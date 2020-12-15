@@ -1,0 +1,13 @@
+Projekt webramverk, mötesprotokoll
+
+Stand-up 14/12:
+Vårt första brainstorming möte efter att vi har blivit indelade I grupper.
+- Brainstorming kring olika ideér, vi kommer fram till en projektidé som vi alla är överens om.
+- Diskuterar fram en standard kring hur vi vill jobba tillsammans under projektets gång.
+/Vi pratar om vad som är viktigt för oss individuellt och som grupp.
+- Ser över Miro och mindmapping inför projekt.
+-  Sätter upp ett github-repo samt personliga branches.
+- Vi bestämmer att vi återkopplar I samband med nästa föreläsning för att fortsätta arbetet.
+/Tid tills dess ägnas åt individuella studier.
+
+
