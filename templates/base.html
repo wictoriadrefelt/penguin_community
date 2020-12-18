@@ -7,50 +7,36 @@
     <link rel="stylesheet" href="static/css/main.css" />
 </head>
 <body>
-    <section>
-        <div class="container">
-            <header>
-                <div class="row">
-                    <div class="col col-4">
-                    </div>
-                    <div class="col col-4">
-                        <h1>Pingvin community.logo</h1>
-                    </div>
-                    <div class="col col-4">
-                    </div>
-                </div>
-            </header>
-            <nav>
-                <li>Min profil</li>
-    			<li>Sök</li>
-    			<li>Vänner</li>
-                <li>Logga in/ut</li>
-            </nav>
-        </div>
-    </section>
 
-    <div id="content">
-        {% block content %}
-        {%  endblock %}
-    </div>
+    <div class="container">
+        <header>Page Header</header>
+        <nav>
+            <li>Flöde</li>
+            <li>Profil</li>
+            <li>Sök</li>
+            <li>Logga ut</li>
+        </nav>
 
-    <section>
-        <div class="section_divider">
-          <article>
-          sidebar 1
-          </article>
-         <article>
-         flow
-         </article>
-        </div>
-        <aside>
-         sidebar 2
-        </aside>
+        <section>
+            <!-- Vi kör article i en tagg för att styra, pga vi vill styra bägge två? -->
+            <aside>
+                <div class="side_section">Vänner</div>
+                <div class="side_section">Reklam</div>
+            </aside>
+            <div class="article_section">
+                <article>
+                    <div id="content">
+                    {% block content %}
+                    {%  endblock %}
+                    </div>
+                </article>
+                <article>Article2</article>
+            </div>
         </section>
         <footer>
-        Page footer
+            Footer
         </footer>
+    </div>
 
-    <div class="footer">Footer</div>
 </body>
 </html>
