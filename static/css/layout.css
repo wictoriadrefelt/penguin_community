@@ -13,8 +13,9 @@ body {
 }
 
 .container {
-    max-width: 1000px;
-    width: 80%;
+    width: 100%;
+    margin-right: 30px;
+
 
 }
 
@@ -23,6 +24,8 @@ header {
     height: 110px;
     background-color: ghostwhite;
     border-bottom: 2px solid black;
+    position: absolute;
+    top: 0;
 }
 
 nav {
@@ -68,8 +71,27 @@ aside {
 }
 
 footer {
+    width: 100%;
     background-color: ghostwhite;
     color: black;
     text-align: center;
     height: 50px;
+    position: absolute;
+    bottom: 0;
+}
+
+.form {
+    border: 7px solid #cc0700;
+    border-radius: 10px;
+    margin-top: -100px;
+    background-color: white;
+}
+
+.window_content {
+    width: 1000px;
+    background-color: ghostwhite;
+    position: absolute;
+    top: 50%;
+
+
 }
