@@ -3,24 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Base Title</title>
-    <link rel="stylesheet" href="static/css/layout.css" />
-    <link rel="stylesheet" href="static/css/main.css" />
+    <link rel="stylesheet" href="/static/css/layout.css" />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
     <div class="container">
-        <header>Page Header</header>
+        <header> <img id ="pingu" src="/static/images/pingvinlogo.jpg"> </header>
         <nav>
-            <li>Flöde</li>
-            <li>Profil</li>
-            <li>Sök</li>
-            <li>Logga ut</li>
+            <div class="icon-bar">
+              <a class="active" href="#"><i class="fa fa-home"></i></a>
+              <a href="#"><i class="fa fa-github"></i></a>
+              <a href="#"><i class="fa fa-envelope"></i></a>
+              <a href="login.html"><i class="fa fa-sign-in"></i></a>
+              <a href="#"><i class="fa fa-trash"></i></a>
+            </div>
+
         </nav>
 
         <section>
             <!-- Vi kör article i en tagg för att styra, pga vi vill styra bägge två? -->
             <aside>
-                <div class="side_section">Vänner</div>
+                <div class="side_section">
+                    <ul>
+                        <li>vänner</li>
+                        <li>one</li>
+                        <li>one</li>
+
+                    </ul>
+                </div>
+
                 <div class="side_section">Reklam</div>
             </aside>
             <div class="article_section">
@@ -30,11 +43,14 @@
                     {%  endblock %}
                     </div>
                 </article>
-                <article>Article2</article>
+
+                <article>
+                    <p> Hej här en text</p>
+                </article>
             </div>
         </section>
         <footer>
-            Footer
+            <p>Footer</p>
         </footer>
     </div>
 
