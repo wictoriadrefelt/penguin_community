@@ -13,8 +13,8 @@ body {
 }
 
 .container {
-    max-width: 1000px;
-    width: 80%;
+    width: 100%;
+
 
 }
 
@@ -28,6 +28,7 @@ header {
 nav {
     display: flex;
     background-color: ghostwhite;
+    max-width: 700px
 }
 
 li {
@@ -35,11 +36,13 @@ li {
     width: 80px;
     margin: 15px;
     background-color: aqua;
+    max-width: 1000;
 }
 
 section {
     display: flex;
     flex-flow: row;
+    max-width: 1000px;
 }
 
 .article_section {
