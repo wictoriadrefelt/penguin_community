@@ -9,3 +9,23 @@ Vårt första brainstorming möte efter att vi har blivit indelade I grupper.
 -  Sätter upp ett github-repo samt personliga branches.
 - Vi bestämmer att vi återkopplar I samband med nästa föreläsning för att fortsätta arbetet.
 /Tid tills dess ägnas åt individuella studier.
+
+
+
+
+
+
+Stand up 18/12, 10.30:
+- Fortsatt idéutveckling, bollande av olika ideér samt layout.
+- Vi river ner vårt första utkast och börjar från grunden.
+- Överblick kring html och css.
+- Vi bestämmer oss för att skapa en grund för att lägga till funktioner efterhand beroende på tidsmarginal.
+ - Beslut kring vilken typ av databas vi vill använda oss av.
+
+
+
+Stand up 21/12 10.30:
+- Modellering av dokumentdatabas
+- Visuell modellering av hemsida, upplägg
+- Vi skapar ett nytt upplägg med hjälp av bootstrap.
+
