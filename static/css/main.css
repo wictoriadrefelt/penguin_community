@@ -9,3 +9,8 @@
     background-color: white;
     color: black;
 }
+
+.navbar-default {
+    border-color: #608fb0;
+    background-color: #608fb0;
+}
