@@ -1,3 +1,7 @@
+body {
+    background-color: #96b4c9;
+}
+
 .foot-wave {
     background-image: url(/static/images/footwave.png);
     background-repeat: no-repeat;
@@ -23,10 +27,9 @@ header {
 }
 
 .jumbotron {
-    background: none;
+    background-color: unset;
 }
 
 #penguin {
     height: 160px;
 }
-
