@@ -8,10 +8,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <link rel="stylesheet" href="/static/css/main.css">
+     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
-<body style="background-color: aqua">
+<body style="background-color: #96b4c9">
 
 <div class="jumbotron" style="margin-bottom: 0">
   <div class="container text-center">
@@ -20,7 +22,6 @@
 </div>
 
 <nav class="navbar navbar-default" style="background-color: white>
-<div class="container">
     <div class=navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"
                 <span class="icon-bar"></span>
@@ -33,22 +34,25 @@
 
 
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" style="background-color: #608fb0">
   <div class="container">
-      <div class="collapse navbar-collapse" id="myNavbar">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Feed</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Friends</a></li>
-      <li><a href="#">Search</a></li>
-    </ul>
-        </li>
-    </ul>
-      </div>
-  </div>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="#" style="color: black">Feed</a></li>
+        <li class="active"><a href="#" style="color: black">Profile</a></li>
+        <li><a href="#" style="color: black">Friends</a></li>
+        <li><a href="#" style="color: black">Search</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
     </div>
   </div>
 </nav>
@@ -65,31 +69,21 @@
     </div>
 
  <div class="container text-center">
-  <div class="row">
+  <div class="row float-left">
     <div class="col-sm-8 well">
-      <div class="well float-left image-left">
-        <p><a href="#">Profile</a></p>
-        <img src="static/images/penguin_selfie.jpg" class="img-circle align-item:left" height="65" width="65" alt="Avatar">
-      </div>
+        <img src="static/images/penguin_selfie.jpg" alt="Profile" class="rounded float-left" height="65" width="65">
       <div class="well">
-        <p><a href="#">Interests</a></p>
-        <p>
-          <span class="label label-default">News</span>
-          <span class="label label-primary">W3Schools</span>
-          <span class="label label-success">Labels</span>
-          <span class="label label-info">Football</span>
-          <span class="label label-warning">Gaming</span>
-          <span class="label label-danger">Friends</span>
-        </p>
+        <p><a href="#">Flapper McPenguin</a></p>
+        <img src="static/images/penguin_selfie.jpg" class="img-circle align-item:left" height="65" width="65" alt="Profile">
       </div>
 
       <div class="row">
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
             <div class="panel-body">
-              <p contenteditable="true">Status: Feeling Blue</p>
+              <p contenteditable="true">Post something</p>
               <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                <span class=></span> Create post
               </button>
             </div>
           </div>
@@ -99,59 +93,73 @@
       <div class="row">
         <div class="col-sm-3">
           <div class="well">
-           <p>John</p>
-           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
+
+        <img class="materialboxed" width="80" height="80" src="static/images/penguin_selfie.jpg">
+        <script>document.addEventListener('DOMContentLoaded', function()
+{
+    var elems = document.querySelectorAll('.materialboxed');
+    var instances = M.Materialbox.init(elems, options);
+});
+
+
+var instance = M.Materialbox.getInstance(elem);
+
+instance.open();</script>
+
+
+
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">pop</button>
+
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <img src="/static/images/penguin_selfie.jpg" class="img-responsive">
         </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Bo</p>
-           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Jane</p>
-           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Anja</p>
-           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>
+    </div>
+  </div>
     </div>
 
+
+          <div class="w3-container">
+  <h2>Previous posts</h2>
+
+  <img src="/static/images/penguin_selfie.jpg" style="width:200%;cursor:zoom-in"
+  onclick="document.getElementById('modal011').style.display='block'">
+
+  <div id="modal011" class="w3-modal" onclick="this.style.display='none'">
+    <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+    <div class="w3-modal-content w3-animate-zoom">
+      <img src="/static/images/penguin_selfie.jpg" style="width:100%">
+    </div>
   </div>
 </div>
+
+
+              <div class="w3-row-padding">
+  <div class="w3-container w3-third">
+    <img src="static/images/penguin_selfie.jpg" style="width:200%" onclick="onClick(this)">
+  </div>
+  <div class="w3-container w3-third">
+    <img src="static/images/penguin_selfie.jpg" style="width:200%" onclick="onClick(this)">
+  </div>
+  <div class="w3-container w3-third">
+    <img src="static/images/penguin_selfie.jpg" style="width:200%" onclick="onClick(this)">
+  </div>
+</div>
+
+<div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+  <img class="w3-modal-content" id="img01" style="width:200%">
+</div>
+
+<script>
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal011").style.display = "block";
+}
+</script>
+
+
 
 <footer class="navbar-fixed-bottom">
     <div class="container-fluid foot-wave position-fixed"></div>

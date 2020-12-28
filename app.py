@@ -14,6 +14,11 @@ def get_profile():
     return render_template("profile.html")
 
 
+@app.route("/logg")
+def get_logg():
+    return render_template("logg.html")
+
+
 
 
 if __name__ == '__main__':
