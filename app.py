@@ -11,7 +11,7 @@ def get_index():
 
 @app.route("/profile")
 def get_profile():
-    return render_template("profile.html")
+    return render_template("test_profile.html")
 
 
 @app.route("/logg")
