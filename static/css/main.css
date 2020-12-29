@@ -1,3 +1,7 @@
+body {
+    background-color: #96b4c9;
+}
+
 .foot-wave {
     background-image: url(/static/images/footwave.png);
     background-repeat: no-repeat;
@@ -13,4 +17,19 @@
 .navbar-default {
     border-color: #608fb0;
     background-color: #608fb0;
+}
+
+header {
+    background-image: url(/static/images/sea-header.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 200px
+}
+
+.jumbotron {
+    background-color: unset;
+}
+
+#penguin {
+    height: 160px;
 }

@@ -1,0 +1,46 @@
+{% include 'base.html' %}
+
+<nav class="navbar navbar-default" style="background-color: #608fb0">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active">
+            <a href="feed.html" style="color: black">Feed</a>
+        </li>
+        <li>
+            <a href="profile.html" style="color: black">Profile</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container center-block">
+  <div class="row">
+    <div class="col-sm-4 jumbotron">
+            <div class="well">
+                <p>Friends:</p>
+            </div>
+            <div class="well">
+                <p>Ad:</p>
+            </div>
+    </div>
+
+    <div class="col-sm-8 jumbotron">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+  </div>
+</div>
