@@ -1,0 +1,35 @@
+{% extends "base_logged_in.html" %}
+
+
+
+{% block content %}
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col-sm-8 well">
+      <div class="well">
+        <p><a href="static/images/penguin_selfie.jpg">Flapper McPenguin</a></p>
+        <img src="static/images/penguin_selfie.jpg" class="img-circle align-item:left" height="65" width="65" id="selfie" alt="Profile">
+      </div>
+    </div>
+
+</div>
+
+    <div class="infinityContainer">
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <img src="https://source.unsplash.com/random/" class="img-responsive" id="infImg">
+        </div>
+    </div>
+  </div>
+    </div>
+    </div>
+
+<script src="/static/infinity.js"></script>
+
+
+{% endblock %}
+
+
