@@ -1,7 +1,98 @@
 {% extends "base_logged_in.html" %}
 
 {% block content %}
-    <div class="well">
-        <p>My profile</p>
+
+
+ <div class="container text-center">
+  <div class="row float-left">
+    <div class="col-sm-8 well">
+        <img src="static/images/penguin_selfie.jpg" alt="Profile" class="rounded float-left" height="65" width="65">
+      <div class="well">
+        <p><a href="#">Flapper McPenguin</a></p>
+        <img src="static/images/penguin_selfie.jpg" class="img-circle align-item:left" height="65" width="65" alt="Profile">
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-body">
+              <p contenteditable="true">Post something</p>
+              <button type="button" class="btn btn-default btn-sm">
+                <span class=></span> Create post
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+
+        <img class="materialboxed" width="80" height="80" src="static/images/penguin_selfie.jpg">
+        <script>document.addEventListener('DOMContentLoaded', function()
+{
+    var elems = document.querySelectorAll('.materialboxed');
+    var instances = M.Materialbox.init(elems, options);
+});
+
+
+var instance = M.Materialbox.getInstance(elem);
+
+instance.open();</script>
+
+
+
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">pop</button>
+
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <img src="/static/images/penguin_selfie.jpg" class="img-responsive">
+        </div>
     </div>
+  </div>
+    </div>
+
+
+          <div class="w3-container">
+  <h2>Previous posts</h2>
+
+  <img src="/static/images/penguin_selfie.jpg" style="width:200%;cursor:zoom-in"
+  onclick="document.getElementById('modal011').style.display='block'">
+
+  <div id="modal011" class="w3-modal" onclick="this.style.display='none'">
+    <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+    <div class="w3-modal-content w3-animate-zoom">
+      <img src="/static/images/penguin_selfie.jpg" style="width:100%">
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+      div class="well">
+    <img src="/static/images/penguin_selfie.jpg" style="width:200%" onclick="onClick(this)">
+  </div>
+    <div class="well">
+    <img src="/static/images/penguin_selfie.jpg" style="width:200%" onclick="onClick(this)">
+  </div>
+  <div class="well">
+    <img src="/static/images/penguin_selfie.jpg" style="width:200%" onclick="onClick(this)">
+  </div>
+          </div>
+
+<div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+  <img class="w3-modal-content" id="img01" style="width:200%">
+</div>
+
+<script>
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+}
+</script>
+          </div>
+        </div>
+      </div>
 {% endblock %}
