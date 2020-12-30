@@ -29,3 +29,9 @@ Stand up 21/12 10.30:
 - Visuell modellering av hemsida, upplägg
 - Vi skapar ett nytt upplägg med hjälp av bootstrap.
 
+
+
+Stand up 30/12 10.30
+- Mergat samtliga branches.
+- Diskussion kring design samt vidare funktionallitet.
+- Flask repetition för samtliga.
