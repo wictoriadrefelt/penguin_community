@@ -33,3 +33,21 @@ header {
 #penguin {
     height: 160px;
 }
+
+
+.infinityContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+#selfie {
+    height: 50px;
+    width: 50px;
+}
+
+
+img {
+    width: 200px;
+    margin: 10px;
+}
