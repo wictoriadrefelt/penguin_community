@@ -1,0 +1,27 @@
+{% extends "base_logged_in.html" %}
+
+{% block content %}
+    <div class="jumbotron content-window">
+        <div class="col-sm-6 jumbotron" style="background-color: aliceblue">
+        <form action="/action_page.php">
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+          </div>
+          <div class="form-group">
+            <form method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {{ form.file }}
+            </form>
+          </div>
+
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+
+    </div>
+{% endblock %}
