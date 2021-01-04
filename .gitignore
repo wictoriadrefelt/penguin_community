@@ -1,2 +1,5 @@
-venv/
 .idea/
+App/Data/db/db_settings/__init__.py
+venv/
+docker-compose.yml
+__pycache__/

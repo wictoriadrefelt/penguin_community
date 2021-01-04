@@ -1,10 +1,5 @@
-from flask import Flask, render_template, url_for, redirect
-from forms import RegistrationForm, LoginForm, PostForm
-from werkzeug.utils import secure_filename
-
-
-app = Flask(__name__)
-app.config["SECRET KEY"] = ""
+from project_webramverk.Flask.app import app
+from flask import render_template
 
 
 @app.route('/')
@@ -30,15 +25,12 @@ def get_test_profile():
 
 @app.route('/create_post')
 def get_create_post():
-    form = PostForm()
+    return render_template('create_post.html')
+
+"""  form = PostForm()
 
     if form.validate_on_submit():
         filename = secure_filename(form.file.data.filename)
         form.file.data.save('uploads' + filename)
         return redirect(url_for('create_post'))
-
-    return render_template('create_post.html')
-
-
-if __name__ == '__main__':
-    app.run()
+"""
