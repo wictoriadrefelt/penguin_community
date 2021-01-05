@@ -1,8 +1,5 @@
-from flask import Flask, render_template, url_for
-from forms import RegistrationForm, LoginForm
-
-app = Flask(__name__)
-app.config["SECRET KEY"] = ""
+from app import app
+from flask import render_template
 
 
 @app.route('/')
@@ -26,5 +23,14 @@ def get_test_profile():
     return render_template('test_profile.html')
 
 
-if __name__ == '__main__':
-    app.run()
+@app.route('/create_post')
+def get_create_post():
+    return render_template('create_post.html')
+
+"""  form = PostForm()
+
+    if form.validate_on_submit():
+        filename = secure_filename(form.file.data.filename)
+        form.file.data.save('uploads' + filename)
+        return redirect(url_for('create_post'))
+"""

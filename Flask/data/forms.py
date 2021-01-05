@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from flask_wtf.file import FileField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateTimeField
 from wtforms.validators import DataRequired, Length, EqualTo
 
 
@@ -12,11 +13,14 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField("Sign up")
 
 
-
-
 class LoginForm(FlaskForm):
-
     email = StringField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     remember = BooleanField("Remember Me")
     submit = SubmitField("Login")
+
+
+class PostForm(FlaskForm):
+    image = FileField()
+    description = TextAreaField('Text')
+    timestamp = DateTimeField()
