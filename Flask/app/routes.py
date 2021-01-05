@@ -1,4 +1,4 @@
-from project_webramverk.Flask.app import app
+from app import app
 from flask import render_template
 
 
