@@ -1,6 +1,8 @@
 from flask import Flask
 
+
 app = Flask(__name__)
-app.config["SECRET KEY"] = "mysecret"
+app.config["SECRET_KEY"] = "mysecret"
+
 
 from app import routes
