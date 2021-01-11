@@ -24,3 +24,4 @@ class PostForm(FlaskForm):
     image = FileField()
     description = TextAreaField('Text')
     timestamp = DateTimeField()
+
