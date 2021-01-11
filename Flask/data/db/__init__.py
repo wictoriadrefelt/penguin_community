@@ -7,8 +7,29 @@ class Customer(Document):
     email = StringField()
 
 
+class Users(Document):
+    name = StringField()
+    username = StringField()
+
+
 def main():
-    connect(db='product_db', host='localhost', port=27016, username='root', password='s3cr37',
+    a = connect(db='mongo-penguin', host='localhost', port=27016, username='root', password='penguin',
             authentication_source='admin')
     customer1 = Customer(first_name="Anders", last_name="Andersson", email='anders@email.com')
-    customer1.save()
+
+
+
+    customers = Customer.objects()
+    for customer in customers:
+        print("first name:", customer.first_name, customer.last_name, customer.email)
+
+
+    users = Users.objects()
+    for user in users:
+        print("user:", user.name)
+
+class Users(Document):
+    name = StringField()
+    username = StringField()
+
+main()
