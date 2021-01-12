@@ -11,12 +11,12 @@ def get_index():
 
 @app.route('/feed')
 def get_feed():
-    return render_template('feed.html')
+    return render_template('feed.html', title='Feed')
 
 
 @app.route('/profile')
 def get_profile():
-    return render_template('profile.html')
+    return render_template('profile.html', title='Profile')
 
 
 @app.route('/sign_up', methods=["GET", "POST"])
