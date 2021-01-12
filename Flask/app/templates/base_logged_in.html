@@ -1,5 +1,6 @@
-{% include 'base.html' %}
+{% extends 'base.html' %}
 
+{% block content %}
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
@@ -38,9 +39,10 @@
     </div>
 
     <div class="col-sm-8 jumbotron">
-        {% block content %}
+        {% block content2 %}
         {% endblock %}
     </div>
 
   </div>
 </div>
+{% endblock %}
