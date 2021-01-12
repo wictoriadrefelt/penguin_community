@@ -1,6 +1,6 @@
 from app import app, bcrypt
 from data import db
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, url_for
 from controllers.web_controller import create_new_user
 from data.forms import RegistrationForm
 
@@ -34,8 +34,8 @@ def post_sign_up():
         first_name = form.first_name.data
         last_name = form.last_name.data
         email = form.email.data
-        password = form.password.data
         create_new_user(first_name, last_name, email, hashed_password)
+        return redirect(url_for('get_index'))
     return render_template('sign_up.html', form=form)
 
 
