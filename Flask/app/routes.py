@@ -1,5 +1,5 @@
 from app import app, bcrypt
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 from controllers.web_controller import create_new_user
 from data.forms import RegistrationForm
 
