@@ -1,6 +1,6 @@
 from data import db
 from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument
-from flask import Flask
+from app import app
 
 # https://www.javatpoint.com/javascript-form-validation
 
