@@ -1,12 +1,14 @@
 from app import app, bcrypt
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, flash
 from controllers.web_controller import create_new_user
-from data.forms import RegistrationForm
+from data.forms import RegistrationForm, LoginForm
+from data.models.models import Users
+from flask_login import login_user, current_user
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def get_index():
-    return render_template('sign_in.html')
+    return render_template("base.html")
 
 
 @app.route('/feed')
@@ -28,8 +30,21 @@ def sign_up():
         last_name = form.last_name.data
         email = form.email.data
         create_new_user(first_name, last_name, email, hashed_password)
-        return redirect(url_for('get_index'))
+        return redirect(url_for('sign_in'))
     return render_template('sign_up.html', form=form)
+
+
+@app.route("/sign_in", methods=["GET", "POST"])
+def sign_in():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = Users.objects(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            return redirect(url_for("get_feed"))
+        else:
+            flash("Login Unsuccessful. Please check email and password", "danger")
+    return render_template("sign_in.html", title="Login", form=form)
 
 
 @app.route('/test_profile')

@@ -1,12 +1,19 @@
 from data import db
 from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument
-from app import app
+from app import login_manager
+from flask_login import UserMixin
+
+
 
 # https://www.javatpoint.com/javascript-form-validation
 
 
+@login_manager.user_loader
+def load_user(user_email):
+    return Users.objects(user=user_email)
 
-class Users(Document):
+
+class Users(Document, UserMixin):
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
     email = StringField(required=True)
