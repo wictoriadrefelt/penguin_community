@@ -37,6 +37,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
+      {% if 'email' in session %}
         <li {% if request.path == '/feed' %}class="active"{% endif %}>
             <a href="{{ url_for('get_feed') }}" style="color: black">Feed</a>
         </li>
@@ -46,6 +47,16 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{{ url_for('sign_out') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+
+      {% else %}
+      <li {% if request.path == '/login' %}class="active"{% endif %}>
+            <a href="{{ url_for('sign_in') }}" style="color: black">Login</a>
+        </li>
+        <li {% if request.path == '/signup' %}class="active"{% endif %}>
+            <a href="{{ url_for('sign_up') }}" style="color: black">Register account</a>
+        </li>
+
+      {% endif %}
       </ul>
     </div>
   </div>
