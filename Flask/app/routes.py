@@ -1,23 +1,55 @@
 from app import app, bcrypt
-from flask import render_template, redirect, url_for, request, flash
+from flask import render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user
 from data.forms import RegistrationForm, LoginForm
 from data.models.models import Users
 from flask_login import login_user, current_user
+from functools import wraps
+
+
+def login_required(default_page):
+    def decorator(route):
+        @wraps(route)
+        def wrapper(*args, **kwargs):
+            if is_authenticated():
+                return route(*args, **kwargs)
+            return redirect(url_for(default_page))
+        return wrapper
+    return decorator
+
+
+def is_authenticated():
+    return 'email' in session
+
 
 
 @app.route('/', methods=["GET", "POST"])
 def get_index():
-    return render_template("base.html")
+    return render_template('base.html', status='Signed In' if is_authenticated() else 'Not Signed In')
+
+
+
+@app.route("/restricted")
+@login_required('restricted')
+def restricted():
+    return render_template('restricted.html', email=session['email'])
+
+
 
 
 @app.route('/feed')
+@login_required('restricted')
 def get_feed():
+    if 'email' in session:
+        email = session['email']
     return render_template('feed.html', title='Feed')
 
 
 @app.route('/profile')
+@login_required('restricted')
 def get_profile():
+    if 'email' in session:
+        email = session['email']
     return render_template('profile.html', title='Profile')
 
 
@@ -36,6 +68,8 @@ def sign_up():
 
 @app.route("/sign_in", methods=["GET", "POST"])
 def sign_in():
+    if request.method == 'POST':
+        session['email'] = request.form['email']
     form = LoginForm()
     if form.validate_on_submit():
         user = Users.objects(email=form.email.data).first()
@@ -56,6 +90,16 @@ def get_test_profile():
 @app.route('/create_post')
 def get_create_post():
     return render_template('create_post.html')
+
+
+@app.route("/signout")
+def sign_out():
+    session.clear()
+    return redirect(url_for('get_index'))
+
+
+
+
 
 
 """  form = PostForm()

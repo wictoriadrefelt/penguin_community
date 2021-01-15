@@ -36,7 +36,6 @@
       </button>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-        <!-- if current_user.is_authenticated wil be placed here -->
       <ul class="nav navbar-nav">
         <li {% if request.path == '/feed' %}class="active"{% endif %}>
             <a href="{{ url_for('get_feed') }}" style="color: black">Feed</a>
@@ -46,7 +45,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ url_for('get_index') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a href="{{ url_for('sign_out') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
   </div>
