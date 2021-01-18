@@ -49,10 +49,10 @@
         <li><a href="{{ url_for('sign_out') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 
       {% else %}
-      <li {% if request.path == '/login' %}class="active"{% endif %}>
+      <li {% if request.path == '/sign_in' %}class="active"{% endif %}>
             <a href="{{ url_for('sign_in') }}" style="color: black">Login</a>
         </li>
-        <li {% if request.path == '/signup' %}class="active"{% endif %}>
+        <li {% if request.path == '/sign_up' %}class="active"{% endif %}>
             <a href="{{ url_for('sign_up') }}" style="color: black">Register account</a>
         </li>
 
