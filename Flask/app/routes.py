@@ -75,10 +75,11 @@ def get_create_post():
     return render_template('create_post.html', form=form)
 
 
-@app.route("/signout")
-def sign_out():
+@app.route("/logged_out", methods=["GET","POST"])
+@login_required('restricted')
+def logged_out():
     session.clear()
-    return redirect(url_for('get_index'))
+    return render_template('logged_out.html')
 
 
 
@@ -86,7 +87,6 @@ def sign_out():
 
 
 """  form = PostForm()
-
     if form.validate_on_submit():
         filename = secure_filename(form.file.data.filename)
         form.file.data.save('uploads' + filename)

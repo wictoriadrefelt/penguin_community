@@ -26,7 +26,7 @@
     </div>
 </header>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" >
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -36,7 +36,7 @@
       </button>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav center">
       {% if 'email' in session %}
         <li {% if request.path == '/feed' %}class="active"{% endif %}>
             <a href="{{ url_for('get_feed') }}" style="color: black">Feed</a>
@@ -46,7 +46,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ url_for('sign_out') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a href="{{ url_for('logged_out') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 
       {% else %}
       <li {% if request.path == '/sign_in' %}class="active"{% endif %}>
