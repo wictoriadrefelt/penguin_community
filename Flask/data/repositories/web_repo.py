@@ -3,6 +3,9 @@ from datetime import datetime
 from data.models.models import Users
 db = mongoengine
 
+
+#  please remove
+
 """
 def create_new_post(location, fishes, image, description, time_stamp):
     post = ({

@@ -3,6 +3,7 @@ import data.repositories.web_repo as wr
 from bson import ObjectId
 
 
+#  please remove
 # def create_new_post(location, fishes, image, description, time_stamp):
 #    return wr.create_new_post(location, fishes, image, description, time_stamp)
 
