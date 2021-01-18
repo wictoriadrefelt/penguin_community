@@ -20,6 +20,11 @@ def create_new_post(location, fishes, image, description, time_stamp):
 """
 
 
+def get_user_by_email(email):
+    return Users.objects(email=email).first()
+
+
+
 def create_new_user(first_name, last_name, email, password):
     new_user = Users(
         first_name=first_name,
@@ -30,5 +35,14 @@ def create_new_user(first_name, last_name, email, password):
     new_user.save()
 
 
+def create_new_post(title, description, tags, photo):
+    new_post = Posts(
+        title=title,
+        description=description,
+        tags=tags,
+        photo=photo
+    )
+
+    new_post.save()
 
 

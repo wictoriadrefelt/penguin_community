@@ -1,11 +1,25 @@
 from data import db
-from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument
+from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument, ImageField
 from app import login_manager
 from flask_login import UserMixin
-
+from flask import session, redirect, url_for
+from functools import wraps
 
 
 # https://www.javatpoint.com/javascript-form-validation
+def login_required(default_page):
+    def decorator(route):
+        @wraps(route)
+        def wrapper(*args, **kwargs):
+            if is_authenticated():
+                return route(*args, **kwargs)
+            return redirect(url_for(default_page))
+        return wrapper
+    return decorator
+
+
+def is_authenticated():
+    return 'email' in session
 
 
 @login_manager.user_loader
@@ -20,6 +34,12 @@ class Users(Document, UserMixin):
     password = StringField()
 
 
+class Posts(Document):
+    title = StringField(max_length=120, required=True)
+    description = StringField(max_length=280)
+    author = StringField()
+    tags = ListField(StringField(max_length=30))
+    content = ImageField()
 """
 class Content(EmbeddedDocument):
     text = StringField()
