@@ -44,15 +44,12 @@ class Posts(Document):
 class Content(EmbeddedDocument):
     text = StringField()
     lang = StringField(max_length=3)
-
 class Post(Document):
     title = StringField(max_length=120, required=True, validators=[validators.InputRequired(message='Missing title.'),])
     author = ReferenceField(User)
     tags = ListField(StringField(max_length=30))
     content = EmbeddedDocumentField(Content)
-
 PostForm = model_form(Post)
-
 def add_post(request):
     form = PostForm(request.POST)
     if request.method == 'POST' and form.validate():

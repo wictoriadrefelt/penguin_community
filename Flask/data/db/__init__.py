@@ -1,9 +1,9 @@
 from mongoengine import connect
 
 connect(
-    db='mongo-penguin',
+    db='mongo_penguin',
     host='localhost',
-    port=27016,
+    port=27015,
     username='root',
     password='penguin',
     authentication_source='admin'
