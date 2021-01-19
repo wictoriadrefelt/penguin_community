@@ -17,8 +17,8 @@ def create_new_user(first_name, last_name, email, password):
     return wr.create_new_user(first_name, last_name, email, hashed_password)
 
 
-def create_new_post(title, description, tags, photo):
-    return wr.create_new_post(title, description, tags, photo)
+def create_new_post(user, description, photo):
+    return wr.create_new_post(user, description, photo)
 
 
 #def add_comment_to_post(post_id, comment_id):

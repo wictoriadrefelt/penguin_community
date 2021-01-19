@@ -1,6 +1,6 @@
 from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session
-from controllers.web_controller import create_new_user, get_user_by_email
+from controllers.web_controller import create_new_user, get_user_by_email, create_new_post
 from data.forms import RegistrationForm, LoginForm, PostForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
@@ -19,8 +19,6 @@ def get_index():
 @login_required('restricted')
 def restricted():
     return render_template('restricted.html', email=session['email'])
-
-
 
 
 @app.route('/feed')
@@ -70,8 +68,14 @@ def get_test_profile():
 
 
 @app.route('/create_post', methods=["GET", "POST"])
+@login_required('restricted')
 def get_create_post():
     form = PostForm()
+    if form.validate_on_submit():
+        user = session['email']
+        description = form.description.data
+        photo = form.file.data
+        create_new_post(user, description, photo)
     return render_template('create_post.html', form=form)
 
 

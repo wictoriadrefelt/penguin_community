@@ -21,5 +21,6 @@ class LoginForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
+    description = StringField("Description")
     file = FileField("Image")
     submit = SubmitField("Submit")
