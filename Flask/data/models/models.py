@@ -1,9 +1,10 @@
 from data import db
-from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument, ImageField
+from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument, FileField
 from app import login_manager
 from flask_login import UserMixin
 from flask import session, redirect, url_for
 from functools import wraps
+
 
 
 # https://www.javatpoint.com/javascript-form-validation
@@ -35,11 +36,9 @@ class Users(Document, UserMixin):
 
 
 class Posts(Document):
-    title = StringField(max_length=120, required=True)
+    user = StringField(required=True)
     description = StringField(max_length=280)
-    author = StringField()
-    tags = ListField(StringField(max_length=30))
-    content = ImageField()
+    photo = FileField()
 """
 class Content(EmbeddedDocument):
     text = StringField()
