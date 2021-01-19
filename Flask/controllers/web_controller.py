@@ -20,6 +20,9 @@ def create_new_user(first_name, last_name, email, password):
 def create_new_post(user, description, photo):
     return wr.create_new_post(user, description, photo)
 
+def get_all_posts():
+    return wr.get_all_posts()
+
 
 #def add_comment_to_post(post_id, comment_id):
 #    return wr.add_comment_to_post(post_id, comment_id)
