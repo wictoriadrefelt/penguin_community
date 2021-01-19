@@ -1,6 +1,6 @@
 from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session
-from controllers.web_controller import create_new_user, get_user_by_email, create_new_post
+from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts
 from data.forms import RegistrationForm, LoginForm, PostForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
@@ -24,9 +24,11 @@ def restricted():
 @app.route('/feed')
 @login_required('restricted')
 def get_feed():
-    if 'email' in session:
-        email = session['email']
-    return render_template('feed.html', title='Feed')
+    posts1 = get_all_posts()
+    for post in posts1:
+        print(post.photo.read())
+
+    return render_template('feed.html', title='Feed', posts=posts)
 
 
 @app.route('/profile')
@@ -75,6 +77,9 @@ def get_create_post():
         user = session['email']
         description = form.description.data
         photo = form.file.data
+        print(photo)
+        print(type(photo))
+        print()
         create_new_post(user, description, photo)
     return render_template('create_post.html', form=form)
 

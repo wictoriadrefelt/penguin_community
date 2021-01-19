@@ -39,6 +39,8 @@ class Posts(Document):
     user = StringField(required=True)
     description = StringField(max_length=280)
     photo = FileField()
+
+
 """
 class Content(EmbeddedDocument):
     text = StringField()
