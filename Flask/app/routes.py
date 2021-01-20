@@ -1,3 +1,5 @@
+import codecs
+
 from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts
@@ -7,6 +9,23 @@ from flask_login import login_user, current_user
 from functools import wraps
 
 
+@app.route('/feed')
+@login_required('restricted')
+def get_feed():
+    posts = get_all_posts()
+
+    photo_list = []
+
+    for post in posts:
+        id = post.photo
+        #image = .get(id)
+        #base64_data = codecs.encode(image.read(), 'base64')
+        #image = base64_data.decode('utf-8')
+        #photo_list.append(image)
+        
+
+
+    return render_template('feed.html', title='Feed', posts=photo_list)
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -21,14 +40,6 @@ def restricted():
     return render_template('restricted.html', email=session['email'])
 
 
-@app.route('/feed')
-@login_required('restricted')
-def get_feed():
-    posts1 = get_all_posts()
-    for post in posts1:
-        print(post.photo.read())
-
-    return render_template('feed.html', title='Feed', posts=posts)
 
 
 @app.route('/profile')
@@ -77,9 +88,6 @@ def get_create_post():
         user = session['email']
         description = form.description.data
         photo = form.file.data
-        print(photo)
-        print(type(photo))
-        print()
         create_new_post(user, description, photo)
     return render_template('create_post.html', form=form)
 

@@ -1,6 +1,6 @@
 from mongoengine import connect
 
-connect(
+db = connect(
     db='mongo-penguin',
     host='localhost',
     port=27016,
