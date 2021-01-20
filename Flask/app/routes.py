@@ -37,9 +37,8 @@ def get_index():
 
 
 @app.route("/restricted")
-@login_required('restricted')
 def restricted():
-    return render_template('restricted.html', email=session['email'])
+    return render_template('restricted.html')
 
 
 
