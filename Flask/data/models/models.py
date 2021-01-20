@@ -26,7 +26,7 @@ def is_authenticated():
 
 @login_manager.user_loader
 def load_user(user_email):
-    return Users.objects(user=user_email)
+    return Users.objects(email=user_email).first()
 
 
 class Users(Document, UserMixin):
