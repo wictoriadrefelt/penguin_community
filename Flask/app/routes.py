@@ -51,6 +51,9 @@ def get_profile():
 
 @app.route('/sign_up', methods=["GET", "POST"])
 def sign_up():
+    if is_authenticated():
+        return redirect(url_for('get_feed'))
+
     form = RegistrationForm()
     if form.validate_on_submit():
         first_name = form.first_name.data
@@ -64,6 +67,9 @@ def sign_up():
 
 @app.route("/sign_in", methods=["GET", "POST"])
 def sign_in():
+    if is_authenticated():
+        return redirect(url_for('get_feed'))
+
     form = LoginForm()
     next_url = request.args.get('next')
 
