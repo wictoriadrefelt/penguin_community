@@ -1,11 +1,10 @@
 {% extends "base_logged_in.html" %}
 
 {% block content2 %}
-    {% for post in posts %}
+    {% for image in photo_list %}
         <div class="jumbotron content-window">
         <p>Post</p>
-            <img src="{{post.photo}}">
-            {{post.description}}
+            <img src = "data:image/png;base64, {{image}}" alt= "myImage"/>
         </div>
     {% endfor %}
     <div class="jumbotron content-window">
