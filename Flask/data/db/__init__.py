@@ -1,3 +1,4 @@
+import gridfs
 from mongoengine import connect
 
 db = connect(
@@ -8,3 +9,4 @@ db = connect(
     password='penguin',
     authentication_source='admin'
 )
+gridFS = gridfs.GridFS(db.db)

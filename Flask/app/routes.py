@@ -3,6 +3,7 @@ import codecs
 from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts
+from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
@@ -17,15 +18,16 @@ def get_feed():
     photo_list = []
 
     for post in posts:
-        id = post.photo
-        #image = .get(id)
-        #base64_data = codecs.encode(image.read(), 'base64')
-        #image = base64_data.decode('utf-8')
-        #photo_list.append(image)
-        
 
 
-    return render_template('feed.html', title='Feed', posts=photo_list)
+        base64_data = codecs.encode(post.photo.read(), 'base64')
+        image = base64_data.decode('utf-8')
+        photo_list.append(image)
+
+
+
+
+    return render_template('feed.html', title='Feed', photo_list=photo_list)
 
 
 @app.route('/', methods=["GET", "POST"])
