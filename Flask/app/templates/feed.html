@@ -3,7 +3,7 @@
 {% block content2 %}
     {% for user, image, description in zipped_list %}
         <div class="jumbotron content-window">
-            <div>{{ user }}</div>
+            <div>{{ user.first_name }}</div>
             <img src = "data:image/png;base64, {{image}}" alt= "myImage"/>
             <div>{{ description }}</div>
         </div>
