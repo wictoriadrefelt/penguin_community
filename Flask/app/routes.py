@@ -14,8 +14,15 @@ from functools import wraps
 @login_required('restricted')
 def get_feed():
     posts = get_all_posts()
-
+    user_list = []
     photo_list = []
+    description_list = []
+
+    for post in posts:
+        user_list.append(post.user)
+
+    for post in posts:
+        description_list.append(post.description)
 
     for post in posts:
 
@@ -24,10 +31,12 @@ def get_feed():
         image = base64_data.decode('utf-8')
         photo_list.append(image)
 
+    zipped_list = zip(user_list, photo_list, description_list)
 
 
 
-    return render_template('feed.html', title='Feed', photo_list=photo_list)
+
+    return render_template('feed.html', title='Feed', zipped_list=zipped_list)
 
 
 @app.route('/', methods=["GET", "POST"])

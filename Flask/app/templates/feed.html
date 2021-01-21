@@ -1,13 +1,12 @@
 {% extends "base_logged_in.html" %}
 
 {% block content2 %}
-    {% for image in photo_list %}
+    {% for user, image, description in zipped_list %}
         <div class="jumbotron content-window">
-        <p>Post</p>
+            <div>{{ user }}</div>
             <img src = "data:image/png;base64, {{image}}" alt= "myImage"/>
+            <div>{{ description }}</div>
         </div>
     {% endfor %}
-    <div class="jumbotron content-window">
-        <p>Post</p>
     </div>
 {% endblock %}
