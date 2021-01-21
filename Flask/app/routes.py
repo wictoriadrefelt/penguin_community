@@ -11,7 +11,7 @@ from functools import wraps
 
 
 @app.route('/feed')
-@login_required('restricted')
+@login_required('sign_in')
 def get_feed():
     posts = get_all_posts()
     user_list = []
@@ -53,13 +53,16 @@ def restricted():
 
 
 @app.route('/profile')
-@login_required('restricted')
+@login_required('sign_in')
 def get_profile():
     return render_template('profile.html', title='Profile')
 
 
 @app.route('/sign_up', methods=["GET", "POST"])
 def sign_up():
+    if is_authenticated():
+        return redirect(url_for('get_feed'))
+
     form = RegistrationForm()
     if form.validate_on_submit():
         first_name = form.first_name.data
@@ -73,12 +76,17 @@ def sign_up():
 
 @app.route("/sign_in", methods=["GET", "POST"])
 def sign_in():
+    if is_authenticated():
+        return redirect(url_for('get_feed'))
+
     form = LoginForm()
+    next_url = request.args.get('next')
+
     if form.validate_on_submit():
         user = get_user_by_email(form.email.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             session['email'] = request.form['email']
-            return redirect(url_for("get_feed"))
+            return redirect(next_url) if next_url else redirect(url_for("get_feed"))
         else:
             flash("Login Unsuccessful. Please check email and password", "danger")
     return render_template("sign_in.html", title="Login", form=form)
@@ -91,7 +99,7 @@ def get_test_profile():
 
 
 @app.route('/create_post', methods=["GET", "POST"])
-@login_required('restricted')
+@login_required('sign_in')
 def get_create_post():
     form = PostForm()
     if form.validate_on_submit():

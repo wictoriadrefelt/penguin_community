@@ -4,6 +4,7 @@ from app import login_manager
 from flask_login import UserMixin
 from flask import session, redirect, url_for
 from functools import wraps
+from data.db import request
 
 
 
@@ -14,7 +15,7 @@ def login_required(default_page):
         def wrapper(*args, **kwargs):
             if is_authenticated():
                 return route(*args, **kwargs)
-            return redirect(url_for(default_page))
+            return redirect(url_for(default_page, next=request.url))
         return wrapper
     return decorator
 
@@ -25,7 +26,7 @@ def is_authenticated():
 
 @login_manager.user_loader
 def load_user(user_email):
-    return Users.objects(user=user_email)
+    return Users.objects(email=user_email).first()
 
 
 class Users(Document, UserMixin):
