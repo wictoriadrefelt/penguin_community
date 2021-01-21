@@ -17,7 +17,8 @@ def create_new_user(first_name, last_name, email, password):
     return wr.create_new_user(first_name, last_name, email, hashed_password)
 
 
-def create_new_post(user, description, photo):
+def create_new_post(email, description, photo):
+    user = get_user_by_email(email)
     return wr.create_new_post(user, description, photo)
 
 def get_all_posts():
