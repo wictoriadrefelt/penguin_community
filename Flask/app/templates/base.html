@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/static/css/header.css">
   <link rel="stylesheet" href="/static/css/footer.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  {% block head %}{% endblock %}
 </head>
 
 <body>
@@ -51,6 +52,9 @@
         </li>
         <li {% if request.path == '/profile' %}class="active"{% endif %}>
             <a href="{{ url_for('get_profile') }}" style="color: black">Profile</a>
+        </li>
+        <li {% if request.path == '/search' %}class="active"{% endif %}>
+            <a href="{{ url_for('get_search') }}" style="color: black">Search</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
