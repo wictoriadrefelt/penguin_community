@@ -11,10 +11,6 @@ Vårt första brainstorming möte efter att vi har blivit indelade I grupper.
 /Tid tills dess ägnas åt individuella studier.
 
 
-
-
-
-
 Stand up 18/12, 10.30:
 - Fortsatt idéutveckling, bollande av olika ideér samt layout.
 - Vi river ner vårt första utkast och börjar från grunden.
@@ -35,3 +31,41 @@ Stand up 30/12 10.30
 - Mergat samtliga branches.
 - Diskussion kring design samt vidare funktionallitet.
 - Flask repetition för samtliga.
+
+
+
+Stand up 5/1-21 10.00
+- Recap och uppdatering efter några dagars ledighet.
+- Vi börjar få till en tydlig struktur över hur hemsidan skall se ut.
+- Etablering av databas.
+- Vi strukturerar om hela repot och flyttar saker beroende på funktionalitet. Pratar kring cirkulära importer
+
+
+Stand up 7/1-21 10.00
+- Bestämmer hur vi vill att våra Models skall se ut, med insikt att detta säkert kommer att ändras med tiden.
+- Login, registrering, forms.
+- Ser över hur man kan få till fungerande login och tittar på olika exempel tillsammans.
+
+
+Stand up 12/1-21 10.00
+-Vi har fått till fungerande login samt logout.
+- Fokus på restricted login.
+- Vi vill att användare skall kunna skapa posts tillsammans med bilder som de sjävla lägger upp.
+
+
+Stand up 19/1-21 10.00
+- Vi har kört fast när det kommer till lagring av bilder i Db, sitter tillsammans och försöker lösa det.
+- Får till funktionalitet att spara bilder i Db men kommer ej åt dom.
+- Vi har möte med en annan grupp för bollning av ideér.
+
+
+Stand up 21/1-21 10.00
+- Vi stämmer av på morgonen samt mergar samtliga pull-requests.
+- Bildlagring samt att rendera bilder från användare fungerar.
+- Vi jobbar alla på varsitt håll och plockar bitar från Projects efter möjlighet. Kontakt via Discord vid behov.
+
+
+Stand up 22/1-21 10.00
+- Mergar samtliga branches.
+- Vi forstätter som under gårdagen.
+- Vi hörs av via discord och uppdaterar varandra om eventuella problem, pull-requests samt vad vi pysslar med just nu.

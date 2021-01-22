@@ -69,3 +69,15 @@ img {
 
 }
 
+
+.btn-default{
+    color: aliceblue;
+     background-color: #96b4c9;
+    border-color: black;
+}
+
+.btn {
+    height: 50px;
+    width: 50px;
+    border: 4px solid transparent;
+}

@@ -41,10 +41,10 @@
         <li {% if request.path == '/feed' %}class="active"{% endif %}>
             <a href="{{ url_for('get_feed') }}" style="color: black">Feed</a>
         </li>
-        <li {% if request.path == '/profile' %}class="active"{% endif %}>
+          <li {% if request.path == '/profile' %}class="active"{% endif %}>
             <a href="{{ url_for('get_profile') }}" style="color: black">Profile</a>
         </li>
-      </ul>
+          </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{{ url_for('logged_out') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 
@@ -83,6 +83,7 @@
         <p>Copyright</p>
     </div>
 </footer>
+
 
 
 </body>
