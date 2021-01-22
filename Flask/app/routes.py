@@ -121,7 +121,7 @@ def get_create_post():
         email = session['email']
         description = form.description.data
         photo = form.file.data
-        create_new_post(user, description, photo)
+        create_new_post(email, description, photo)
         flash("Congratulations, your post was successfully uploaded", "success")
     return render_template('create_post.html', form=form)
 
