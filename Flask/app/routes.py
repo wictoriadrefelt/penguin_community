@@ -5,7 +5,7 @@ from flask import jsonify, render_template, redirect, url_for, request, flash, s
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_name
 from data.db import gridFS
-from data.forms import RegistrationForm, LoginForm, PostForm, SearchForm
+from data.forms import RegistrationForm, LoginForm, PostForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
 from functools import wraps
@@ -13,8 +13,7 @@ from functools import wraps
 
 @app.route('/search')
 def get_search():
-    form = SearchForm()
-    return render_template('search.html', form=form)
+    return render_template('search.html')
 
 
 @app.route('/process', methods=['POST'])
