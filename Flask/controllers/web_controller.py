@@ -33,3 +33,6 @@ def get_all_posts():
 
 """def like_post():
     return"""
+
+def get_users_by_first_name(first_name):
+    return wr.get_users_by_first_name(first_name)
