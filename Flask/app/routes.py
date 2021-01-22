@@ -103,10 +103,10 @@ def get_test_profile():
 def get_create_post():
     form = PostForm()
     if form.validate_on_submit():
-        user = session['email']
+        email = session['email']
         description = form.description.data
         photo = form.file.data
-        create_new_post(user, description, photo)
+        create_new_post(email, description, photo)
     return render_template('create_post.html', form=form)
 
 

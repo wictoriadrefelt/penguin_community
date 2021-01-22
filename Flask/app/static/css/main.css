@@ -17,6 +17,11 @@ body {
     padding-top: 35px;
 }
 
+.container .jumbotron {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
 .infinityContainer {
     display: flex;
     flex-wrap: wrap;
@@ -39,3 +44,11 @@ body {
 
 }
 
+#post-img {
+    max-width: 100%;
+    max-height: 350px;
+}
+
+.jumbotron .post {
+    font-size: 16px;
+}
