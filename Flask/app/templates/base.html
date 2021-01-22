@@ -50,6 +50,9 @@
         <li {% if request.path == '/feed' %}class="active"{% endif %}>
             <a href="{{ url_for('get_feed') }}" style="color: black">Feed</a>
         </li>
+        <li {% if request.path == '/create_post' %}class="active"{% endif %}>
+            <a href="{{ url_for('get_create_post') }}" style="color: black">Create post</a>
+        </li>
         <li {% if request.path == '/profile' %}class="active"{% endif %}>
             <a href="{{ url_for('get_profile') }}" style="color: black">Profile</a>
         </li>
@@ -98,6 +101,7 @@
         <p>Copyright</p>
     </div>
 </footer>
+
 
 
 </body>

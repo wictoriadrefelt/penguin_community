@@ -1,6 +1,7 @@
 {% extends "base_logged_in.html" %}
 
 {% block content2 %}
+
     {% for user, image, description in zipped_list %}
         <div class="jumbotron content-window">
             <div class="media">
@@ -17,4 +18,6 @@
         </div>
     {% endfor %}
     </div>
+
+</script>
 {% endblock %}
