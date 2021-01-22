@@ -4,9 +4,17 @@
 
     {% for user, image, description in zipped_list %}
         <div class="jumbotron content-window">
-            <div>{{ user }}</div>
-            <img src = "data:image/png;base64, {{image}}" alt= "myImage"/>
-            <div>{{ description }}</div>
+            <div class="media">
+                <div class="media-left">
+                  <img src="static/images/img_avatar1.png" class="media-object" style="width:60px">
+                </div>
+                <div class="media-body">
+                  <h3 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h3>
+                </div>
+            </div>
+            <hr>
+            <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
+            <p class="post">{{ description }}</p>
         </div>
     {% endfor %}
     </div>
