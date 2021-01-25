@@ -54,3 +54,7 @@ def create_new_post(user, description, new_photo):
 
 def get_users_by_first_name(first_name):
     return Users.objects(first_name__icontains=first_name)
+
+
+def get_users_by_last_name(last_name):
+    return Users.objects(last_name__icontains=last_name)
