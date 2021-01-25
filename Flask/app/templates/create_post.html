@@ -8,58 +8,61 @@
 
 {% block content %}
 
+    <div class="container text-center" >
     <h1>For the love of penguins, flap the button below to create your post</h1>
     <form action="" method="POST" enctype="multipart/form-data" id="form1">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <button type="button" style="color:dodgerblue" class="btn btn-default btn-lg glyphicon glyphicon-heart" id="myBtn"></button>
+  <button type="button" style="color:dodgerblue" class="btn btn-default btn-lg glyphicon glyphicon-heart" id="myBtn"></button>
 
-            <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
 
-                <div class="modal-header">
+      <div class="modal-content">
+        <div class="modal-header">
 
-                    <h4 style="color:dodgerblue;"><span class="glyphicon glyphicon-heart"></span> Spread the penguin love with a post!</h4>
-                </div>
-                <form role="form">
-                    <legend class="border-bottom mb-4">Insert your best (or worst) penguin photo below!</legend>
-                    <div class="form-group">
-                        {{ form.description.label(class="form-control-label") }}
+          <h4 style="color:dodgerblue;"><span class="glyphicon glyphicon-heart"></span> Spread the penguin love with a post!</h4>
+        </div>
+          <form role="form">
+              <legend class="border-bottom mb-4">Insert your best (or worst) penguin photo below!</legend>
+              <div class="form-group">
+                  {{ form.description.label(class="form-control-label") }}
 
-                        {% if form.description.errors %}
-                            {{ form.description(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.description.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
+                  {% if form.description.errors %}
+                      {{ form.description(class="form-control form-control-lg is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.description.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
 
-                            </div>
-                        {% else %}
-                            {{ form.description(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
+                      </div>
+                  {% else %}
+                      {{ form.description(class="form-control form-control-lg") }}
+                  {% endif %}
+              </div>
 
-                    <div class="form-group">
-                        <title></title>
-                        <h1>Select a picture below</h1>
-                        {{ form.hidden_tag() }}
-                        {{ form.file }}
-                        {% for error in form.file.errors %}
-                            <span style="color: #ff0000;">{{ error }}</span>
-                        {% endfor %}
+              <div class="form-group">
+                  <title></title>
+                  <h1>Select a picture below</h1>
+                  {{ form.hidden_tag() }}
+                  {{ form.file }}
+                  {% for error in form.file.errors %}
+                      <span style="color: #ff0000;">{{ error }}</span>
+                  {% endfor %}
 
-                        {{ form.submit }}
+                  {{ form.submit }}
 
-                    </div>
-                </form>
-            </div>
+              </div>
 
-            </fieldset>
+      </div>
 
 
 
 
  </form>
 
+ </div>
+</div>
 
 <script>
 $(document).ready(function() {
@@ -71,7 +74,5 @@ $(document).ready(function() {
 </script>
 
 
-
     </div>
-
 {% endblock %}

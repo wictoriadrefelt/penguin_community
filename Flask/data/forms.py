@@ -25,3 +25,6 @@ class PostForm(FlaskForm):
     description = StringField("Description")
     file = FileField(validators=[DataRequired()])
     submit = SubmitField("Submit")
+
+class CommentForm(FlaskForm):
+    
