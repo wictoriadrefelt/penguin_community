@@ -42,3 +42,13 @@ def get_user_by_id(user_id):
 
 def get_users_by_first_name(first_name):
     return wr.get_users_by_first_name(first_name)
+
+def delete_post(post_id):
+    return wr.delete_post(post_id)
+
+
+def get_by_post_id(post_id):
+    return wr.get_by_post_id(post_id)
+
+def delete_post_by_id(post_id):
+    return wr.delete_post_by_id(post_id)

@@ -12,6 +12,24 @@ from flask_login import login_user, current_user
 from functools import wraps
 
 
+
+@app.route('/post/<post_id>/post_delete', methods=["POST"])
+def delete_post(post_id):
+    delete_post_by_id(post_id)
+    flash('The post is now deleted', 'success')
+    return redirect(url_for('get_feed'))
+
+
+@app.route('/post/<post_id>',  methods=["GET", "POST",])
+def post(post_id):
+
+    post=get_by_post_id(post_id)
+    base64_data = codecs.encode(post.photo.read(), 'base64')
+    image = base64_data.decode('utf-8')
+
+    return render_template('post.html', post=post, image=image)
+
+
 @app.route('/search')
 def get_search():
     return render_template('search.html')
@@ -41,14 +59,14 @@ def get_feed():
 
     user_list = []
     photo_list = []
-    description_list = []
+    post_list = []
     profile_picture_list = []
 
     for post in posts:
         user_list.append(post.user)
 
     for post in posts:
-        description_list.append(post.description)
+        post_list.append(post.description)
 
     for post in posts:
         base64_data = codecs.encode(post.photo.read(), 'base64')
@@ -60,7 +78,7 @@ def get_feed():
         p_picture = base64_data.decode('utf-8')
         profile_picture_list.append(p_picture)
 
-    zipped_list = zip(user_list, photo_list, description_list, profile_picture_list)
+    zipped_list = zip(user_list, photo_list, post_list, profile_picture_list)
 
     return render_template('feed.html', title='Feed', zipped_list=zipped_list)
 

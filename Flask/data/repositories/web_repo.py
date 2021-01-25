@@ -66,3 +66,11 @@ def get_users_by_first_name(first_name):
     return Users.objects(first_name__icontains=first_name)
 
 
+def delete_post_by_id(post_id):
+    post = Posts.objects.get(id=bson.objectid.ObjectId(post_id))
+
+    #    post = Posts.objects.first(Posts.objects)
+    post.delete()
+
+def get_user_by_id(user_id):
+    return Users.objects.get(id=bson.objectid.ObjectId(user_id))
