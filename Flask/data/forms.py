@@ -10,6 +10,7 @@ class RegistrationForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     confirm_password = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo("password")])
+    file = FileField()
     submit = SubmitField("Sign up")
 
 
@@ -24,3 +25,5 @@ class PostForm(FlaskForm):
     description = StringField("Description")
     file = FileField(validators=[DataRequired()])
     submit = SubmitField("Submit")
+
+

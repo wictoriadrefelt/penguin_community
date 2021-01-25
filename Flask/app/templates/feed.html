@@ -2,22 +2,22 @@
 
 {% block content2 %}
 
-    {% for user, image, description in zipped_list %}
+    {% for user, image, post, profile_picture in zipped_list %}
         <div class="jumbotron content-window">
             <div class="media">
                 <div class="media-left">
-                  <img src="static/images/img_avatar1.png" class="media-object" style="width:60px">
+                  <img src = "data:image/png;base64, {{profile_picture}}" class="media-object" style="width:60px">
                 </div>
                 <div class="media-body">
                   <h3 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h3>
                 </div>
             </div>
             <hr>
+            <a href="{{ url_for('get_post', post_id=post.id) }}">
             <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
-            <p class="post">{{ description }}</p>
+            </a>
+            <p class="post">{{ post.description }}</p>
         </div>
     {% endfor %}
-    </div>
 
-</script>
 {% endblock %}

@@ -1,14 +1,32 @@
 import codecs
 import json
+
 from app import app, bcrypt
 from flask import jsonify, render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
-    get_users_by_first_or_last_name
+    get_users_by_first_or_last_name, get_user_by_id, get_by_post_id
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
 from functools import wraps
+
+
+
+@app.route('/post/<post_id>/post_delete', methods=["POST"])
+def delete_post(post_id):
+    delete_post_by_id(post_id)
+    flash('The post is now deleted', 'success')
+    return redirect(url_for('get_feed'))
+
+
+@app.route('/post/<post_id>',  methods=["GET", "POST",])
+def get_post(post_id):
+    post = get_by_post_id(post_id)
+    base64_data = codecs.encode(post.photo.read(), 'base64')
+    image = base64_data.decode('utf-8')
+
+    return render_template('post.html', post=post, image=image)
 
 
 @app.route('/search')
@@ -36,22 +54,29 @@ def post_process():
 @login_required('sign_in')
 def get_feed():
     posts = get_all_posts()
+
     user_list = []
     photo_list = []
-    description_list = []
+    post_list = []
+    profile_picture_list = []
 
     for post in posts:
         user_list.append(post.user)
 
     for post in posts:
-        description_list.append(post.description)
+        post_list.append(post)
 
     for post in posts:
         base64_data = codecs.encode(post.photo.read(), 'base64')
         image = base64_data.decode('utf-8')
         photo_list.append(image)
 
-    zipped_list = zip(user_list, photo_list, description_list)
+    for post in posts:
+        base64_data = codecs.encode(post.user.profile_picture.read(), 'base64')
+        p_picture = base64_data.decode('utf-8')
+        profile_picture_list.append(p_picture)
+
+    zipped_list = zip(user_list, photo_list, post_list, profile_picture_list)
 
     return render_template('feed.html', title='Feed', zipped_list=zipped_list)
 
@@ -83,9 +108,11 @@ def sign_up():
         last_name = form.last_name.data
         email = form.email.data
         password = form.password.data
-        create_new_user(first_name, last_name, email, password)
+        profile_picture = form.file.data
+        create_new_user(first_name, last_name, email, password, profile_picture)
         return redirect(url_for('sign_in'))
     return render_template('sign_up.html', form=form)
+
 
 
 @app.route("/sign_in", methods=["GET", "POST"])
@@ -112,6 +139,7 @@ def get_test_profile():
     return render_template('test_profile.html')
 
 
+
 @app.route('/create_post', methods=["GET", "POST"])
 @login_required('sign_in')
 def get_create_post():
@@ -123,6 +151,7 @@ def get_create_post():
         create_new_post(email, description, photo)
         flash("Congratulations, your post was successfully uploaded", "success")
     return render_template('create_post.html', form=form)
+
 
 
 @app.route("/logged_out", methods=["GET", "POST"])

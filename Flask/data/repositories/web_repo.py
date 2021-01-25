@@ -2,6 +2,7 @@ import mongoengine
 from datetime import datetime
 from data.models.models import Users, Posts
 db = mongoengine
+import bson
 
 """
 def create_new_post(location, fishes, image, description, time_stamp):
@@ -23,24 +24,33 @@ def create_new_post(location, fishes, image, description, time_stamp):
 def get_user_by_email(email):
     return Users.objects(email=email).first()
 
+
+
+
+def get_user_by_id(user_id):
+    return Users.objects.get(id=bson.objectid.ObjectId(user_id))
+
+
 def get_all_posts():
 
     return Posts.objects.all()
 
 
-
-def create_new_user(first_name, last_name, email, password):
+def create_new_user(first_name, last_name, email, password, profile_picture):
     new_user = Users(
         first_name=first_name,
         last_name=last_name,
         email=email,
         password=password
     )
+
+    new_user.profile_picture.put(profile_picture, content_type='image/jpeg')
+    print(new_user)
+
     new_user.save()
 
 
 def create_new_post(user, description, new_photo):
-    print(new_photo.filename)
     new_post = Posts(
         user=user,
         description=description
@@ -55,6 +65,20 @@ def create_new_post(user, description, new_photo):
 def get_users_by_first_name(first_name):
     return Users.objects(first_name__icontains=first_name)
 
-
+  
 def get_users_by_last_name(last_name):
     return Users.objects(last_name__icontains=last_name)
+
+  
+def delete_post_by_id(post_id):
+    post = Posts.objects.get(id=bson.objectid.ObjectId(post_id))
+
+    #    post = Posts.objects.first(Posts.objects)
+    post.delete()
+
+def get_user_by_id(user_id):
+    return Users.objects.get(id=bson.objectid.ObjectId(user_id))
+
+
+def get_by_post_id(post_id):
+    return Posts.objects.get(id=bson.objectid.ObjectId(post_id))

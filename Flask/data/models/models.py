@@ -1,5 +1,5 @@
 from data import db
-from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument, FileField
+from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument, FileField, IntField
 from app import login_manager
 from flask_login import UserMixin
 from flask import session, redirect, url_for
@@ -34,6 +34,7 @@ class Users(Document, UserMixin):
     last_name = StringField(max_length=50)
     email = StringField(required=True)
     password = StringField()
+    profile_picture = FileField()
 
     def __repr__(self):
         return f"User({self.first_name}, {self.last_name}, {self.email})"
@@ -43,6 +44,8 @@ class Posts(Document):
     user = ReferenceField(Users)
     description = StringField(max_length=280)
     photo = FileField()
+
+    fishes = IntField()
 
     def __repr__(self):
         return f"Post({self.user}, {self.description})"

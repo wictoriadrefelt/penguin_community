@@ -23,52 +23,46 @@
 
           <h4 style="color:dodgerblue;"><span class="glyphicon glyphicon-heart"></span> Spread the penguin love with a post!</h4>
         </div>
-        <div class="modal-body">
-            <form role="form">
-            <legend class="border-bottom mb-4">Insert your best (or worst) penguin photo below!</legend>
-            <div class="form-group">
-                {{ form.description.label(class="form-control-label") }}
+          <form role="form">
+              <legend class="border-bottom mb-4">Insert your best (or worst) penguin photo below!</legend>
+              <div class="form-group">
+                  {{ form.description.label(class="form-control-label") }}
 
-                {% if form.description.errors %}
-                    {{ form.description(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.description.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
+                  {% if form.description.errors %}
+                      {{ form.description(class="form-control form-control-lg is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.description.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
 
-                    </div>
-                    {% else %}
-                        {{ form.description(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
+                      </div>
+                  {% else %}
+                      {{ form.description(class="form-control form-control-lg") }}
+                  {% endif %}
+              </div>
 
-                <div class="form-group">
-                    <title></title>
-                    <h1>Select a picture below</h1>
-                    {{ form.hidden_tag() }}
-                    {{ form.file }}
-                    {% for error in form.file.errors %}
-                        <span style="color: #ff0000;">{{ error }}</span>
-                    {% endfor %}
+              <div class="form-group">
+                  <title></title>
+                  <h1>Select a picture below</h1>
+                  {{ form.hidden_tag() }}
+                  {{ form.file }}
+                  {% for error in form.file.errors %}
+                      <span style="color: #ff0000;">{{ error }}</span>
+                  {% endfor %}
 
-                    {{ form.submit }}
+                  {{ form.submit }}
 
-        </div>
+              </div>
 
-  </div>
-</div>
+      </div>
 
 
-{% if file_url %}
-<br>
-<img src="{{ file_url }}">
-{% endif %}
+
+
  </form>
 
  </div>
-
-
-        </div>
+</div>
 
 <script>
 $(document).ready(function() {
