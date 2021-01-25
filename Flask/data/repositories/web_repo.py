@@ -25,6 +25,8 @@ def get_user_by_email(email):
     return Users.objects(email=email).first()
 
 
+
+
 def get_user_by_id(user_id):
     return Users.objects.get(id=bson.objectid.ObjectId(user_id))
 
