@@ -74,3 +74,7 @@ def delete_post_by_id(post_id):
 
 def get_user_by_id(user_id):
     return Users.objects.get(id=bson.objectid.ObjectId(user_id))
+
+
+def get_by_post_id(post_id):
+    return Posts.objects.get(id=bson.objectid.ObjectId(post_id))

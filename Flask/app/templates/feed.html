@@ -2,7 +2,7 @@
 
 {% block content2 %}
 
-    {% for user, image, description, profile_picture in zipped_list %}
+    {% for user, image, post, profile_picture in zipped_list %}
         <div class="jumbotron content-window">
             <div class="media">
                 <div class="media-left">
@@ -13,15 +13,11 @@
                 </div>
             </div>
             <hr>
-     <a href="{{ url_for('post',post_id=post.id) }}">
+            <a href="{{ url_for('get_post', post_id=post.id) }}">
             <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
             </a>
             <p class="post">{{ post.description }}</p>
-
-         <div class="modal-footer">
         </div>
     {% endfor %}
-    </div>
 
-</script>
 {% endblock %}
