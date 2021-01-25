@@ -16,7 +16,10 @@
                 success: (data) => {
                     $('#suggestion-list').empty();
                     $.each(data, (i, item) => {
-                        $('#suggestion-list').append('<a href="#" class="list-group-item list-group-item-action">' + item + '</a>');
+                        if (item["first name"]) {
+                            $('#suggestion-list').append('<a href="#" class="list-group-item list-group-item-action">' +
+                                item["first name"] + ' ' + item["last name"] + '</a>');
+                        }
                     });
                 }
             })
