@@ -1,0 +1,38 @@
+{% extends 'base_logged_in.html' %}
+
+{% block content2 %}
+
+            <div class="jumbotron content-window">
+            <div class="media">
+                <div class="media-left">
+                  <img src="static/images/img_avatar1.png" class="media-object" style="width:60px">
+                </div>
+                <div class="media-body">
+                  <h3 class="media-heading">{{ post.user.first_name }} {{ post.user.last_name }}</h3>
+                </div>
+            </div>
+            <hr>
+            <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
+            <p class="post">{{ post.description }}</p>
+
+                  <form action="{{ url_for('delete_post', post_id=post.id) }}"method="POST">
+            <input class="btn " type="submit" value="Delete">
+
+           </form>
+
+         <div class="modal-footer">
+        </div>
+
+
+
+
+
+
+
+  <form action="/deleted_post " method="POST">
+            <input class="btn " type="submit" value="Delete">
+
+           </form>
+</div>
+
+{% endblock %}

@@ -13,8 +13,12 @@
                 </div>
             </div>
             <hr>
+     <a href="{{ url_for('post',post_id=post.id) }}">
             <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
-            <p class="post">{{ description }}</p>
+            </a>
+            <p class="post">{{ post.description }}</p>
+
+         <div class="modal-footer">
         </div>
     {% endfor %}
     </div>
