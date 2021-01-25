@@ -2,19 +2,6 @@ body {
     background-color: #96b4c9;
 }
 
-.foot-wave {
-    background-image: url(/static/images/footwave.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 44px;
-}
-
-.foot-white {
-    height: 60px;
-    background-color: white;
-    color: black;
-}
-
 .navbar-default {
     background-color: #608fb0;
     border: unset;
@@ -24,21 +11,15 @@ body {
 
 }
 
-header {
-    background-image: url(/static/images/sea-header.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 200px
-}
-
 .jumbotron {
     background-color: unset;
     margin-bottom: 35px;
     padding-top: 35px;
 }
 
-#penguin {
-    height: 160px;
+.container .jumbotron {
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .infinityContainer {
@@ -52,12 +33,6 @@ header {
     width: 50px;
 }
 
-
-img {
-    width: 200px;
-    margin: 10px;
-}
-
 .content-window {
     background-color: aliceblue;
 }
@@ -69,3 +44,22 @@ img {
 
 }
 
+.btn-default{
+    color: aliceblue;
+     background-color: #96b4c9;
+    border-color: black;
+}
+
+.btn {
+    height: 50px;
+    width: 50px;
+    border: 4px solid transparent;
+  
+#post-img {
+    max-width: 100%;
+    max-height: 350px;
+}
+
+.jumbotron .post {
+    font-size: 16px;
+}

@@ -1,13 +1,36 @@
 import codecs
-
+import json
 from app import app, bcrypt
-from flask import render_template, redirect, url_for, request, flash, session
-from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts
+from flask import jsonify, render_template, redirect, url_for, request, flash, session
+from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
+    get_users_by_first_name
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
 from functools import wraps
+
+
+@app.route('/search')
+def get_search():
+    return render_template('search.html')
+
+
+@app.route('/process', methods=['POST'])
+def post_process():
+    user_search = request.form['name']
+    db_search = get_users_by_first_name(user_search)
+    result = [user.first_name.capitalize() for user in db_search]
+
+    if user_search:
+        response = app.response_class(
+            response=json.dumps(result),
+            status=200,
+            mimetype='application/json'
+        )
+        return response  # jsonify({'name': new_name})
+
+    return jsonify({'error': 'No penguins found.'})
 
 
 @app.route('/feed')
@@ -25,16 +48,11 @@ def get_feed():
         description_list.append(post.description)
 
     for post in posts:
-
-
         base64_data = codecs.encode(post.photo.read(), 'base64')
         image = base64_data.decode('utf-8')
         photo_list.append(image)
 
     zipped_list = zip(user_list, photo_list, description_list)
-
-
-
 
     return render_template('feed.html', title='Feed', zipped_list=zipped_list)
 
@@ -44,12 +62,9 @@ def get_index():
     return render_template('base.html', status='Signed In' if is_authenticated() else 'Not Signed In')
 
 
-
 @app.route("/restricted")
 def restricted():
     return render_template('restricted.html')
-
-
 
 
 @app.route('/profile')
@@ -74,16 +89,6 @@ def sign_up():
         return redirect(url_for('sign_in'))
     return render_template('sign_up.html', form=form)
 
-@app.route('/create_post', methods=["GET", "POST"])
-@login_required('sign_in')
-def get_create_post():
-    form = PostForm()
-    if form.validate_on_submit():
-        user = session['email']
-        description = form.description.data
-        photo = form.file.data
-        create_new_post(user, description, photo)
-    return render_template('create_post.html', form=form)
 
 
 @app.route("/sign_in", methods=["GET", "POST"])
@@ -111,9 +116,21 @@ def get_test_profile():
 
 
 
+@app.route('/create_post', methods=["GET", "POST"])
+@login_required('sign_in')
+def get_create_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        email = session['email']
+        description = form.description.data
+        photo = form.file.data
+        create_new_post(email, description, photo)
+        flash("Congratulations, your post was successfully uploaded", "success")
+    return render_template('create_post.html', form=form)
 
 
-@app.route("/logged_out", methods=["GET","POST"])
+
+@app.route("/logged_out", methods=["GET", "POST"])
 @login_required('restricted')
 def logged_out():
     session.clear()
@@ -133,6 +150,7 @@ def error_404(error):
 @app.errorhandler(500)
 def error_500(error):
     return render_template('errors/500.html'), 500
+
 
 """  form = PostForm()
     if form.validate_on_submit():

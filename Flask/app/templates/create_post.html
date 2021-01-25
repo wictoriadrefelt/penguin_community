@@ -1,61 +1,77 @@
 {% extends "base_logged_in.html" %}
 
-{% block content %}
-<div class="container center-block" style="margin-top: 35px">
-  <div class="row">
-    <div class="col-sm-3 jumbotron">
-    </div>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <div class="col-sm-6 jumbotron" style="background-color: aliceblue">
-        <form action="" method="POST" enctype="multipart/form-data">
+
+{% block content %}
+
+    <h1>For the love of penguins, flap the button below to create your post</h1>
+    <form action="" method="POST" enctype="multipart/form-data" id="form1">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Make a new penguin-post!</legend>
-            <div class="form-group">
-                {{ form.description.label(class="form-control-label") }}
+            <button type="button" style="color:dodgerblue" class="btn btn-default btn-lg glyphicon glyphicon-heart" id="myBtn"></button>
 
-                {% if form.description.errors %}
-                    {{ form.description(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.description.errors %}
-                            <span>{{ error }}</span>
+            <div class="modal fade" id="myModal" role="dialog">
+
+                <div class="modal-header">
+
+                    <h4 style="color:dodgerblue;"><span class="glyphicon glyphicon-heart"></span> Spread the penguin love with a post!</h4>
+                </div>
+                <form role="form">
+                    <legend class="border-bottom mb-4">Insert your best (or worst) penguin photo below!</legend>
+                    <div class="form-group">
+                        {{ form.description.label(class="form-control-label") }}
+
+                        {% if form.description.errors %}
+                            {{ form.description(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.description.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+
+                            </div>
+                        {% else %}
+                            {{ form.description(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <title></title>
+                        <h1>Select a picture below</h1>
+                        {{ form.hidden_tag() }}
+                        {{ form.file }}
+                        {% for error in form.file.errors %}
+                            <span style="color: #ff0000;">{{ error }}</span>
                         {% endfor %}
 
+                        {{ form.submit }}
+
                     </div>
-                    {% else %}
-                        {{ form.description(class="form-control form-control-lg") }}
-                {% endif %}
+                </form>
             </div>
 
-
-             <div class="form-group">
-                <div class="jumbotron content-window">
-                    <div class="col-sm-6 jumbotron" style="background-color: aliceblue">
-                    <title>Upload File</title>
-                    <h1>Photo Upload</h1>
-                    {{ form.hidden_tag() }}
-                    {{ form.file }}
-                    {% for error in form.file.errors %}
-                        <span style="color: red;">{{ error }}</span>
-                    {% endfor %}
-                    {{ form.submit }}
-
-    </form>
-
-
-    <div class="col-sm-3 jumbotron">
-    </div>
-
-  </div>
-</div>
+            </fieldset>
 
 
 
 
+ </form>
 
-</form>
+
+<script>
+$(document).ready(function() {
+    $("#myBtn").click(function () {
+        $("#myModal").modal();
+    });
+})
+
+</script>
 
 
 
     </div>
+
 {% endblock %}

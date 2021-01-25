@@ -36,11 +36,17 @@ class Users(Document, UserMixin):
     password = StringField()
     profile_picture = FileField()
 
+    def __repr__(self):
+        return f"User({self.first_name}, {self.last_name}, {self.email})"
+
 
 class Posts(Document):
-    user = StringField(required=True)
+    user = ReferenceField(Users)
     description = StringField(max_length=280)
     photo = FileField()
+
+    def __repr__(self):
+        return f"Post({self.user}, {self.description})"
 
 
 """
