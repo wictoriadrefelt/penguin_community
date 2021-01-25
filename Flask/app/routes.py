@@ -3,7 +3,7 @@ import json
 from app import app, bcrypt
 from flask import jsonify, render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
-    get_users_by_first_name
+    get_users_by_first_name, get_users_by_first_or_last_name
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm
 from data.models.models import Users, login_required, is_authenticated
@@ -18,11 +18,10 @@ def get_search():
 
 @app.route('/process', methods=['POST'])
 def post_process():
-    user_search = request.form['name']
-    db_search = get_users_by_first_name(user_search)
-    result = [user.first_name.capitalize() for user in db_search]
+    user_input = request.form['name']
+    result = get_users_by_first_or_last_name(user_input)
 
-    if user_search:
+    if user_input:
         response = app.response_class(
             response=json.dumps(result),
             status=200,
