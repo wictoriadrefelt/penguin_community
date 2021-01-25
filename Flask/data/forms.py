@@ -26,5 +26,4 @@ class PostForm(FlaskForm):
     file = FileField(validators=[DataRequired()])
     submit = SubmitField("Submit")
 
-class CommentForm(FlaskForm):
-    
+

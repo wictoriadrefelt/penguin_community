@@ -1,9 +1,10 @@
 import codecs
 import json
+
 from app import app, bcrypt
 from flask import jsonify, render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
-    get_users_by_first_name
+    get_users_by_first_name, get_user_by_id
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm
 from data.models.models import Users, login_required, is_authenticated
@@ -37,9 +38,11 @@ def post_process():
 @login_required('sign_in')
 def get_feed():
     posts = get_all_posts()
+
     user_list = []
     photo_list = []
     description_list = []
+    profile_picture_list = []
 
     for post in posts:
         user_list.append(post.user)
@@ -52,7 +55,12 @@ def get_feed():
         image = base64_data.decode('utf-8')
         photo_list.append(image)
 
-    zipped_list = zip(user_list, photo_list, description_list)
+    for post in posts:
+        base64_data = codecs.encode(post.user.profile_picture.read(), 'base64')
+        p_picture = base64_data.decode('utf-8')
+        profile_picture_list.append(p_picture)
+
+    zipped_list = zip(user_list, photo_list, description_list, profile_picture_list)
 
     return render_template('feed.html', title='Feed', zipped_list=zipped_list)
 

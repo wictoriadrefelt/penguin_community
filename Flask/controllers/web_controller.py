@@ -21,8 +21,13 @@ def create_new_post(email, description, photo):
     user = get_user_by_email(email)
     return wr.create_new_post(user, description, photo)
 
+
 def get_all_posts():
     return wr.get_all_posts()
+
+
+def get_user_by_id(user_id):
+    return wr.get_user_by_id(user_id)
 
 
 #def add_comment_to_post(post_id, comment_id):

@@ -2,6 +2,7 @@ import mongoengine
 from datetime import datetime
 from data.models.models import Users, Posts
 db = mongoengine
+import bson
 
 """
 def create_new_post(location, fishes, image, description, time_stamp):
@@ -22,6 +23,13 @@ def create_new_post(location, fishes, image, description, time_stamp):
 
 def get_user_by_email(email):
     return Users.objects(email=email).first()
+
+
+
+
+def get_user_by_id(user_id):
+    return Users.objects.get(id=bson.objectid.ObjectId(user_id))
+
 
 def get_all_posts():
 
