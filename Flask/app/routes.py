@@ -84,9 +84,11 @@ def sign_up():
         last_name = form.last_name.data
         email = form.email.data
         password = form.password.data
-        create_new_user(first_name, last_name, email, password)
+        profile_picture = form.file.data
+        create_new_user(first_name, last_name, email, password, profile_picture)
         return redirect(url_for('sign_in'))
     return render_template('sign_up.html', form=form)
+
 
 
 @app.route("/sign_in", methods=["GET", "POST"])
@@ -113,6 +115,7 @@ def get_test_profile():
     return render_template('test_profile.html')
 
 
+
 @app.route('/create_post', methods=["GET", "POST"])
 @login_required('sign_in')
 def get_create_post():
@@ -124,6 +127,7 @@ def get_create_post():
         create_new_post(email, description, photo)
         flash("Congratulations, your post was successfully uploaded", "success")
     return render_template('create_post.html', form=form)
+
 
 
 @app.route("/logged_out", methods=["GET", "POST"])

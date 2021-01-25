@@ -12,9 +12,9 @@ def get_user_by_email(email):
     return wr.get_user_by_email(email)
 
 
-def create_new_user(first_name, last_name, email, password):
+def create_new_user(first_name, last_name, email, password, profile_picture):
     hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
-    return wr.create_new_user(first_name, last_name, email, hashed_password)
+    return wr.create_new_user(first_name, last_name, email, hashed_password, profile_picture)
 
 
 def create_new_post(email, description, photo):

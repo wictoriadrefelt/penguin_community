@@ -28,19 +28,21 @@ def get_all_posts():
     return Posts.objects.all()
 
 
-
-def create_new_user(first_name, last_name, email, password):
+def create_new_user(first_name, last_name, email, password, profile_picture):
     new_user = Users(
         first_name=first_name,
         last_name=last_name,
         email=email,
         password=password
     )
+
+    new_user.profile_picture.put(profile_picture, content_type='image/jpeg')
+    print(new_user)
+
     new_user.save()
 
 
 def create_new_post(user, description, new_photo):
-    print(new_photo.filename)
     new_post = Posts(
         user=user,
         description=description
@@ -54,3 +56,5 @@ def create_new_post(user, description, new_photo):
 
 def get_users_by_first_name(first_name):
     return Users.objects(first_name__icontains=first_name)
+
+
