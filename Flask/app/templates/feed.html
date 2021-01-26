@@ -3,7 +3,7 @@
 {% block content2 %}
 
     {% for user, image, post, profile_picture in zipped_list %}
-        <div class="jumbotron content-window">
+        <div class="jumbotron">
             <div class="media">
                 <div class="media-left">
                   <img src = "data:image/png;base64, {{profile_picture}}" class="media-object" style="width:60px">
