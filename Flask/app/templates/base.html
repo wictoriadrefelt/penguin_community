@@ -61,6 +61,11 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <form method="POST" action="" id="penguin-search" style="padding-top: 8px; width: auto">
+                <input type="text" class="form-control" id="nameInput" placeholder="Search penguins">
+          </form>
+        </li>
         <li><a href="{{ url_for('logged_out') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 
       {% else %}
