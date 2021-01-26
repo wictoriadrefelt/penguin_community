@@ -49,10 +49,13 @@ def get_users_by_first_or_last_name(search_input):
     users_last = wr.get_users_by_last_name(search_input)
     users = set(users_first) | set(users_last)
 
-    return [
-        {"first name": user.first_name.capitalize(),
-         "last name": user.last_name.capitalize()}
-        for user in users]
+    if users:
+        return [
+            {"first name": user.first_name.capitalize(),
+             "last name": user.last_name.capitalize()}
+            for user in users]
+    else:
+        return [{"empty": True}]
 
 
 def get_by_post_id(post_id):
