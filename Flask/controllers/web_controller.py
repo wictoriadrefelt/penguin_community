@@ -49,9 +49,6 @@ def get_users_by_first_or_last_name(search_input):
          "last name": user.last_name.capitalize()}
         for user in users]
 
-def delete_post(post_id):
-    return wr.delete_post(post_id)
-
 
 def get_by_post_id(post_id):
     return wr.get_by_post_id(post_id)

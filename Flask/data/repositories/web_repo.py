@@ -25,8 +25,6 @@ def get_user_by_email(email):
     return Users.objects(email=email).first()
 
 
-
-
 def get_user_by_id(user_id):
     return Users.objects.get(id=bson.objectid.ObjectId(user_id))
 
@@ -75,9 +73,6 @@ def delete_post_by_id(post_id):
 
     #    post = Posts.objects.first(Posts.objects)
     post.delete()
-
-def get_user_by_id(user_id):
-    return Users.objects.get(id=bson.objectid.ObjectId(user_id))
 
 
 def get_by_post_id(post_id):

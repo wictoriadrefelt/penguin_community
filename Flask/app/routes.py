@@ -4,7 +4,7 @@ import json
 from app import app, bcrypt
 from flask import jsonify, render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
-    get_users_by_first_or_last_name, get_user_by_id, get_by_post_id
+    get_users_by_first_or_last_name, get_user_by_id, get_by_post_id, delete_post_by_id
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm
 from data.models.models import Users, login_required, is_authenticated
@@ -64,12 +64,12 @@ def get_feed():
         user_list.append(post.user)
 
     for post in posts:
-        post_list.append(post)
-
-    for post in posts:
         base64_data = codecs.encode(post.photo.read(), 'base64')
         image = base64_data.decode('utf-8')
         photo_list.append(image)
+
+    for post in posts:
+        post_list.append(post)
 
     for post in posts:
         base64_data = codecs.encode(post.user.profile_picture.read(), 'base64')
