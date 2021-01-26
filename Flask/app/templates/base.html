@@ -56,9 +56,6 @@
         <li {% if request.path == '/profile' %}class="active"{% endif %}>
             <a href="{{ url_for('get_profile') }}" style="color: black">Profile</a>
         </li>
-        <li {% if request.path == '/search' %}class="active"{% endif %}>
-            <a href="{{ url_for('get_search') }}" style="color: black">Search</a>
-        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
