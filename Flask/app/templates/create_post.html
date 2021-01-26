@@ -1,14 +1,20 @@
 {% extends "base_logged_in.html" %}
 
+{% block head %}
+{{ super() }}
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/header.css">
+  <link rel="stylesheet" href="/static/css/footer.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% endblock %}
 
 {% block content2 %}
 <div class="jumbotron">
-    <div class="container text-center" >
+    <div class="text-center" >
     <h1>For the love of penguins, flap the button below to create your post</h1>
     <form action="" method="POST" enctype="multipart/form-data" id="form1">
         {{ form.hidden_tag() }}
