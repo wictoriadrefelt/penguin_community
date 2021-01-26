@@ -18,6 +18,10 @@
             </a>
             <p class="post">{{ post.description }}</p>
         </div>
+                          <form action="{{ url_for('delete_post', post_id=post.id) }}"method="POST">
+            <input class="btn " type="submit" value="+1 fish">
+
+           </form>
     {% endfor %}
 
 {% endblock %}

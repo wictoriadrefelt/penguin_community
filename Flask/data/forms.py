@@ -27,3 +27,5 @@ class PostForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
+class FeedForm(FlaskForm):
+    fishes = BooleanField()
