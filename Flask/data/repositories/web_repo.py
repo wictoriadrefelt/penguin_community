@@ -70,8 +70,6 @@ def get_users_by_last_name(last_name):
   
 def delete_post_by_id(post_id):
     post = Posts.objects.get(id=bson.objectid.ObjectId(post_id))
-
-    #    post = Posts.objects.first(Posts.objects)
     post.delete()
 
 

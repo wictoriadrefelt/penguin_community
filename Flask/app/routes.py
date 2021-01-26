@@ -25,8 +25,9 @@ def get_post(post_id):
     post = get_by_post_id(post_id)
     base64_data = codecs.encode(post.photo.read(), 'base64')
     image = base64_data.decode('utf-8')
-
-    return render_template('post.html', post=post, image=image)
+    base64_data_2 = codecs.encode(post.user.profile_picture.read(), 'base64')
+    p_picture = base64_data_2.decode('utf-8')
+    return render_template('post.html', post=post, image=image, p_picture=p_picture)
 
 
 @app.route('/search')

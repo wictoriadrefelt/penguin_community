@@ -5,7 +5,7 @@
             <div class="jumbotron content-window">
             <div class="media">
                 <div class="media-left">
-                  <img src="static/images/img_avatar1.png" class="media-object" style="width:60px">
+                  <img src = "data:image/png;base64, {{ p_picture }}" class="media-object" style="width:60px">
                 </div>
                 <div class="media-body">
                   <h3 class="media-heading">{{ post.user.first_name }} {{ post.user.last_name }}</h3>
@@ -25,14 +25,6 @@
 
 
 
-
-
-
-
-  <form action="/deleted_post " method="POST">
-            <input class="btn " type="submit" value="Delete">
-
-           </form>
 </div>
 
 {% endblock %}
