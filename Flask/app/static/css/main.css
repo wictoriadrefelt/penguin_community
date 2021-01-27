@@ -63,7 +63,7 @@ body {
     border-color: black;
 }
 
-.btn {
+#myBtn {
     height: 50px;
     width: 50px;
     border: 4px solid transparent;
