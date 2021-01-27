@@ -5,7 +5,7 @@ from app import app, bcrypt
 from flask import jsonify, render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
-    get_posts_by_user_id
+    get_posts_by_user_id, add_friend, add_fish_to_post
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm
 from data.models.models import Users, login_required, is_authenticated
@@ -13,9 +13,22 @@ from flask_login import login_user, current_user
 from functools import wraps
 
 
+@app.route('/post/<post_id>/post_fish', methods=["POST"])
+def fish_post(post_id):
+    add_fish_to_post(post_id)
+    flash('One fish added to this post!', 'success')
+    return redirect(url_for('get_feed'))
+
 
 @app.route('/post/<post_id>/post_delete', methods=["POST"])
 def delete_post(post_id):
+    delete_post_by_id(post_id)
+    flash('The post is now deleted', 'success')
+    return redirect(url_for('get_feed'))
+
+
+@app.route('/post/<post_id>/follow', methods=["POST"])
+def follow(user_id):
     delete_post_by_id(post_id)
     flash('The post is now deleted', 'success')
     return redirect(url_for('get_feed'))
@@ -122,14 +135,13 @@ def restricted():
     return render_template('restricted.html')
 
 
-@app.route('/profile',  methods=["GET", "POST"])
+@app.route('/profile/<user_id>',  methods=["GET", "POST"])
 @login_required('sign_in')
-def get_profile():
 
-    email = session['email']
-    user = get_user_by_email(email)
+def get_others_profile(user_id):
+
+    user = get_user_by_id(user_id)
     posts = get_posts_by_user_id(user.id)
-
 
     user_list = []
     photo_list = []
@@ -155,6 +167,18 @@ def get_profile():
     zipped_list = zip(user_list, photo_list, post_list, profile_picture_list)
 
     return render_template('profile.html', title='Profile', zipped_list=zipped_list)
+
+
+@app.route('/profile',  methods=["GET", "POST"])
+@login_required('sign_in')
+def get_profile():
+
+    email = session['email']
+    user = get_user_by_email(email)
+    user_id = user.id
+    return redirect(url_for("get_others_profile", user_id=user_id))
+
+
 
 
 @app.route('/sign_up', methods=["GET", "POST"])

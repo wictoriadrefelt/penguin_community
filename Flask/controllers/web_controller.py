@@ -69,3 +69,10 @@ def delete_post_by_id(post_id):
 
 def get_posts_by_user_id(user_id):
     return wr.get_posts_by_user_id(user_id)
+
+def add_friend(email, follow_id):
+    user = get_user_by_email(email)
+    return wr.add_friend(user, follow_id)
+
+def add_fish_to_post(post_id):
+    return wr.add_fish_to_post(post_id)

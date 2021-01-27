@@ -36,6 +36,7 @@ class Users(Document, UserMixin):
     email = StringField(required=True)
     password = StringField()
     profile_picture = FileField()
+    following = ListField(StringField)
 
     def __repr__(self):
         return f"User({self.first_name}, {self.last_name}, {self.email})"
