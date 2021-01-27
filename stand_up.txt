@@ -69,3 +69,10 @@ Stand up 22/1-21 10.00
 - Mergar samtliga branches.
 - Vi forstätter som under gårdagen.
 - Vi hörs av via discord och uppdaterar varandra om eventuella problem, pull-requests samt vad vi pysslar med just nu.
+
+
+
+-Stand up 26/1/21 10.00
+- Mergat samtliga branches samt löst conflicts.
+- Arbetar tillsammans under dagen med att få till comments för posts
+- Fortsatt arbete under morgondagens lektion.
