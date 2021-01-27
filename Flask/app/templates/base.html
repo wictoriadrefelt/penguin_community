@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% block head %}
   {% if title %}
       <title>Penguin - {{ title }}</title>
   {% else %}
@@ -15,7 +16,7 @@
   <link rel="stylesheet" href="/static/css/header.css">
   <link rel="stylesheet" href="/static/css/footer.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  {% block head %}{% endblock %}
+  {% endblock %}
 </head>
 
 <body>
@@ -56,11 +57,13 @@
         <li {% if request.path == '/profile' %}class="active"{% endif %}>
             <a href="{{ url_for('get_profile') }}" style="color: black">Profile</a>
         </li>
-        <li {% if request.path == '/search' %}class="active"{% endif %}>
-            <a href="{{ url_for('get_search') }}" style="color: black">Search</a>
-        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <form method="POST" action="" id="penguin-search" style="padding-top: 8px; width: auto" name="form1" onsubmit="return false;">
+                <input type="text" class="form-control" id="nameInput" placeholder="Search penguins">
+          </form>
+        </li>
         <li><a href="{{ url_for('logged_out') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 
       {% else %}

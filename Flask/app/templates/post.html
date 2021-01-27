@@ -2,7 +2,8 @@
 
 {% block content2 %}
 
-            <div class="jumbotron content-window">
+    <div class="jumbotron">
+                <!-- post -->
             <div class="media">
                 <div class="media-left">
                   <img src = "data:image/png;base64, {{ p_picture }}" class="media-object" style="width:60px">
@@ -11,11 +12,58 @@
                   <h3 class="media-heading">{{ post.user.first_name }} {{ post.user.last_name }}</h3>
                 </div>
             </div>
+
             <hr>
             <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
             <p class="post">{{ post.description }}</p>
+            <hr>
 
-                  <form action="{{ url_for('delete_post', post_id=post.id) }}"method="POST">
+                <!-- comments -->
+            {% for comment, profile_picture in zipped_list %}
+            <div class="container">
+              <div class="media">
+                <div class="media-left">
+                  <img src = "data:image/png;base64, {{ profile_picture }}" class="media-object" style="width:60px">
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">{{ comment.user.first_name }} {{ comment.user.last_name }}<small><i>{{ comment.comment_date }}</i></small></h4>
+                  <p>{{ comment.comment }}</p>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+            <hr>
+            <!-- comment-form -->
+            <form method="POST" action="{{ url_for('post_comment', post_id=post.id) }}" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.comment.label(class="form-control-label") }}
+
+                    {% if form.comment.errors %}
+                        {{ form.comment(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.comment.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+
+                        </div>
+                        {% else %}
+                            {{ form.comment(class="textarea form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            </form>
+
+
+
+
+
+            <hr>
+
+                  <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
             <input class="btn " type="submit" value="Delete">
 
            </form>

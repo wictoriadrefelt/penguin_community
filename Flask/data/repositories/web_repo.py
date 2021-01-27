@@ -1,6 +1,6 @@
 import mongoengine
 from datetime import datetime
-from data.models.models import Users, Posts
+from data.models.models import Users, Posts, Comment
 db = mongoengine
 import bson
 
@@ -58,6 +58,17 @@ def create_new_post(user, description, new_photo):
     print(new_post)
 
     new_post.save()
+
+
+def create_new_comment(user, comment, post_id):
+    comment_obj = Comment(
+        user=user,
+        comment=comment
+    )
+    post = get_by_post_id(post_id)
+
+    post.comments.append(comment_obj)
+    post.save()
 
 
 def get_users_by_first_name(first_name):
