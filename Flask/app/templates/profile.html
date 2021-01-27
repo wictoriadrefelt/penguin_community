@@ -17,6 +17,12 @@
             <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
             </a>
             <p class="post">{{ post.description }}</p>
+            <hr>
+            {%if session["email"] == user.email %}
+            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+            <input class="btn " type="submit" value="Delete">
+            </form>
+            {% endif %}
         </div>
     {% endfor %}
 

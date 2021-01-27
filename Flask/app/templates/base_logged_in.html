@@ -30,8 +30,11 @@ $(document).ready(function() {
                     let u_id = item["user_id"]
 
                     if (item["first name"]) {
-                        console.log(u_id)
+                        console.log(typeof u_id);
+
                         let text = '{{ url_for('get_others_profile', user_id=u_id) }}';
+                        text += u_id;
+                        console.log(text)
 
                         $('#suggestion-list').append('<a href="' + text + '" class="list-group-item list-group-item-action">' +
                             item["first name"] + ' ' + item["last name"] + '</a>');
