@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block head %}
+
   {% if title %}
       <title>Penguin - {{ title }}</title>
   {% else %}
@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/static/css/header.css">
   <link rel="stylesheet" href="/static/css/footer.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% block head %}
   {% endblock %}
 </head>
 

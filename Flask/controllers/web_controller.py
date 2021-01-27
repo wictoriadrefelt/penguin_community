@@ -52,7 +52,8 @@ def get_users_by_first_or_last_name(search_input):
     if users:
         return [
             {"first name": user.first_name.capitalize(),
-             "last name": user.last_name.capitalize()}
+             "last name": user.last_name.capitalize(),
+             "user_id": str(user.id)}
             for user in users]
     else:
         return [{"empty": True}]
