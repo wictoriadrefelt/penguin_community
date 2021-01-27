@@ -58,8 +58,13 @@ def get_users_by_first_or_last_name(search_input):
         return [{"empty": True}]
 
 
-def get_by_post_id(post_id):
-    return wr.get_by_post_id(post_id)
+def get_post_by_post_id(post_id):
+    return wr.get_post_by_post_id(post_id)
+
 
 def delete_post_by_id(post_id):
     return wr.delete_post_by_id(post_id)
+
+
+def get_posts_by_user_id(user_id):
+    return wr.get_posts_by_user_id(user_id)

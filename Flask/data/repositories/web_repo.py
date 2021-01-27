@@ -21,6 +21,11 @@ def create_new_post(location, fishes, image, description, time_stamp):
 """
 
 
+def get_posts_by_user_id(user_id):
+    print(user_id)
+    return Posts.objects(user=bson.objectid.ObjectId(user_id))
+
+
 def get_user_by_email(email):
     return Users.objects(email=email).first()
 
@@ -65,7 +70,7 @@ def create_new_comment(user, comment, post_id):
         user=user,
         comment=comment
     )
-    post = get_by_post_id(post_id)
+    post = get_post_by_post_id(post_id)
 
     post.comments.append(comment_obj)
     post.save()
@@ -84,5 +89,8 @@ def delete_post_by_id(post_id):
     post.delete()
 
 
-def get_by_post_id(post_id):
+def get_post_by_post_id(post_id):
     return Posts.objects.get(id=bson.objectid.ObjectId(post_id))
+
+
+

@@ -4,7 +4,8 @@ import json
 from app import app, bcrypt
 from flask import jsonify, render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
-    get_users_by_first_or_last_name, get_user_by_id, get_by_post_id, delete_post_by_id, create_new_comment
+    get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
+    get_posts_by_user_id
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm
 from data.models.models import Users, login_required, is_authenticated
@@ -34,7 +35,7 @@ def post_comment(post_id):
 def get_post(post_id):
     form = CommentForm()  # uses for send comment
 
-    post = get_by_post_id(post_id)
+    post = get_post_by_post_id(post_id)
 
     comments_list = []
     profile_picture_list = []
@@ -121,10 +122,39 @@ def restricted():
     return render_template('restricted.html')
 
 
-@app.route('/profile')
+@app.route('/profile',  methods=["GET", "POST"])
 @login_required('sign_in')
 def get_profile():
-    return render_template('profile.html', title='Profile')
+
+    email = session['email']
+    user = get_user_by_email(email)
+    posts = get_posts_by_user_id(user.id)
+
+
+    user_list = []
+    photo_list = []
+    post_list = []
+    profile_picture_list = []
+
+    for post in posts:
+        user_list.append(post.user)
+
+    for post in posts:
+        base64_data = codecs.encode(post.photo.read(), 'base64')
+        image = base64_data.decode('utf-8')
+        photo_list.append(image)
+
+    for post in posts:
+        post_list.append(post)
+
+    for post in posts:
+        base64_data = codecs.encode(post.user.profile_picture.read(), 'base64')
+        p_picture = base64_data.decode('utf-8')
+        profile_picture_list.append(p_picture)
+
+    zipped_list = zip(user_list, photo_list, post_list, profile_picture_list)
+
+    return render_template('profile.html', title='Profile', zipped_list=zipped_list)
 
 
 @app.route('/sign_up', methods=["GET", "POST"])
