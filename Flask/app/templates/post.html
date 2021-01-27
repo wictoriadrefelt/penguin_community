@@ -62,11 +62,11 @@
 
 
             <hr>
-
-                  <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+            {%if session["email"] == post.user.email %}
+            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
             <input class="btn " type="submit" value="Delete">
-
-           </form>
+            </form>
+            {% endif %}
 
          <div class="modal-footer">
         </div>
