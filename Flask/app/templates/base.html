@@ -55,6 +55,7 @@
             <a href="{{ url_for('get_create_post') }}" style="color: black">Create post</a>
         </li>
         <li {% if request.path == '/profile' %}class="active"{% endif %}>
+
             <a href="{{ url_for('get_profile') }}" style="color: black">Profile</a>
         </li>
       </ul>

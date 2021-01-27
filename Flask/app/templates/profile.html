@@ -1,7 +1,23 @@
 {% extends "base_logged_in.html" %}
 
 {% block content2 %}
-    <div class="jumbotron">
-        <p>Profile</p>
-    </div>
+
+    {% for user, image, post, profile_picture in zipped_list %}
+        <div class="jumbotron">
+            <div class="media">
+                <div class="media-left">
+                  <img src = "data:image/png;base64, {{profile_picture}}" class="media-object" style="width:60px">
+                </div>
+                <div class="media-body">
+                  <h3 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h3>
+                </div>
+            </div>
+            <hr>
+            <a href="{{ url_for('get_post', post_id=post.id) }}">
+            <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
+            </a>
+            <p class="post">{{ post.description }}</p>
+        </div>
+    {% endfor %}
+
 {% endblock %}

@@ -29,3 +29,5 @@ class PostForm(FlaskForm):
 class CommentForm(FlaskForm):
     comment = StringField("Comment")
     submit = SubmitField("Submit")
+
+
