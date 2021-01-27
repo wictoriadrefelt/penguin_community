@@ -93,4 +93,15 @@ def get_post_by_post_id(post_id):
     return Posts.objects.get(id=bson.objectid.ObjectId(post_id))
 
 
+def add_friend(user, follow_id):
+
+    if follow_id not in user.following:
+        user.following.append(follow_id)
+
+def add_fish_to_post(post_id):
+    post = Posts.objects.get(id=bson.objectid.ObjectId(post_id))
+    post.fishes.append
+
+
+
 
