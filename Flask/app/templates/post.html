@@ -26,7 +26,7 @@
                   <img src = "data:image/png;base64, {{ profile_picture }}" class="media-object" style="width:60px">
                 </div>
                 <div class="media-body">
-                  <h4 class="media-heading">{{ comment.user.first_name }} {{ comment.user.last_name }}<small><i>{{ comment.comment_date }}</i></small></h4>
+                  <h4 class="media-heading">{{ comment.user.first_name }} {{ comment.user.last_name }}<small><i>Posted: {{ comment.comment_date.strftime('%Y-%m-%d') }}</i></small></h4>
                   <p>{{ comment.comment }}</p>
                 </div>
               </div>
