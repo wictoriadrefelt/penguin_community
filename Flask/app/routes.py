@@ -5,7 +5,7 @@ from app import app, bcrypt
 from flask import jsonify, render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
-    get_posts_by_user_id, add_to_huddle, add_fish_to_post
+    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm
 from data.models.models import Users, login_required, is_authenticated
@@ -41,7 +41,8 @@ def post_huddle(user_id):
         flash("Penguin removed from your huddle!", "danger")
     return redirect(url_for('get_others_profile', user_id=user_id))
 
-@app.route('/post/<post_id>/comment_post',  methods=["POST"])
+
+@app.route('/post/<post_id>/comment_post', methods=["POST"])
 def post_comment(post_id):
     form = CommentForm()
     if form.validate_on_submit():
@@ -51,7 +52,7 @@ def post_comment(post_id):
         return redirect(url_for('get_post', post_id=post_id))
 
 
-@app.route('/post/<post_id>',  methods=["GET", "POST"])
+@app.route('/post/<post_id>', methods=["GET", "POST"])
 def get_post(post_id):
     form = CommentForm()  # uses for send comment
 
@@ -110,6 +111,11 @@ def get_feed():
     photo_list = []
     post_list = []
     profile_picture_list = []
+    post_fishes_list = []
+
+    for post in posts:
+        fishes = number_of_fishes_on_post(post.id)
+        post_fishes_list.append(fishes)
 
     for post in posts:
         user_list.append(post.user)
@@ -127,7 +133,7 @@ def get_feed():
         p_picture = base64_data.decode('utf-8')
         profile_picture_list.append(p_picture)
 
-    zipped_list = zip(user_list, photo_list, post_list, profile_picture_list)
+    zipped_list = zip(user_list, photo_list, post_list, profile_picture_list, post_fishes_list)
 
     return render_template('feed.html', title='Feed', zipped_list=zipped_list)
 
@@ -142,13 +148,13 @@ def restricted():
     return render_template('restricted.html')
 
 
-@app.route('/profile/<user_id>',  methods=["GET", "POST"])
+@app.route('/profile/<user_id>', methods=["GET", "POST"])
 @login_required('sign_in')
-
 def get_others_profile(user_id):
-
-    user = get_user_by_id(user_id)
-    posts = get_posts_by_user_id(user.id)
+    user_profile = get_user_by_id(user_id)
+    user_visitor = get_user_by_email(session['email'])
+    user_profile_id = str(user_profile.id)
+    posts = get_posts_by_user_id(user_profile.id)
 
     user_list = []
     photo_list = []
@@ -171,26 +177,22 @@ def get_others_profile(user_id):
         p_picture = base64_data.decode('utf-8')
         profile_picture_list.append(p_picture)
 
-    base64_data = codecs.encode(user.profile_picture.read(), 'base64')
+    base64_data = codecs.encode(user_profile.profile_picture.read(), 'base64')
     user_picture = base64_data.decode('utf-8')
-
-
 
     zipped_list = zip(user_list, photo_list, post_list, profile_picture_list)
 
-    return render_template('profile.html', title='Profile', zipped_list=zipped_list, user=user, user_picture=user_picture)
+    return render_template('profile.html', title='Profile', zipped_list=zipped_list, user=user_profile,
+                           user_visitor=user_visitor, user_picture=user_picture, user_profile_id=user_profile_id)
 
 
-@app.route('/profile',  methods=["GET", "POST"])
+@app.route('/profile', methods=["GET", "POST"])
 @login_required('sign_in')
 def get_profile():
-
     email = session['email']
     user = get_user_by_email(email)
     user_id = user.id
     return redirect(url_for("get_others_profile", user_id=user_id))
-
-
 
 
 @app.route('/sign_up', methods=["GET", "POST"])
@@ -208,7 +210,6 @@ def sign_up():
         create_new_user(first_name, last_name, email, password, profile_picture)
         return redirect(url_for('sign_in'))
     return render_template('sign_up.html', form=form)
-
 
 
 @app.route("/sign_in", methods=["GET", "POST"])
@@ -235,7 +236,6 @@ def get_test_profile():
     return render_template('test_profile.html')
 
 
-
 @app.route('/create_post', methods=["GET", "POST"])
 @login_required('sign_in')
 def get_create_post():
@@ -247,7 +247,6 @@ def get_create_post():
         create_new_post(email, description, photo)
         flash("Congratulations, your post was successfully uploaded", "success")
     return render_template('create_post.html', form=form)
-
 
 
 @app.route("/logged_out", methods=["GET", "POST"])
