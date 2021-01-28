@@ -68,3 +68,17 @@ def add_fish_to_post(post_id, email):
 def number_of_fishes_on_post(post_id):
     return wr.number_of_fishes_on_post(post_id)
 
+
+def get_huddlers_from_user(user):
+    return wr.get_huddlers_from_user(user)
+
+
+
+def get_post_from_huddle(email):
+    user = get_user_by_email(email)
+    huddlers = get_huddlers_from_user(user)
+    post_list = []
+    for huddle in huddlers:
+        post_list.append(get_posts_by_user_id(huddle))
+    return post_list
+

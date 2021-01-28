@@ -5,7 +5,7 @@ from app import app, bcrypt
 from flask import jsonify, render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
-    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post
+    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm
 from data.models.models import Users, login_required, is_authenticated
@@ -105,7 +105,8 @@ def post_process():
 @app.route('/feed')
 @login_required('sign_in')
 def get_feed():
-    posts = get_all_posts()
+
+    posts = get_post_from_huddle(session["email"])
 
     user_list = []
     photo_list = []
@@ -114,6 +115,7 @@ def get_feed():
     post_fishes_list = []
 
     for post in posts:
+        print(post)
         fishes = number_of_fishes_on_post(post.id)
         post_fishes_list.append(fishes)
 
