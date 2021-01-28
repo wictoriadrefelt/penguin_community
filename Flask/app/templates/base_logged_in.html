@@ -73,10 +73,22 @@ $(document).ready(function() {
     </div>
 
     <div class="col-sm-8 content-window" id="main-content">
+        <!-- flash msg -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {%  for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
         {% block content2 %}
         {% endblock %}
     </div>
 
+    <!-- this div will replace div above while searching -->
     <div class="col-sm-8 content-window" id="search-content">
       <div class="jumbotron">
         <h4>Search</h4>
