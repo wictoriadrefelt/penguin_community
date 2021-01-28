@@ -77,11 +77,18 @@ def get_post_by_post_id(post_id):
     return Posts.objects.get(id=bson.objectid.ObjectId(post_id))
 
 
-def add_friend(user, follow_id):
+def add_to_huddle(huddle_id, user):
 
-    if follow_id not in user.following:
-        user.following.append(follow_id)
+    huddle_id_string = str(huddle_id)
+    if huddle_id_string not in user.huddle:
+        user.huddle.append(huddle_id_string)
+        user.save()
+        return True
 
+    else:
+        user.huddle.remove(huddle_id_string)
+        user.save()
+        return False
 
 def add_fish_to_post(post, fish_giver):
 
@@ -89,7 +96,11 @@ def add_fish_to_post(post, fish_giver):
     if fish_giver_id not in post.fishes:
         post.fishes.append(fish_giver_id)
         post.save()
+        return True
 
-
+    else:
+        post.fishes.remove(fish_giver_id)
+        post.save()
+        return False
 
 
