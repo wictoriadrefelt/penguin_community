@@ -76,3 +76,10 @@ Stand up 22/1-21 10.00
 - Mergat samtliga branches samt löst conflicts.
 - Arbetar tillsammans under dagen med att få till comments för posts
 - Fortsatt arbete under morgondagens lektion.
+
+
+Stand up 28/1/21 10.00
+- Merges.
+- Arbetar tillsammans med att få till huddles och fishes.
+- Skapar en penguin random fact generator
+- Återsamling under morgondagen.

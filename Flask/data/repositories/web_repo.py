@@ -108,3 +108,11 @@ def add_fish_to_post(post, fish_giver):
 def number_of_fishes_on_post(post_id):
     post = get_post_by_post_id(post_id)
     return len(post.fishes)
+
+
+def get_huddlers_from_user(user):
+    return user.huddle
+
+
+def get_post_from_huddle(email):
+    return get_post_from_huddle(email)
