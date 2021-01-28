@@ -12,9 +12,15 @@
                 </div>
             </div>
         <hr>
-        <form action="{{ url_for('post_huddle', user_id=user.id) }}" method="POST">
-        <input class="btn " type="submit" value="Add penguin to huddle">
-        </form>
+        {%if session["email"] != user.email %}
+            <form action="{{ url_for('post_huddle', user_id=user.id) }}" method="POST">
+            {% if user_profile_id in user_visitor.huddle %}
+                <input class="btn " type="submit" value="Remove penguin from your huddle">
+            {% else %}
+                <input class="btn " type="submit" value="Add penguin to huddle">
+            {% endif %}
+            </form>
+        {% endif %}
     </div>
 
 
