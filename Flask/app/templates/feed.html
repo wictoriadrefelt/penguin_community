@@ -2,14 +2,16 @@
 
 {% block content2 %}
 
-    {% for user, image, post, profile_picture in zipped_list %}
+    {% for user, image, post, profile_picture, fishes in zipped_list %}
         <div class="jumbotron">
             <div class="media">
                 <div class="media-left">
-                  <img src = "data:image/png;base64, {{profile_picture}}" class="media-object" style="width:60px">
+                  <a href="{{ url_for('get_others_profile', user_id=user.id) }}">
+                      <img src = "data:image/png;base64, {{profile_picture}}" class="media-object" style="width:60px">
+                  </a>
                 </div>
                 <div class="media-body">
-                  <h3 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h3>
+                    <h3 class="media-heading"><a href="{{ url_for('get_others_profile', user_id=user.id) }}">{{ user.first_name }} {{ user.last_name }}</a></h3>
                 </div>
             </div>
             <hr>
@@ -19,7 +21,7 @@
             <p class="post">{{ post.description }}</p>
             <hr>
             <form action="{{ url_for('fish_post', post_id=post.id) }}" method="POST">
-            <input class="btn " type="submit" value="Give Fish">
+            <input class="btn " type="submit" value="Give Fish ({{ fishes }})">
             </form>
         </div>
 
