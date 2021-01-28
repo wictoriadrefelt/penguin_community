@@ -2,17 +2,24 @@
 
 {% block content2 %}
 
-    {% for user, image, post, profile_picture in zipped_list %}
-        <div class="jumbotron">
+    <div class="jumbotron">
             <div class="media">
                 <div class="media-left">
-                  <img src = "data:image/png;base64, {{profile_picture}}" class="media-object" style="width:60px">
+                  <img src = "data:image/png;base64, {{user_picture}}" class="media-object rounded" style="width:60px">
                 </div>
                 <div class="media-body">
                   <h3 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h3>
                 </div>
             </div>
-            <hr>
+        <hr>
+        <form action="{{ url_for('post_huddle', user_id=user.id) }}" method="POST">
+        <input class="btn " type="submit" value="Add penguin to huddle">
+        </form>
+    </div>
+
+
+    {% for user, image, post, profile_picture in zipped_list %}
+        <div class="jumbotron">
             <a href="{{ url_for('get_post', post_id=post.id) }}">
             <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
             </a>

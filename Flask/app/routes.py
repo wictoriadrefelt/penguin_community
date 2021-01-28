@@ -5,7 +5,7 @@ from app import app, bcrypt
 from flask import jsonify, render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
-    get_posts_by_user_id, add_friend, add_fish_to_post
+    get_posts_by_user_id, add_to_huddle, add_fish_to_post
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm
 from data.models.models import Users, login_required, is_authenticated
@@ -16,8 +16,11 @@ from functools import wraps
 @app.route('/post/<post_id>/post_fish', methods=["POST"])
 def fish_post(post_id):
     email = session['email']
-    add_fish_to_post(post_id, email)
-    flash('One fish added to this post!', 'success')
+    fish = add_fish_to_post(post_id, email)
+    if fish:
+        flash('One fish added to this post!', 'success')
+    else:
+        flash("Your fish was removed from this post!", "danger")
     return redirect(url_for('get_feed'))
 
 
@@ -28,12 +31,15 @@ def delete_post(post_id):
     return redirect(url_for('get_feed'))
 
 
-@app.route('/post/<post_id>/follow', methods=["POST"])
-def follow(user_id):
-    delete_post_by_id(post_id)
-    flash('The post is now deleted', 'success')
-    return redirect(url_for('get_feed'))
-
+@app.route('/profile/<user_id>/huddle', methods=["POST"])
+def post_huddle(user_id):
+    email = session['email']
+    huddle = add_to_huddle(user_id, email)
+    if huddle:
+        flash('Penguin added to your huddle!', 'success')
+    else:
+        flash("Penguin removed from your huddle!", "danger")
+    return redirect(url_for('get_others_profile', user_id=user_id))
 
 @app.route('/post/<post_id>/comment_post',  methods=["POST"])
 def post_comment(post_id):
@@ -165,9 +171,14 @@ def get_others_profile(user_id):
         p_picture = base64_data.decode('utf-8')
         profile_picture_list.append(p_picture)
 
+    base64_data = codecs.encode(user.profile_picture.read(), 'base64')
+    user_picture = base64_data.decode('utf-8')
+
+
+
     zipped_list = zip(user_list, photo_list, post_list, profile_picture_list)
 
-    return render_template('profile.html', title='Profile', zipped_list=zipped_list)
+    return render_template('profile.html', title='Profile', zipped_list=zipped_list, user=user, user_picture=user_picture)
 
 
 @app.route('/profile',  methods=["GET", "POST"])
