@@ -4,22 +4,6 @@ from data.models.models import Users, Posts, Comment
 db = mongoengine
 import bson
 
-"""
-def create_new_post(location, fishes, image, description, time_stamp):
-    post = ({
-        'Location': location,
-        'Fishes': fishes,
-        'Image': image,
-        'Description': description,
-        'Tags': [],
-        'Timestamp': time_stamp,
-        'Comments': []
-
-    })
-
-    db.users.insert_one(user)
-"""
-
 
 def get_posts_by_user_id(user_id):
     print(user_id)
@@ -98,9 +82,13 @@ def add_friend(user, follow_id):
     if follow_id not in user.following:
         user.following.append(follow_id)
 
-def add_fish_to_post(post_id):
-    post = Posts.objects.get(id=bson.objectid.ObjectId(post_id))
-    post.fishes.append
+
+def add_fish_to_post(post, fish_giver):
+
+    fish_giver_id = str(fish_giver.id)
+    if fish_giver_id not in post.fishes:
+        post.fishes.append(fish_giver_id)
+        post.save()
 
 
 

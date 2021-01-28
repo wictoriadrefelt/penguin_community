@@ -55,7 +55,7 @@ class Posts(Document):
     user = ReferenceField(Users)
     description = StringField(max_length=280)
     photo = FileField()
-    fishes = ListField(StringField)
+    fishes = ListField(StringField())
     comments = ListField(EmbeddedDocumentField(Comment))
 
     def __repr__(self):

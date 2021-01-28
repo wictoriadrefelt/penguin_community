@@ -1,10 +1,5 @@
 import data.repositories.web_repo as wr
 from app import bcrypt
-from bson import ObjectId
-
-
-# def create_new_post(location, fishes, image, description, time_stamp):
-#    return wr.create_new_post(location, fishes, image, description, time_stamp)
 
 
 def get_user_by_email(email):
@@ -33,16 +28,6 @@ def get_all_posts():
 def get_user_by_id(user_id):
     return wr.get_user_by_id(user_id)
 
-
-#def add_comment_to_post(post_id, comment_id):
-#    return wr.add_comment_to_post(post_id, comment_id)
-
-
-# def create_new_comment(user_id, first_name, last_name, text, time_stamp):
-#    return wr.create_new_comment(user_id, first_name, last_name, text, time_stamp)
-
-"""def like_post():
-    return"""
 
 def get_users_by_first_or_last_name(search_input):
     users_first = wr.get_users_by_first_name(search_input)
@@ -74,5 +59,8 @@ def add_friend(email, follow_id):
     user = get_user_by_email(email)
     return wr.add_friend(user, follow_id)
 
-def add_fish_to_post(post_id):
-    return wr.add_fish_to_post(post_id)
+def add_fish_to_post(post_id, email):
+    post = get_post_by_post_id(post_id)
+    fish_giver = get_user_by_email(email)
+    return wr.add_fish_to_post(post, fish_giver)
+

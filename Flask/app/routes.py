@@ -15,7 +15,8 @@ from functools import wraps
 
 @app.route('/post/<post_id>/post_fish', methods=["POST"])
 def fish_post(post_id):
-    add_fish_to_post(post_id)
+    email = session['email']
+    add_fish_to_post(post_id, email)
     flash('One fish added to this post!', 'success')
     return redirect(url_for('get_feed'))
 
