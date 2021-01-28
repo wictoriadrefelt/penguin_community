@@ -64,3 +64,7 @@ def add_fish_to_post(post_id, email):
     fish_giver = get_user_by_email(email)
     return wr.add_fish_to_post(post, fish_giver)
 
+
+def number_of_fishes_on_post(post_id):
+    return wr.number_of_fishes_on_post(post_id)
+

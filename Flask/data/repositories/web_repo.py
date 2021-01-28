@@ -96,6 +96,7 @@ def add_fish_to_post(post, fish_giver):
     if fish_giver_id not in post.fishes:
         post.fishes.append(fish_giver_id)
         post.save()
+        print(post.fishes, len(post.fishes))
         return True
 
     else:
@@ -104,3 +105,6 @@ def add_fish_to_post(post, fish_giver):
         return False
 
 
+def number_of_fishes_on_post(post_id):
+    post = get_post_by_post_id(post_id)
+    return len(post.fishes)
