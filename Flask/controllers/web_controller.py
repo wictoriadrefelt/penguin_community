@@ -76,9 +76,12 @@ def get_huddlers_from_user(user):
 
 def get_post_from_huddle(email):
     user = get_user_by_email(email)
-    huddlers = get_huddlers_from_user(user)
+    huddle = get_huddlers_from_user(user)
     post_list = []
-    for huddle in huddlers:
-        post_list.append(get_posts_by_user_id(huddle))
+    for huddlers in huddle:
+        posts = get_posts_by_user_id(huddlers)
+        for post in posts:
+            post_list.append(post)
+
     return post_list
 
