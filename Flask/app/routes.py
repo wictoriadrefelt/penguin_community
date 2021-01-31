@@ -2,7 +2,7 @@ import codecs
 import json
 
 from app import app, bcrypt
-from flask import jsonify, render_template, redirect, url_for, request, flash, session
+from flask import render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
     get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle
@@ -91,15 +91,12 @@ def post_process():
     user_input = request.form['name']
     result = get_users_by_first_or_last_name(user_input)
 
-    if user_input:
-        response = app.response_class(
-            response=json.dumps(result),
-            status=200,
-            mimetype='application/json'
-        )
-        return response  # jsonify({'name': new_name})
-
-    return jsonify({'error': 'No penguins found.'})
+    response = app.response_class(
+        response=json.dumps(result),
+        status=200,
+        mimetype='application/json'
+    )
+    return response  # jsonify({'empty string': True})
 
 
 @app.route('/feed')
