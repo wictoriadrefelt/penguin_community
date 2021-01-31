@@ -5,51 +5,39 @@
 <script>
 $(document).ready(function() {
     $("#search-content").hide();
-});
-
-$(document).ready(function() {
-    $('form').keyup(function(e) {
-      return e.which !== 13
-    });
-});
-
-$(document).ready(function() {
 
     $('form').on('input', function() {
+        let input = $('#nameInput').val()
+
+        if (input === "") {
+            $("#main-content").show();
+            $("#search-content").hide();
+        } else {
+            $("#main-content").hide();
+            $("#search-content").show();
+        }
 
         $.ajax({
             data : {
-                name : $('#nameInput').val()
+                name : input
             },
             type : 'POST',
             url : '/process',
             success: (data) => {
                 $('#suggestion-list').empty();
+
                 $.each(data, (i, item) => {
-                    let test = $('#nameInput').val()
-                    let u_id = item["user_id"]
-
                     if (item["first name"]) {
-                        console.log(typeof u_id);
-
+                        let u_id = item["user_id"];
                         let text = '{{ url_for('get_others_profile', user_id=u_id) }}';
                         text += u_id;
-                        console.log(text)
 
                         $('#suggestion-list').append('<a href="' + text + '" class="list-group-item list-group-item-action">' +
                             item["first name"] + ' ' + item["last name"] + '</a>');
 
-                        $("#main-content").hide();
-                        $("#search-content").show();
-
                     } else if (item["empty"] === true) {
-                        $("#main-content").hide();
-                        $("#search-content").show();
                         $('#suggestion-list').append('<a>No penguins found with name ' + '<b>' + $('#nameInput').val() + '</b>' + '.' + '</a>');
 
-                    } else if (test === "") {
-                        $("#main-content").show();
-                        $("#search-content").hide();
                     }
                 });
             }
