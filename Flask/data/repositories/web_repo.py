@@ -78,7 +78,6 @@ def get_post_by_post_id(post_id):
 
 
 def add_to_huddle(huddle_id, user):
-
     huddle_id_string = str(huddle_id)
     if huddle_id_string not in user.huddle:
         user.huddle.append(huddle_id_string)
