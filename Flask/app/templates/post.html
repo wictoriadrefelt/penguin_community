@@ -9,7 +9,7 @@
                   <img src = "data:image/png;base64, {{ p_picture }}" class="media-object" style="width:60px">
                 </div>
                 <div class="media-body">
-                  <h3 class="media-heading">{{ post.user.first_name }} {{ post.user.last_name }}</h3>
+                  <h3 class="media-heading">{{ post.user.first_name }} {{ post.user.last_name }} <small><i>Posted: {{ post.post_date.strftime('%Y-%m-%d') }}</i></small></h3>
                 </div>
             </div>
 

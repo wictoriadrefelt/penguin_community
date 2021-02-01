@@ -32,7 +32,7 @@ $(document).ready(function() {
                         let text = '{{ url_for('get_others_profile', user_id=u_id) }}';
                         text += u_id;
 
-                        $('#suggestion-list').append('<a href="' + text + '" class="list-group-item list-group-item-action">' +
+                        $('#suggestion-list').append('<a id= "search-result" href="' + text + '" class="list-group-item list-group-item-action">' +
                             item["first name"] + ' ' + item["last name"] + '</a>');
 
                     } else if (item["empty"] === true) {
@@ -53,7 +53,7 @@ $(document).ready(function() {
   <div class="row">
     <div class="col-sm-4 content-window">
             <div class="jumbotron" id="factDisplay">
-                <button onclick="newFact()">New Fact</button>
+                <button onclick="newFact()">Did you know?</button>
             </div>
             <div class="jumbotron" id="adDisplay">
                 <input type="button" onClick="choosePic()" value="Display Random Image" style="display: none;">
