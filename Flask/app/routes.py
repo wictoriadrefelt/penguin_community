@@ -110,6 +110,8 @@ def get_feed():
     post_list = []
     profile_picture_list = []
     post_fishes_list = []
+    user_visitor = get_user_by_email(session['email'])
+    user_visitor_id = str(user_visitor.id)
 
     for post in posts:
         print(post)
@@ -134,7 +136,7 @@ def get_feed():
 
     zipped_list = zip(user_list, photo_list, post_list, profile_picture_list, post_fishes_list)
 
-    return render_template('feed.html', title='Feed', zipped_list=zipped_list)
+    return render_template('feed.html', title='Feed', zipped_list=zipped_list, user_visitor_id=user_visitor_id)
 
 
 @app.route('/', methods=["GET", "POST"])

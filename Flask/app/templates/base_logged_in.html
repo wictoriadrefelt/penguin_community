@@ -32,7 +32,7 @@ $(document).ready(function() {
                         let text = '{{ url_for('get_others_profile', user_id=u_id) }}';
                         text += u_id;
 
-                        $('#suggestion-list').append('<a href="' + text + '" class="list-group-item list-group-item-action">' +
+                        $('#suggestion-list').append('<a id= "search-result" href="' + text + '" class="list-group-item list-group-item-action">' +
                             item["first name"] + ' ' + item["last name"] + '</a>');
 
                     } else if (item["empty"] === true) {
