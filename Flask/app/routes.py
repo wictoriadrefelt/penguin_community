@@ -7,7 +7,7 @@ from controllers.web_controller import create_new_user, get_user_by_email, creat
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
     get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle
 from data.db import gridFS
-from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm
+from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
 from functools import wraps
@@ -150,6 +150,7 @@ def restricted():
 @app.route('/profile/<user_id>', methods=["GET", "POST"])
 @login_required('sign_in')
 def get_others_profile(user_id):
+    form = UpdateProfileForm()
     user_profile = get_user_by_id(user_id)
     user_visitor = get_user_by_email(session['email'])
     user_profile_id = str(user_profile.id)
@@ -182,7 +183,27 @@ def get_others_profile(user_id):
     zipped_list = zip(user_list, photo_list, post_list, profile_picture_list)
 
     return render_template('profile.html', title='Profile', zipped_list=zipped_list, user=user_profile,
-                           user_visitor=user_visitor, user_picture=user_picture, user_profile_id=user_profile_id)
+                           user_visitor=user_visitor, user_picture=user_picture, user_profile_id=user_profile_id, form=form)
+
+
+@app.route("/profile/<user_id>/update", methods=["GET", "POST"])
+@login_required('sign_in')
+def update_profile(user_id):
+    email = session['email']
+    user = get_user_by_email(email)
+    user_id = user.id
+    form = UpdateProfileForm()
+    if form.validate_on_submit():
+        user.first_name = form.first_name.data
+        user.last_name = form.last_name.data
+
+        flash("Your account has been updated", "success")
+        return redirect(url_for("get_profile"))
+    elif request.method == "GET":
+        form.first_name.data = user.first_name
+        form.last_name.data = user.last_name
+    return render_template("profile.html", title="Profile", form=form, user=user, user_id=user_id)
+
 
 
 @app.route('/profile', methods=["GET", "POST"])
