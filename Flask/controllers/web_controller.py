@@ -1,5 +1,6 @@
 import data.repositories.web_repo as wr
 from app import bcrypt
+from flask import jsonify
 
 
 def get_user_by_email(email):
@@ -30,8 +31,15 @@ def get_user_by_id(user_id):
 
 
 def get_users_by_first_or_last_name(search_input):
-    users_first = wr.get_users_by_first_name(search_input)
-    users_last = wr.get_users_by_last_name(search_input)
+    search_input = search_input.rstrip()
+
+    if len(search_input.split()) == 2:
+        f_input, l_input = search_input.split()
+        users_first = wr.get_users_by_first_name(f_input)
+        users_last = wr.get_users_by_last_name(l_input)
+    else:
+        users_first = wr.get_users_by_first_name(search_input)
+        users_last = wr.get_users_by_last_name(search_input)
     users = set(users_first) | set(users_last)
 
     if users:
