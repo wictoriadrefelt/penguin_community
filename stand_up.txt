@@ -88,3 +88,8 @@ Stand up 28/1/21 10.00
 Stand up 29/1/21 10.00
 - Ser över det "sista" som vi vill ha på plats inför måndagen.
 - Småstäd av projektet.
+
+
+Stand up 02/02/21 10.00
+- Diskuterar kring vilka tester vi bör ha med.
+- Påbörjar utformande av tester.
