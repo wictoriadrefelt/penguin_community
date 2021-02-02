@@ -193,12 +193,11 @@ def get_others_profile(user_id):
 def update_profile(user_id):
     email = session['email']
     user = get_user_by_email(email)
-    user_id = user.id
     form = UpdateProfileForm()
     if form.validate_on_submit():
-        user.first_name = form.first_name.data
-        user.last_name = form.last_name.data
-
+        first_name = form.first_name.data
+        #last_name = form.last_name.data
+        update_profile(user.id, first_name)
         flash("Your account has been updated", "success")
         return redirect(url_for("get_profile"))
     elif request.method == "GET":
