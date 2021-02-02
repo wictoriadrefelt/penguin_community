@@ -1,3 +1,4 @@
+
 let facts = [
     'A group of penguins in the water is called a raft but on land they’re called a waddle!',
     'The black and white “tuxedo” look donned by most penguin species is a clever camouflage called countershading. When swimming, the black on their backs helps them blend in with the darkness of the ocean from predators viewing from above. Their white bellies help them blend in with the bright surface of the ocean when viewed by predators and prey from below.',
@@ -11,8 +12,23 @@ let facts = [
     'According to some animal experts, the penguin is one of the most streamlined animals in the world. A penguin’s body is tapered at both ends and it has a large head, short neck and elongated body. This streamlined design helps penguins swim fast. '
 ]
 
+
+
+
 function newFact() {
     let randomNum = Math.floor(Math.random() * (facts.length));
 
     document.getElementById("factDisplay").innerHTML = facts[randomNum];
+}
+
+
+
+
+window.onload = choosePic;
+
+let myPix = ["penguin_ad.jpg","penguin_ad2.jpg", "penguin_ad3.jpg", "penguin_ad4.jpg", "penguin_ad5.jpg"];
+
+function choosePic() {
+    let randomNum2 = Math.floor(Math.random() * myPix.length);
+    document.canvas.src = "/static/ads/"+myPix[randomNum2];
 }
