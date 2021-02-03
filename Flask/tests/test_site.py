@@ -6,40 +6,48 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-class WowSiteTests(unittest.TestCase):
+class PenguinCommunityTest(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome('../chromedriver.exe') # laddar ner rätt ver.
+        self.driver = webdriver.Firefox()# laddar ner rätt ver.
 
     def test_login(self):
         self.driver.get('http://127.0.0.1:5000/sign_in')
-        """username_field = self.driver.find_element_by_id('email')
+        username_field = self.driver.find_element_by_id('email')
         password_field = self.driver.find_element_by_id('password')
         submit = self.driver.find_element_by_id('submit')
 
         username_field.send_keys('qq@qq.qq')
         password_field.send_keys('qq')
-        submit.click()"""
+        submit.click()
 
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'factDisplay')))
+        self.assertEqual("Did you know?", welcome.text)
+
+
+
+
+        """
         import keyboard
         keyboard.press_and_release('tab')
         keyboard.press_and_release('tab')
         keyboard.press_and_release('tab')
         keyboard.write('qq@qq.qq')
         keyboard.press_and_release('tab')
-        keyboard.write('qq')
+        keyboard.write('qqqq')
         keyboard.press_and_release('enter')
 
-        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'welcome')))
-        self.assertEqual('Welcome admin', welcome.text)
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'Feed')))
 
+        self.assertEqual('Welcome admin', welcome.text)
+        """
 
     def test_search(self):
         self.driver.get('http://127.0.0.1:5000')
 
         search_field = self.driver.find_element_by_id('nameInput')
         search_field.clear()
-        search_field.send_keys('Aa Aa')
+        search_field.send_keys('Simon')
         #search_field.send_keys(Keys.RETURN)
 
         search_results = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'suggestion-list')))
