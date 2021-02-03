@@ -93,7 +93,7 @@ def get_post_from_huddle(email):
 
     return post_list
 
-def update_user_profile(id, first_name, last_name, profile_picture):
-    return wr.update_user_profile(id, first_name, last_name, profile_picture)
+def update_user_profile(id, first_name, last_name):
+    return wr.update_user_profile(id, first_name, last_name)
 
 
