@@ -6,7 +6,6 @@ import bson
 
 
 def get_posts_by_user_id(user_id):
-    print(user_id)
     return Posts.objects(user=bson.objectid.ObjectId(user_id))
 
 
@@ -32,7 +31,6 @@ def create_new_user(first_name, last_name, email, password, profile_picture):
     )
 
     new_user.profile_picture.put(profile_picture, content_type='image/jpeg')
-    print(new_user)
 
     new_user.save()
 
@@ -44,7 +42,6 @@ def create_new_post(user, description, new_photo):
     )
 
     new_post.photo.put(new_photo, content_type='image/jpeg')
-    print(new_post)
 
     new_post.save()
 
@@ -95,7 +92,6 @@ def add_fish_to_post(post, fish_giver):
     if fish_giver_id not in post.fishes:
         post.fishes.append(fish_giver_id)
         post.save()
-        print(post.fishes, len(post.fishes))
         return True
 
     else:

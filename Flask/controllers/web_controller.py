@@ -93,3 +93,17 @@ def get_post_from_huddle(email):
 
     return post_list
 
+
+def get_huddle_list(user):
+
+    huddle = get_huddlers_from_user(user)
+    huddle_list = []
+    for huddler in huddle:
+        huddler_object = get_user_by_id(huddler)
+        for huddler in huddler_object:
+            huddle_list.append(huddler.first_name + huddler.last_name)
+    print(huddle_list)
+
+
+
+    return huddle_list

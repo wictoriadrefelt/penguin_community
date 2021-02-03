@@ -52,6 +52,9 @@ $(document).ready(function() {
 <div class="container">
   <div class="row">
     <div class="col-sm-4 content-window">
+             <div class="jumbotron" id="factDisplay">
+                {{ url_for('get_huddle_list') }}
+            </div>
             <div class="jumbotron" id="factDisplay">
                 <button onclick="newFact()">Did you know?</button>
             </div>

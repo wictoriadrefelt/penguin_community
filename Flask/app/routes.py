@@ -5,7 +5,7 @@ from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
-    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle
+    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, get_huddlers_from_user
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm
 from data.models.models import Users, login_required, is_authenticated
@@ -114,7 +114,6 @@ def get_feed():
     user_visitor_id = str(user_visitor.id)
 
     for post in posts:
-        print(post)
         fishes = number_of_fishes_on_post(post.id)
         post_fishes_list.append(fishes)
 
@@ -255,6 +254,13 @@ def get_create_post():
 def logged_out():
     session.clear()
     return render_template('logged_out.html')
+
+
+@app.route('/huddle')
+@login_required('sign_in')
+
+user = get_user_by_email(session['email'])
+get_huddle_from_list()
 
 
 @app.errorhandler(403)
