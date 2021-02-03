@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class WowSiteTests(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome('../chromedriver.exe') # laddar ner rätt ver.
+        self.driver = webdriver.firefox('../geckodriver.exe') # laddar ner rätt ver.
 
     def test_search(self):
         self.driver.get('http://127.0.0.1:5000')

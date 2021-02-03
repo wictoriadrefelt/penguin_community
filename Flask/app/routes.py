@@ -197,13 +197,16 @@ def update_profile():
     if form.validate_on_submit():
         first_name = form.first_name.data
         last_name = form.last_name.data
-        update_user_profile(user.id, first_name, last_name)
+        profile_picture = form.picture.data
+        update_user_profile(user.id, first_name, last_name, profile_picture)
+        base64_data = codecs.encode(user.profile_picture.read(), 'base64')
+        profile_picture = base64_data.decode('utf-8')
         flash("Your account has been updated", "success")
         return redirect(url_for("get_profile"))
     elif request.method == "GET":
         form.first_name.data = user.first_name
         form.last_name.data = user.last_name
-    return render_template("profile.html", title="Profile", form=form, user=user, user_id=user_id)
+    return render_template("profile.html", title="Profile", form=form, user=user)
 
 
 
