@@ -111,3 +111,10 @@ def get_huddlers_from_user(user):
 
 def get_post_from_huddle(email):
     return get_post_from_huddle(email)
+
+
+def update_user_profile(user_id, first_name, last_name):
+    user = get_user_by_id(user_id)
+    # user = Users.objects(id=id)
+    user.update(first_name=first_name, last_name=last_name)
+    print(user_id, first_name)

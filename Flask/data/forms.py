@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateTimeField
 from wtforms.validators import DataRequired, Length, EqualTo
 
@@ -29,5 +29,12 @@ class PostForm(FlaskForm):
 class CommentForm(FlaskForm):
     comment = StringField("Comment")
     submit = SubmitField("Submit")
+
+
+class UpdateProfileForm(FlaskForm):
+    first_name = StringField('First Name', validators=[DataRequired(), Length(min=2, max=20)])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    submit = SubmitField('Update')
+
 
 

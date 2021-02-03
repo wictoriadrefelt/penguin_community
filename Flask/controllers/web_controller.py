@@ -107,3 +107,8 @@ def get_huddle_list(user):
 
 
     return huddle_list
+
+def update_user_profile(id, first_name, last_name):
+    return wr.update_user_profile(id, first_name, last_name)
+
+
