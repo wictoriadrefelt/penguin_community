@@ -2,8 +2,12 @@
  {% block profile_content %}
      <div class="jumbotron" id="">
             <h1>hi friends</h1>
+            {% for huddlers in huddle_list %}
+                <a href="{{ url_for('get_others_profile', user_id=huddlers["user_id"]) }}">{{ huddlers["first_name"] }} {{ huddlers["last_name"]}}</a>
+                <br>
+            {% endfor %}
                 </div>
-            {% endblock %}
+ {% endblock %}
 {% block content2 %}
 
     <div class="jumbotron">
