@@ -58,7 +58,11 @@ $(document).ready(function() {
             <div class="jumbotron" id="adDisplay">
                 <input type="button" onClick="choosePic()" value="Display Random Image" style="display: none;">
                 <img src="img/dog5.jpg" name="canvas"/>
-                </div>
+            </div>
+           {% block feed_content %}
+            {% endblock %}
+        {% block profile_content %}
+            {% endblock %}
     </div>
 
     <div class="col-sm-8 content-window" id="main-content">

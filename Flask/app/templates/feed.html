@@ -1,5 +1,9 @@
 {% extends "base_logged_in.html" %}
-
+{% block feed_content %}
+    <div class="jumbotron" id="">
+            <h1>hi</h1>
+                </div>
+{% endblock %}
 {% block content2 %}
 
     {% for user, image, post, profile_picture, fishes in zipped_list %}

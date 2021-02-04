@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import io
 
 class PenguinCommunityTest(unittest.TestCase):
 
@@ -13,11 +13,11 @@ class PenguinCommunityTest(unittest.TestCase):
 
     def test_login(self):
         self.driver.get('http://127.0.0.1:5000/sign_in')
-        username_field = self.driver.find_element_by_id('email')
+        email_field = self.driver.find_element_by_id('email')
         password_field = self.driver.find_element_by_id('password')
         submit = self.driver.find_element_by_id('submit')
 
-        username_field.send_keys('qq@qq.qq')
+        email_field.send_keys('qq@qq.qq')
         password_field.send_keys('qq')
         submit.click()
 
@@ -26,35 +26,60 @@ class PenguinCommunityTest(unittest.TestCase):
 
 
 
+    def test_register(self):
+        self.driver.get('http://127.0.0.1:5000/sign_up')
+        first_name_field = self.driver.find_element_by_id("first_name")
+        last_name_field = self.driver.find_element_by_id("last_name")
+        email_field = self.driver.find_element_by_id("email")
+        password_field = self.driver.find_element_by_id("password")
+        confirm_password_field = self.driver.find_element_by_id("confirm_password")
+        picture_field = self.driver.find_element_by_id("file")
+        submit = self.driver.find_element_by_id("submit")
 
-        """
-        import keyboard
-        keyboard.press_and_release('tab')
-        keyboard.press_and_release('tab')
-        keyboard.press_and_release('tab')
-        keyboard.write('qq@qq.qq')
-        keyboard.press_and_release('tab')
-        keyboard.write('qqqq')
-        keyboard.press_and_release('enter')
+        first_name_field.send_keys('Hans')
+        last_name_field.send_keys('Hans')
+        email_field.send_keys('hans@hans.de')
+        password_field.send_keys('hans')
+        confirm_password_field.send_keys('hans')
+        picture_field._upload("penguin.png")
+        picture_field.find_elements_by_xpath()
+        submit.click()
 
-        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'Feed')))
-
-        self.assertEqual('Welcome admin', welcome.text)
-        """
 
     def test_search(self):
-        self.driver.get('http://127.0.0.1:5000')
+        self.driver.get('http://127.0.0.1:5000/sign_in')
+        email_field = self.driver.find_element_by_id('email')
+        password_field = self.driver.find_element_by_id('password')
+        submit = self.driver.find_element_by_id('submit')
+
+        email_field.send_keys('qq@qq.qq')
+        password_field.send_keys('qq')
+        submit.click()
+
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "Penguin-Com")))
+        self.assertEqual("Penguin Community", welcome.text)
 
         search_field = self.driver.find_element_by_id('nameInput')
-        search_field.clear()
-        search_field.send_keys('Simon')
-        #search_field.send_keys(Keys.RETURN)
-
+        #search_field.clear()
         search_results = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'suggestion-list')))
+        search_field.send_keys('Simon')
+        print("sleep")
+        print(search_results.find_elements_by_xpath('S'))
+        results = [item.text for item in search_results.find_elements_by_xpath('S')]
+        print(results)
 
-        results = [item.text for item in search_results.find_elements_by_tag_name('a')]
-        self.assertIn('test, usertwo', results)
-        # self.assertEqual(len(results), 6)
+    def test_add_huddle(self):
+        self.driver.get('http://127.0.0.1:5000/sign_in')
+        email_field = self.driver.find_element_by_id('email')
+        password_field = self.driver.find_element_by_id('password')
+        submit = self.driver.find_element_by_id('submit')
+
+        email_field.send_keys('qq@qq.qq')
+        password_field.send_keys('qq')
+        submit.click()
+
+
+
 
     """
     def test_add_friend(self):
