@@ -84,17 +84,6 @@ def get_post(post_id):
                            form=form, zipped_list=zipped_list)
 
 
-@app.route('/search')
-def get_search():
-    return render_template('search.html')
-
-"""
-@app.route('/huddle')
-def get_huddle():
-    huddlers = get_huddle_list(session["email"])
-    return render_template('huddle_list.html')
-
-"""
 
 @app.route('/process', methods=['POST'])
 def post_process():
@@ -112,7 +101,6 @@ def post_process():
 @app.route('/feed')
 @login_required('sign_in')
 def get_feed():
-
 
     posts = get_post_from_huddle(session["email"])
 
@@ -171,6 +159,8 @@ def get_others_profile(user_id):
     user_visitor = get_user_by_email(session['email'])
     user_profile_id = str(user_profile.id)
     posts = get_posts_by_user_id(user_profile.id)
+    huddle_list = get_huddle_list(session["email"])
+    print(huddle_list)
 
     user_list = []
     photo_list = []
@@ -199,7 +189,8 @@ def get_others_profile(user_id):
     zipped_list = zip(user_list, photo_list, post_list, profile_picture_list)
 
     return render_template('profile.html', title='Profile', zipped_list=zipped_list, user=user_profile,
-                           user_visitor=user_visitor, user_picture=user_picture, user_profile_id=user_profile_id, form=form)
+                           user_visitor=user_visitor, user_picture=user_picture, user_profile_id=user_profile_id,
+                           form=form, huddle_list=huddle_list)
 
 
 @app.route("/profile/update", methods=["GET", "POST"])
@@ -225,6 +216,7 @@ def update_profile():
 @app.route('/profile', methods=["GET", "POST"])
 @login_required('sign_in')
 def get_profile():
+
     email = session['email']
     user = get_user_by_email(email)
     user_id = user.id

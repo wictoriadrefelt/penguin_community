@@ -119,3 +119,6 @@ def update_user_profile(user_id, first_name, last_name):
     user.update(first_name=first_name, last_name=last_name)
     print(user_id, first_name)
 
+
+def get_all_users():
+    return Users.objects.all()

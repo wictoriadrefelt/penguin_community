@@ -1,7 +1,7 @@
 import data.repositories.web_repo as wr
 from app import bcrypt
 from flask import jsonify
-
+import random
 
 def get_user_by_email(email):
     return wr.get_user_by_email(email)
@@ -97,14 +97,18 @@ def get_post_from_huddle(email):
 def get_huddle_list(user_email):
     user = get_user_by_email(user_email)
     huddle = get_huddlers_from_user(user)
-    huddle_list = []
-    for huddlers in huddle:
-        huddler_object = get_user_by_id(huddlers)
-        huddle_list.append(f'{huddler_object.first_name} {huddler_object.last_name}')
-
-    return huddle_list
+    users = [get_user_by_id(id) for id in huddle]
+    return [
+            {"first_name": user.first_name.capitalize(),
+             "last_name": user.last_name.capitalize(),
+             "user_id": str(user.id)}
+            for user in users]
 
 
 def update_user_profile(id, first_name, last_name):
     return wr.update_user_profile(id, first_name, last_name)
 
+
+def get_random_user():
+    users = wr.get_all_users()
+    return random.choice(users)
