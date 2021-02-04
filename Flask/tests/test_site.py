@@ -78,6 +78,51 @@ class PenguinCommunityTest(unittest.TestCase):
         password_field.send_keys('qq')
         submit.click()
 
+    def test_visit_profile(self):
+        self.driver.get('http://127.0.0.1:5000/sign_in')
+        email_field = self.driver.find_element_by_id('email')
+        password_field = self.driver.find_element_by_id('password')
+        submit = self.driver.find_element_by_id('submit')
+
+        email_field.send_keys('qq@qq.qq')
+        password_field.send_keys('qq')
+        submit.click()
+
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'myNavbar')))
+        self.assertEqual("Feed\nCreate post\nProfile\nLogout", welcome.text)
+        profile_field = self.driver.find_element_by_id("Profile")
+        profile_field.click()
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'myNavbar')))
+        self.assertEqual("Feed\nCreate post\nProfile\nLogout", welcome.text)
+
+
+    def test_update_profile(self):
+        self.driver.get('http://127.0.0.1:5000/sign_in')
+        email_field = self.driver.find_element_by_id('email')
+        password_field = self.driver.find_element_by_id('password')
+        submit = self.driver.find_element_by_id('submit')
+
+        email_field.send_keys('qq@qq.qq')
+        password_field.send_keys('qq')
+        submit.click()
+
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'myNavbar')))
+        self.assertEqual("Feed\nCreate post\nProfile\nLogout", welcome.text)
+        profile_field = self.driver.find_element_by_id("Profile")
+        profile_field.click()
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'myNavbar')))
+        self.assertEqual("Feed\nCreate post\nProfile\nLogout", welcome.text)
+        update_button = self.driver.find_element_by_id("update_button")
+        update_button.click()
+        first_name_field = self.driver.find_element_by_id("first_name")
+        last_name_field = self.driver.find_element_by_id("last_name")
+        update = self.driver.find_element_by_id('update')
+        first_name_field.send_keys('Hans')
+        last_name_field.send_keys('Hans')
+        update.click()
+
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'alert')))
+        self.assertEqual("Your account has been updated", welcome.text)
 
 
 

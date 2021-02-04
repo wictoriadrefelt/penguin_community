@@ -26,7 +26,7 @@
             </form>
         {% else %}
              <p>
-              <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <a class="btn btn-primary" id="update_button" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Update info
               </a>
             </p>
@@ -65,7 +65,7 @@
                 {% endif %}
             </div>
 
-        <div class="form-group">
+        <div class="form-group" id="update">
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
         </fieldset>
