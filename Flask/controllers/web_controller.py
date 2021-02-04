@@ -94,21 +94,17 @@ def get_post_from_huddle(email):
     return post_list
 
 
-def get_huddle_list(user):
-
+def get_huddle_list(user_email):
+    user = get_user_by_email(user_email)
     huddle = get_huddlers_from_user(user)
     huddle_list = []
-    for huddler in huddle:
-        huddler_object = get_user_by_id(huddler)
-        for huddler in huddler_object:
-            huddle_list.append(huddler.first_name + huddler.last_name)
-    print(huddle_list)
-
-
+    for huddlers in huddle:
+        huddler_object = get_user_by_id(huddlers)
+        huddle_list.append(f'{huddler_object.first_name} {huddler_object.last_name}')
 
     return huddle_list
 
+
 def update_user_profile(id, first_name, last_name):
     return wr.update_user_profile(id, first_name, last_name)
-
 

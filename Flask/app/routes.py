@@ -5,13 +5,15 @@ from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
-    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, update_user_profile
+    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, update_user_profile, \
+    get_huddle_list
 
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
 from functools import wraps
+
 
 
 @app.route('/post/<post_id>/post_fish', methods=["POST"])
@@ -86,6 +88,13 @@ def get_post(post_id):
 def get_search():
     return render_template('search.html')
 
+"""
+@app.route('/huddle')
+def get_huddle():
+    huddlers = get_huddle_list(session["email"])
+    return render_template('huddle_list.html')
+
+"""
 
 @app.route('/process', methods=['POST'])
 def post_process():
@@ -103,6 +112,7 @@ def post_process():
 @app.route('/feed')
 @login_required('sign_in')
 def get_feed():
+
 
     posts = get_post_from_huddle(session["email"])
 
@@ -135,6 +145,10 @@ def get_feed():
         profile_picture_list.append(p_picture)
 
     zipped_list = zip(user_list, photo_list, post_list, profile_picture_list, post_fishes_list)
+
+    #thing = get_huddle_list(session['email'])
+    #print(thing)
+
 
     return render_template('feed.html', title='Feed', zipped_list=zipped_list, user_visitor_id=user_visitor_id)
 
