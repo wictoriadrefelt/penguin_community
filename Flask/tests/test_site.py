@@ -63,22 +63,17 @@ class PenguinCommunityTest(unittest.TestCase):
 
         search_field = self.driver.find_element_by_id('nameInput')
         #search_field.clear()
-        search_results = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'suggestion-list')))
-        search_field.send_keys('Simon')
+        search_results = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'search-result')))
+        search_field.send_keys('Hans')
+
+        search_results = [item.text for item in search_results.find_elements_by_tag_name('a')]
+        self.assertIn('Hans', search_results)
+        self.assertEqual(len(search_results), 2)
+
         print("sleep")
-        print(search_results.find_elements_by_xpath('S'))
-        results = [item.text for item in search_results.find_elements_by_xpath('S')]
-        print(results)
 
-    def test_add_huddle(self):
-        self.driver.get('http://127.0.0.1:5000/sign_in')
-        email_field = self.driver.find_element_by_id('email')
-        password_field = self.driver.find_element_by_id('password')
-        submit = self.driver.find_element_by_id('submit')
 
-        email_field.send_keys('qq@qq.qq')
-        password_field.send_keys('qq')
-        submit.click()
+
 
     def test_visit_profile(self):
         self.driver.get('http://127.0.0.1:5000/sign_in')
@@ -127,6 +122,31 @@ class PenguinCommunityTest(unittest.TestCase):
         welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'alert')))
         self.assertEqual("Your account has been updated", welcome.text)
 
+
+    def test_create_post(self):
+        self.driver.get('http://127.0.0.1:5000/sign_in')
+        email_field = self.driver.find_element_by_id('email')
+        password_field = self.driver.find_element_by_id('password')
+        submit = self.driver.find_element_by_id('submit')
+
+        email_field.send_keys('qq@qq.qq')
+        password_field.send_keys('qq')
+        submit.click()
+
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'myNavbar')))
+        self.assertEqual("Feed\nCreate post\nProfile\nLogout", welcome.text)
+        profile_field = self.driver.find_element_by_id("create_post")
+        profile_field.click()
+        create_button = self.driver.find_element_by_id("myBtn")
+        create_button.click()
+
+        description_field = self.driver.find_element_by_id("description")
+        file_upload_field = self.driver.find_element_by_id("file")
+        upload_btn = self.driver.find_element_by_id("upload_btn")
+
+        description_field.send_keys('Photo of a lovely penguin')
+        file_upload_field.send_keys("C:\\Users\Admin\Pictures\ping_selfie2.jpg")
+        upload_btn.click()
 
 
     """
