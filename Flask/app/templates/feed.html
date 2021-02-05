@@ -8,10 +8,19 @@
 <div id="post">
 </div>
 
+<div class="spinner" id="loading">
+    <img src="static/images/ajaxloader.gif" style="width: 25px; height: 25px;">
+</div>
+
+<div id="error-msg">
+</div>
+
 <script>
     let page = 1
 
     function loadImages(){
+        document.getElementById("loading").style.display = "block";
+
         $.ajax({
             data : {
                 page_num : page
@@ -49,6 +58,15 @@
                         '</div>');
                 }
 
+                if (data.length === 0){
+                    document.getElementById("error-msg").innerHTML = '<p>' + 'No more posts.' + '</p>';
+                }
+
+                document.getElementById("loading").style.display = "none";
+
+            },
+            error: function(){
+                document.getElementById("error-msg").innerHTML = '<p>' + 'No contact with server.' + '</p>';
             }
 
         })
