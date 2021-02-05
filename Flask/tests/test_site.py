@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import io
+import time
 
 class PenguinCommunityTest(unittest.TestCase):
 
@@ -34,16 +35,16 @@ class PenguinCommunityTest(unittest.TestCase):
         password_field = self.driver.find_element_by_id("password")
         confirm_password_field = self.driver.find_element_by_id("confirm_password")
         picture_field = self.driver.find_element_by_id("file")
-        submit = self.driver.find_element_by_id("submit")
+        submit = self.driver.find_element_by_id("submit_reg")
 
         first_name_field.send_keys('Hans')
         last_name_field.send_keys('Hans')
         email_field.send_keys('hans@hans.de')
         password_field.send_keys('hans')
         confirm_password_field.send_keys('hans')
-        picture_field._upload("penguin.png")
-        picture_field.find_elements_by_xpath()
+        picture_field.send_keys("C:\\Users\Admin\Pictures\ping_selfie2.jpg")
         submit.click()
+        time.sleep(10)
 
 
     def test_search(self):
