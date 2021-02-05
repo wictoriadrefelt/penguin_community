@@ -5,46 +5,63 @@
                 </div>
 {% endblock %}
 {% block content2 %}
+<div id="post">
+</div>
 
-    {% for user, image, post, profile_picture, fishes in zipped_list %}
-        <div class="jumbotron">
-            <div class="media">
-                <div class="media-left">
-                  <a href="{{ url_for('get_others_profile', user_id=user.id) }}">
-                      <img src = "data:image/png;base64, {{profile_picture}}" class="media-object" style="width:60px">
-                  </a>
-                </div>
-                <div class="media-body">
-                    <h3 class="media-heading"><a href="{{ url_for('get_others_profile', user_id=user.id) }}">{{ user.first_name }} {{ user.last_name }}</a></h3>
-                </div>
-            </div>
-            <hr>
-            <a href="{{ url_for('get_post', post_id=post.id) }}">
-            <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
-            </a>
-            <p class="post">{{ post.description }}</p>
-            <hr>
+<script>
+    let page = 1
 
+    function loadImages(){
+        $.ajax({
+            data : {
+                page_num : page
+            },
+            type : 'POST',
+            url : '/feedscroll',
+            success: (data) => {
+                for (let i = 0; i < data.length; i++) {
+                    let post_user_id = data[i]["post_user_id"];
+                    let profile_link = '{{ url_for('get_others_profile', user_id=post_user_id) }}';
+                    profile_link += post_user_id;
 
+                    $('#post').append('' +
+                        '<div class="jumbotron">\n' +
+                        '    <div class="media">\n' +
+                        '        <div class="media-left">\n' +
+                        '        <a href="' + profile_link +  '">' +
+                        '            <img src = "data:image/png;base64, ' + data[i]["profile_picture"] + '" class="media-object" style="width:60px">' +
+                        '        </a>' +
+                        '        </div>\n' +
+                        '        <div class="media-body">\n' +
+                        '            <h3 class="media-heading">' +
+                        '            <a href="#">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
+                        '        </div>\n' +
+                        '    </div>\n' +
+                        '    <hr>\n' +
+                        '    <a href="#">\n' +
+                        '        <img src = "data:image/png;base64, ' + data[i]["photo"] + '" alt= "myImage" id="post-img"/>' +
+                        '    </a>\n' +
+                        '    <p class="post">' + data[i]["description"] + '</p>' +
+                        '    <hr>' +
+                        '    <form action="" method="POST">' +
+                        '        <input class="btn" type="submit" value="Give Fish (' + data[i]["fishes"] + ')">' +
+                        '    </form>' +
+                        '</div>');
+                }
 
+            }
 
-            <form action="{{ url_for('fish_post', post_id=post.id) }}" method="POST">
+        })
+        page++
+    }
 
-                  {% if user_visitor_id in post.fishes %}
+    window.addEventListener("scroll", () =>{
+        if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight){
+            loadImages()
+        }
+    })
 
-            <input class="btn " type="submit" value="Take away Fish ({{ fishes }})">
-
-                   {% else %}
-
-                    <input class="btn " type="submit" value=" Give Fish ({{ fishes }})">
-
-               {% endif %}
-
-            </form>
-        </div>
-
-
-           </form>
-    {% endfor %}
+    loadImages()
+</script>
 
 {% endblock %}
