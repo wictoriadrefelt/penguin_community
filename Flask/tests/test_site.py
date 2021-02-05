@@ -5,11 +5,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import io
+import time
 
 class PenguinCommunityTest(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Firefox()# laddar ner rätt ver.
+        self.driver.maximize_window()
 
     def test_login(self):
         self.driver.get('http://127.0.0.1:5000/sign_in')
@@ -34,16 +36,16 @@ class PenguinCommunityTest(unittest.TestCase):
         password_field = self.driver.find_element_by_id("password")
         confirm_password_field = self.driver.find_element_by_id("confirm_password")
         picture_field = self.driver.find_element_by_id("file")
-        submit = self.driver.find_element_by_id("submit")
+        submit = self.driver.find_element_by_id("submit_reg")
 
         first_name_field.send_keys('Hans')
         last_name_field.send_keys('Hans')
         email_field.send_keys('hans@hans.de')
         password_field.send_keys('hans')
         confirm_password_field.send_keys('hans')
-        picture_field._upload("penguin.png")
-        picture_field.find_elements_by_xpath()
+        picture_field.send_keys("C:\\Users\Admin\Pictures\ping_selfie2.jpg")
         submit.click()
+        time.sleep(10)
 
 
     def test_search(self):
@@ -98,6 +100,7 @@ class PenguinCommunityTest(unittest.TestCase):
 
     def test_update_profile(self):
         self.driver.get('http://127.0.0.1:5000/sign_in')
+        self.driver.maximize_window()
         email_field = self.driver.find_element_by_id('email')
         password_field = self.driver.find_element_by_id('password')
         submit = self.driver.find_element_by_id('submit')
