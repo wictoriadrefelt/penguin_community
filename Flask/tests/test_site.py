@@ -11,6 +11,7 @@ class PenguinCommunityTest(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Firefox()# laddar ner rätt ver.
+        self.driver.maximize_window()
 
     def test_login(self):
         self.driver.get('http://127.0.0.1:5000/sign_in')
@@ -99,6 +100,7 @@ class PenguinCommunityTest(unittest.TestCase):
 
     def test_update_profile(self):
         self.driver.get('http://127.0.0.1:5000/sign_in')
+        self.driver.maximize_window()
         email_field = self.driver.find_element_by_id('email')
         password_field = self.driver.find_element_by_id('password')
         submit = self.driver.find_element_by_id('submit')
