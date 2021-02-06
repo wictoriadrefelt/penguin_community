@@ -1,13 +1,14 @@
 import codecs
 import json
+import time
 
 from app import app, bcrypt
-from flask import render_template, redirect, url_for, request, flash, session
+from flask import render_template, redirect, url_for, request, flash, session, jsonify
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
     get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, update_user_profile, \
     get_huddle_list
-
+from controllers.post_controller import get_posts_paginate
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
 from data.models.models import Users, login_required, is_authenticated
@@ -96,6 +97,19 @@ def post_process():
         mimetype='application/json'
     )
     return response  # jsonify({'empty string': True})
+
+
+@app.route('/feedscroll', methods=['POST'])
+def feed_scroll_process():
+    page = int(request.form['page_num'])
+    posts = get_posts_paginate(page_num=page, items_per_page=2)
+
+    response = app.response_class(
+        response=json.dumps(posts),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 
 @app.route('/feed')
