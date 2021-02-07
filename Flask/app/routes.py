@@ -252,6 +252,7 @@ def sign_in():
         user = get_user_by_email(form.email.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             session['email'] = request.form['email']
+            flash("Login Successful, Welcome " + user.first_name + " " + user.last_name, "success")
             return redirect(next_url) if next_url else redirect(url_for("get_feed"))
         else:
             flash("Login Unsuccessful. Please check email and password", "danger")
