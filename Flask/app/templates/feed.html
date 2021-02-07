@@ -12,14 +12,15 @@
 </div>
 
 <script>
-    let page = 1
+    let current_page = 1,
+        currentXHR
 
     function loadImages(){
         document.getElementById("loading-msg").innerHTML = '<img src="static/images/ajaxloader.gif" style="width: 25px; height: 25px;">';
 
-        $.ajax({
+        currentXHR = $.ajax({
             data : {
-                page_num : page
+                page_num : current_page
             },
             type : 'POST',
             url : '/feedscroll',
@@ -60,7 +61,10 @@
                     document.getElementById("loading-msg").innerHTML = '';
                 }
 
-                page++
+                current_page++;
+            },
+            complete: function (){
+              currentXHR = null;
             },
             error: function(){
                 document.getElementById("loading-msg").innerHTML = '<p>' + 'No contact with server.' + '</p>';
@@ -70,6 +74,9 @@
 
     window.addEventListener("scroll", () =>{
         if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight){
+            if (currentXHR) {
+                return;
+            }
             loadImages()
         }
     })
