@@ -44,6 +44,7 @@ class PenguinCommunityTest(unittest.TestCase):
         password_field.send_keys('hans')
         confirm_password_field.send_keys('hans')
         picture_field.send_keys("C:\\Users\Admin\Pictures\ping_selfie2.jpg")
+        submit.send_keys('enter')
         submit.click()
         time.sleep(10)
 
@@ -62,12 +63,12 @@ class PenguinCommunityTest(unittest.TestCase):
         self.assertEqual("Penguin Community", welcome.text)
 
         search_field = self.driver.find_element_by_id('nameInput')
-        #search_field.clear()
-        search_results = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'search-result')))
         search_field.send_keys('Hans')
+        #search_field.clear()
+        search_results = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'suggestion-list')))
 
         search_results = [item.text for item in search_results.find_elements_by_tag_name('a')]
-        self.assertIn('Hans', search_results)
+        self.assertIn('Hans Hans', search_results)
         self.assertEqual(len(search_results), 2)
 
         print("sleep")
