@@ -56,6 +56,7 @@
                     let profile_link = '{{ url_for('get_others_profile', user_id=post_user_id) }}';
                     profile_link += post_user_id;
 
+                    let post_time_milliseconds = data[i]["ms_since_post_date"];
                     let posted_on_time = timeSince(data[i]["ms_since_post_date"]);
 
                     $('#post').append('' +
@@ -71,7 +72,7 @@
                         '            <a href="#">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
                         '        </div>\n' +
                         '        <div class="media-right">' +
-                        '        <a href="#">Posted ' + posted_on_time + '</a>' +
+                        '        <a href="#" class="post-time" data-post-milliseconds="'  + post_time_milliseconds + '">Posted ' + posted_on_time + '</a>' +
                         '        </div>' +
                         '    </div>\n' +
                         '    <hr>\n' +
@@ -91,7 +92,6 @@
                 } else {
                     document.getElementById("loading-msg").innerHTML = '';
                 }
-
                 current_page++;
             },
             complete: function (){
@@ -112,7 +112,20 @@
         }
     })
 
+    function update_posts_time() {
+        let post = document.getElementsByClassName("post-time");
+
+        for(let i = 0; i < post.length; i++) {
+            let time = post[i].getAttribute("data-post-milliseconds");
+            post[i].innerHTML = timeSince(time);
+        }
+    }
+
     loadImages()
+    window.setInterval(function(){
+        update_posts_time()
+    }, 5000);
+
 </script>
 
 {% endblock %}
