@@ -12,6 +12,32 @@
 </div>
 
 <script>
+    function timeSince(time) {
+        let date = new Date(Date.now() - (Date.now() - time));
+        let seconds = Math.floor((new Date() - date) / 1000);
+
+        seconds -= 60*60; //subtract 1 hour because of incorrect mongodb server time
+
+        let interval = seconds / 86400;
+        if (interval > 1) {
+            if (interval > 3){  // posted > 3day ago = return date as string
+                let d = new Date();
+                d.setTime(time);
+                return d.toLocaleDateString();
+            }
+            return Math.floor(interval) + " days ago";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+            return Math.floor(interval) + " hours ago";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+            return Math.floor(interval) + " minutes ago";
+        }
+        return Math.floor(seconds) + " seconds ago";
+    }
+
     let current_page = 1,
         currentXHR
 
@@ -30,6 +56,8 @@
                     let profile_link = '{{ url_for('get_others_profile', user_id=post_user_id) }}';
                     profile_link += post_user_id;
 
+                    let posted_on_time = timeSince(data[i]["ms_since_post_date"]);
+
                     $('#post').append('' +
                         '<div class="jumbotron">\n' +
                         '    <div class="media">\n' +
@@ -43,7 +71,7 @@
                         '            <a href="#">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
                         '        </div>\n' +
                         '        <div class="media-right">' +
-                        '        <a href="#">' + data[i]["post_date"] + '</a>' +
+                        '        <a href="#">Posted ' + posted_on_time + '</a>' +
                         '        </div>' +
                         '    </div>\n' +
                         '    <hr>\n' +
