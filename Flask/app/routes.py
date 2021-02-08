@@ -7,9 +7,8 @@ from flask import render_template, redirect, url_for, request, flash, session, j
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
     get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, update_user_profile, \
-    get_huddle_list
-from controllers.post_controller import get_posts_paginate
     get_huddle_list, get_random_user
+from controllers.post_controller import get_posts_paginate
 
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
