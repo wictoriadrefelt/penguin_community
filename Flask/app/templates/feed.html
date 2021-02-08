@@ -12,14 +12,41 @@
 </div>
 
 <script>
-    let page = 1
+    function timeSince(time) {
+        let date = new Date(Date.now() - (Date.now() - time));
+        let seconds = Math.floor((new Date() - date) / 1000);
+
+        seconds -= 60*60; //subtract 1 hour because of incorrect mongodb server time
+
+        let interval = seconds / 86400;
+        if (interval > 1) {
+            if (interval > 3){  // posted > 3day ago = return date as string
+                let d = new Date();
+                d.setTime(time);
+                return d.toLocaleDateString();
+            }
+            return Math.floor(interval) + " days ago";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+            return Math.floor(interval) + " hours ago";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+            return Math.floor(interval) + " minutes ago";
+        }
+        return Math.floor(seconds) + " seconds ago";
+    }
+
+    let current_page = 1,
+        currentXHR
 
     function loadImages(){
         document.getElementById("loading-msg").innerHTML = '<img src="static/images/ajaxloader.gif" style="width: 25px; height: 25px;">';
 
-        $.ajax({
+        currentXHR = $.ajax({
             data : {
-                page_num : page
+                page_num : current_page
             },
             type : 'POST',
             url : '/feedscroll',
@@ -28,6 +55,9 @@
                     let post_user_id = data[i]["post_user_id"];
                     let profile_link = '{{ url_for('get_others_profile', user_id=post_user_id) }}';
                     profile_link += post_user_id;
+
+                    let post_time_milliseconds = data[i]["ms_since_post_date"];
+                    let posted_on_time = timeSince(data[i]["ms_since_post_date"]);
 
                     $('#post').append('' +
                         '<div class="jumbotron">\n' +
@@ -41,6 +71,9 @@
                         '            <h3 class="media-heading">' +
                         '            <a href="#">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
                         '        </div>\n' +
+                        '        <div class="media-right">' +
+                        '        <a href="#" class="post-time" data-post-milliseconds="'  + post_time_milliseconds + '">Posted ' + posted_on_time + '</a>' +
+                        '        </div>' +
                         '    </div>\n' +
                         '    <hr>\n' +
                         '    <a href="#">\n' +
@@ -59,8 +92,10 @@
                 } else {
                     document.getElementById("loading-msg").innerHTML = '';
                 }
-
-                page++
+                current_page++;
+            },
+            complete: function (){
+              currentXHR = null;
             },
             error: function(){
                 document.getElementById("loading-msg").innerHTML = '<p>' + 'No contact with server.' + '</p>';
@@ -70,11 +105,27 @@
 
     window.addEventListener("scroll", () =>{
         if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight){
+            if (currentXHR) {
+                return;
+            }
             loadImages()
         }
     })
 
+    function update_posts_time() {
+        let post = document.getElementsByClassName("post-time");
+
+        for(let i = 0; i < post.length; i++) {
+            let time = post[i].getAttribute("data-post-milliseconds");
+            post[i].innerHTML = timeSince(time);
+        }
+    }
+
     loadImages()
+    window.setInterval(function(){
+        update_posts_time()
+    }, 5000);
+
 </script>
 
 {% endblock %}
