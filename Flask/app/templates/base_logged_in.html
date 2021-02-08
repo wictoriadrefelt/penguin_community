@@ -52,9 +52,18 @@ $(document).ready(function() {
 <div class="container">
   <div class="row">
     <div class="col-sm-4 content-window">
-            <div class="jumbotron" id="factDisplay">
-                <button onclick="newFact()">Did you know?</button>
+    <div class="jumbotron" id="factDisplay">
+
+                <a class="btn btn-primary" id="factButton" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample"
+                onClick="newFact()">
+                Did you know?
+              </a>
+            <div class="collapse" id="collapseExample1">
+              <div class="card card-body">
+
             </div>
+            </div>
+    </div>
             <div class="jumbotron" id="adDisplay">
                 <input type="button" onClick="choosePic()" value="Display Random Image" style="display: none;">
                 <img src="img/dog5.jpg" name="canvas"/>
