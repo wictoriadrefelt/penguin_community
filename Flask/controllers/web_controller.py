@@ -9,6 +9,11 @@ def get_user_by_email(email):
 
 def create_new_user(first_name, last_name, email, password, profile_picture):
     hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+    if not isinstance(first_name, str) and not isinstance(last_name, str):
+        raise TypeError("Name of user needs be type of str")
+    else:
+        first_name, last_name = first_name.strip().capitalize(), last_name.strip().capitalize()
+
     return wr.create_new_user(first_name, last_name, email, hashed_password, profile_picture)
 
 
@@ -106,6 +111,11 @@ def get_huddle_list(user_email):
 
 
 def update_user_profile(id, first_name, last_name):
+    if not isinstance(first_name, str) and not isinstance(last_name, str):
+        raise TypeError("Name of user needs be type of str")
+    else:
+        first_name, last_name = first_name.strip().capitalize(), last_name.strip().capitalize()
+
     return wr.update_user_profile(id, first_name, last_name)
 
 

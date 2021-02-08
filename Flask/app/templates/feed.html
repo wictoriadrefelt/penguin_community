@@ -8,46 +8,125 @@
     {% endif %}
 {% endblock %}
 {% block content2 %}
+<div id="post">
+</div>
 
-    {% for user, image, post, profile_picture, fishes in zipped_list %}
-        <div class="jumbotron">
-            <div class="media">
-                <div class="media-left">
-                  <a href="{{ url_for('get_others_profile', user_id=user.id) }}">
-                      <img src = "data:image/png;base64, {{profile_picture}}" class="media-object" style="width:60px">
-                  </a>
-                </div>
-                <div class="media-body">
-                    <h3 class="media-heading"><a href="{{ url_for('get_others_profile', user_id=user.id) }}">{{ user.first_name }} {{ user.last_name }}</a></h3>
-                </div>
-            </div>
-            <hr>
-            <a href="{{ url_for('get_post', post_id=post.id) }}">
-            <img src = "data:image/png;base64, {{image}}" alt= "myImage" id="post-img"/>
-            </a>
-            <p class="post">{{ post.description }}</p>
-            <hr>
+<div id="loading-msg">
+</div>
 
+<script>
+    function timeSince(time) {
+        let date = new Date(Date.now() - (Date.now() - time));
+        let seconds = Math.floor((new Date() - date) / 1000);
 
+        seconds -= 60*60; //subtract 1 hour because of incorrect mongodb server time
 
+        let interval = seconds / 86400;
+        if (interval > 1) {
+            if (interval > 3){  // posted > 3day ago = return date as string
+                let d = new Date();
+                d.setTime(time);
+                return d.toLocaleDateString();
+            }
+            return Math.floor(interval) + " days ago";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+            return Math.floor(interval) + " hours ago";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+            return Math.floor(interval) + " minutes ago";
+        }
+        return Math.floor(seconds) + " seconds ago";
+    }
 
-            <form action="{{ url_for('fish_post', post_id=post.id) }}" method="POST">
+    let current_page = 1,
+        currentXHR
 
-                  {% if user_visitor_id in post.fishes %}
+    function loadImages(){
+        document.getElementById("loading-msg").innerHTML = '<img src="static/images/ajaxloader.gif" style="width: 25px; height: 25px;">';
 
-            <input class="btn " type="submit" value="Take away Fish ({{ fishes }})">
+        currentXHR = $.ajax({
+            data : {
+                page_num : current_page
+            },
+            type : 'POST',
+            url : '/feedscroll',
+            success: (data) => {
+                for (let i = 0; i < data.length; i++) {
+                    let profile_link = '/profile/' + data[i]["post_user_id"];
 
-                   {% else %}
+                    let post_time_milliseconds = data[i]["ms_since_post_date"];
+                    let posted_on_time = timeSince(data[i]["ms_since_post_date"]);
 
-                    <input class="btn " type="submit" value=" Give Fish ({{ fishes }})">
+                    $('#post').append('' +
+                        '<div class="jumbotron">\n' +
+                        '    <div class="media">\n' +
+                        '        <div class="media-left">\n' +
+                        '        <a href="' + profile_link +  '">' +
+                        '            <img src = "data:image/png;base64, ' + data[i]["profile_picture"] + '" class="media-object" style="width:60px">' +
+                        '        </a>' +
+                        '        </div>\n' +
+                        '        <div class="media-body">\n' +
+                        '            <h3 class="media-heading">' +
+                        '            <a href="' + profile_link + '">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
+                        '        </div>\n' +
+                        '        <div class="media-right">' +
+                        '        <a href="#" class="post-time" data-post-milliseconds="'  + post_time_milliseconds + '">Posted ' + posted_on_time + '</a>' +
+                        '        </div>' +
+                        '    </div>\n' +
+                        '    <hr>\n' +
+                        '    <a href="' + profile_link + '">\n' +
+                        '        <img src = "data:image/png;base64, ' + data[i]["photo"] + '" alt= "myImage" id="post-img"/>' +
+                        '    </a>\n' +
+                        '    <p class="post">' + data[i]["description"] + '</p>' +
+                        '    <hr>' +
+                        '    <form action="/post/' + data[i]["post_id"] + '/post_fish" method="POST">' +
+                        '        <input class="btn" type="submit" value="Give Fish (' + data[i]["fishes"] + ')">' +
+                        '    </form>' +
+                        '</div>');
+                }
 
-               {% endif %}
+                if (data.length === 0){
+                    document.getElementById("loading-msg").innerHTML = '<p>' + 'No more posts.' + '</p>';
+                } else {
+                    document.getElementById("loading-msg").innerHTML = '';
+                }
+                current_page++;
+            },
+            complete: function (){
+              currentXHR = null;
+            },
+            error: function(){
+                document.getElementById("loading-msg").innerHTML = '<p>' + 'No contact with server.' + '</p>';
+            }
+        })
+    }
 
-            </form>
-        </div>
+    window.addEventListener("scroll", () =>{
+        if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight){
+            if (currentXHR) {
+                return;
+            }
+            loadImages()
+        }
+    })
 
+    function update_posts_time() {
+        let post = document.getElementsByClassName("post-time");
 
+        for(let i = 0; i < post.length; i++) {
+            let time = post[i].getAttribute("data-post-milliseconds");
+            post[i].innerHTML = timeSince(time);
+        }
+    }
 
-    {% endfor %}
+    loadImages()
+    window.setInterval(function(){
+        update_posts_time()
+    }, 5000);
+
+</script>
 
 {% endblock %}
