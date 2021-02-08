@@ -52,9 +52,7 @@
             url : '/feedscroll',
             success: (data) => {
                 for (let i = 0; i < data.length; i++) {
-                    let post_user_id = data[i]["post_user_id"];
-                    let profile_link = '{{ url_for('get_others_profile', user_id=post_user_id) }}';
-                    profile_link += post_user_id;
+                    let profile_link = '/profile/' + data[i]["post_user_id"];
 
                     let post_time_milliseconds = data[i]["ms_since_post_date"];
                     let posted_on_time = timeSince(data[i]["ms_since_post_date"]);
@@ -81,7 +79,7 @@
                         '    </a>\n' +
                         '    <p class="post">' + data[i]["description"] + '</p>' +
                         '    <hr>' +
-                        '    <form action="" method="POST">' +
+                        '    <form action="/post/' + data[i]["post_id"] + '/post_fish" method="POST">' +
                         '        <input class="btn" type="submit" value="Give Fish (' + data[i]["fishes"] + ')">' +
                         '    </form>' +
                         '</div>');
