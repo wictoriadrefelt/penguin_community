@@ -52,9 +52,7 @@
             url : '/feedscroll',
             success: (data) => {
                 for (let i = 0; i < data.length; i++) {
-                    let post_user_id = data[i]["post_user_id"];
-                    let profile_link = '{{ url_for('get_others_profile', user_id=post_user_id) }}';
-                    profile_link += post_user_id;
+                    let profile_link = '/profile/' + data[i]["post_user_id"];
 
                     let post_time_milliseconds = data[i]["ms_since_post_date"];
                     let posted_on_time = timeSince(data[i]["ms_since_post_date"]);
@@ -69,19 +67,19 @@
                         '        </div>\n' +
                         '        <div class="media-body">\n' +
                         '            <h3 class="media-heading">' +
-                        '            <a href="#">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
+                        '            <a href="' + profile_link + '">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
                         '        </div>\n' +
                         '        <div class="media-right">' +
                         '        <a href="#" class="post-time" data-post-milliseconds="'  + post_time_milliseconds + '">Posted ' + posted_on_time + '</a>' +
                         '        </div>' +
                         '    </div>\n' +
                         '    <hr>\n' +
-                        '    <a href="#">\n' +
+                        '    <a href="' + profile_link + '">\n' +
                         '        <img src = "data:image/png;base64, ' + data[i]["photo"] + '" alt= "myImage" id="post-img"/>' +
                         '    </a>\n' +
                         '    <p class="post">' + data[i]["description"] + '</p>' +
                         '    <hr>' +
-                        '    <form action="" method="POST">' +
+                        '    <form action="/post/' + data[i]["post_id"] + '/post_fish" method="POST">' +
                         '        <input class="btn" type="submit" value="Give Fish (' + data[i]["fishes"] + ')">' +
                         '    </form>' +
                         '</div>');
