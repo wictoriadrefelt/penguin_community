@@ -69,14 +69,14 @@
                         '        </div>\n' +
                         '        <div class="media-body">\n' +
                         '            <h3 class="media-heading">' +
-                        '            <a href="#">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
+                        '            <a href="' + profile_link + '">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
                         '        </div>\n' +
                         '        <div class="media-right">' +
                         '        <a href="#" class="post-time" data-post-milliseconds="'  + post_time_milliseconds + '">Posted ' + posted_on_time + '</a>' +
                         '        </div>' +
                         '    </div>\n' +
                         '    <hr>\n' +
-                        '    <a href="#">\n' +
+                        '    <a href="' + profile_link + '">\n' +
                         '        <img src = "data:image/png;base64, ' + data[i]["photo"] + '" alt= "myImage" id="post-img"/>' +
                         '    </a>\n' +
                         '    <p class="post">' + data[i]["description"] + '</p>' +
