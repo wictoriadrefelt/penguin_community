@@ -6,6 +6,7 @@ from controllers.controller_functions import decode_picture, get_milliseconds_si
 def get_posts_paginate(page_num=1, items_per_page=3):
     posts = pr.get_posts_paginate(page_num, items_per_page)
 
+
     return [{"first_name": post.user.first_name,
              "last_name": post.user.last_name,
              "description": post.description,
@@ -16,3 +17,7 @@ def get_posts_paginate(page_num=1, items_per_page=3):
              "post_user_id": str(post.user.id),
              "post_id": str(post.id)}
             for post in posts]
+
+
+def number_of_comments_on_posts(post_id):
+    return pr.number_of_comments_on_posts(post_id)

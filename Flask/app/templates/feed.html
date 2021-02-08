@@ -84,7 +84,10 @@
                         '    <hr>' +
                         '    <form action="/post/' + data[i]["post_id"] + '/post_fish" method="POST">' +
                         '        <input class="btn" type="submit" value="Give Fish (' + data[i]["fishes"] + ')">' +
-                        '    </form>' +
+                        '    <form action="/post/comment' + data[i]["post_id"] + '/post_comment" method="POST">' +
+                        '        <input class="btn" type="submit" value="Comments (' + data[i]["comments"] + ')">' +
+                        '    ' +
+                        '</form>' +
                         '</div>');
                 }
 

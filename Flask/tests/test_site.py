@@ -174,10 +174,10 @@ class PenguinCommunityTest(unittest.TestCase):
 
         self.assertEqual(num_friends_before + 1, num_friends_after)
     """
-
+"""
     def tearDown(self):
         self.driver.close()
-
+"""
 
 if __name__ == '__main__':
     unittest.main()
