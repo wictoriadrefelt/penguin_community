@@ -1,5 +1,6 @@
 import codecs
 import data.repositories.web_repo as wr
+import data.repositories.post_repo as pr
 
 
 def decode_picture(picture):
@@ -24,5 +25,6 @@ def get_dicts_of_posts(post_list):
              "profile_picture": decode_picture(post.user.profile_picture),
              "fishes": wr.number_of_fishes_on_post(post.id),
              "post_user_id": str(post.user.id),
+             "comment": pr.number_of_comments_on_posts(post.id),
              "post_id": str(post.id)}
             for post in post_list]
