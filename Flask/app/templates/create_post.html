@@ -15,7 +15,7 @@
 {% block content2 %}
 <div class="jumbotron">
     <div class="text-center" >
-    <h1>For the love of penguins, flap the button below to create your post</h1>
+    <h3>For the love of penguins, flap the button below to create your post</h3>
     <form action="" method="POST" enctype="multipart/form-data" id="form1">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
@@ -49,7 +49,7 @@
 
               <div class="form-group">
                   <title></title>
-                  <h1>Select a picture below</h1>
+                  <h3>Select a picture below</h3>
                   {{ form.hidden_tag() }}
                   {{ form.file }}
                   {% for error in form.file.errors %}

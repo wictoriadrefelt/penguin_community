@@ -136,26 +136,18 @@ def get_other_user(current_email):
     current_user_id = str(current_user.id)
     huddle_list = get_huddle_list(current_user.email)
     huddle_id_list = [huddler["user_id"] for huddler in huddle_list]
-
-    while True:
+    i = 0
+    while i < 15:
+        i += 1
         random_user = get_random_user()
         print(random_user)
         if random_user["user_id"] not in huddle_id_list and random_user["user_id"] != current_user_id:
             return random_user
 
+    else:
+        return None
 
 
 
-
-
-"""
-    for huddler in huddle_list:
-        if deconstructed_random_user["user_id"] == huddler["user_id"] or random_user.id == current_user_id:
-            get_random_user(email)
-            print(deconstructed_random_user)
-            print(current_email)
-        else:
-            return deconstructed_random_user
-"""
 
 

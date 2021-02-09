@@ -122,6 +122,7 @@ def get_feed():
     return render_template('feed.html', title='Feed', random_user=random_user)
 
 
+
 @app.route('/', methods=["GET", "POST"])
 def get_index():
     return render_template('base.html', status='Signed In' if is_authenticated() else 'Not Signed In')
