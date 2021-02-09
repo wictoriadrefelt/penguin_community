@@ -119,24 +119,41 @@ def update_user_profile(id, first_name, last_name):
     return wr.update_user_profile(id, first_name, last_name)
 
 
-def get_random_user(current_email):
-    email = current_email
-    current_user = get_user_by_email(email)
-    current_user_id = current_user.id
+def get_random_user():
     users = wr.get_all_users()
-    huddle_list = get_huddle_list(current_user.email)
     random_user = random.choice(users)
     deconstructed_random_user = {
-            "first_name": random_user.first_name.capitalize(),
-            "last_name": random_user.last_name.capitalize(),
-            "user_id": str(random_user.id)}
+        "first_name": random_user.first_name.capitalize(),
+        "last_name": random_user.last_name.capitalize(),
+        "user_id": str(random_user.id)}
+    return deconstructed_random_user
 
-    if deconstructed_random_user not in huddle_list or random_user.id == current_user_id:
-        return deconstructed_random_user
 
-    else:
-        print(deconstructed_random_user)
-        print(current_email)
-        get_random_user(email)
+def get_other_user(current_email):
+    current_user = get_user_by_email(current_email)
+    current_user_id = str(current_user.id)
+    huddle_list = get_huddle_list(current_user.email)
+    huddle_id_list = [huddler["user_id"] for huddler in huddle_list]
+
+    while True:
+        random_user = get_random_user()
+        if random_user["user_id"] not in huddle_id_list and random_user["user_id"] != current_user_id:
+            return random_user
+
+
+
+
+
+
+
+"""
+    for huddler in huddle_list:
+        if deconstructed_random_user["user_id"] == huddler["user_id"] or random_user.id == current_user_id:
+            get_random_user(email)
+            print(deconstructed_random_user)
+            print(current_email)
+        else:
+            return deconstructed_random_user
+"""
 
 
