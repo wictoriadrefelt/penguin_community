@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateTimeField
-from wtforms.validators import DataRequired, Length, EqualTo
+from flask_wtf.file import FileField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
+from controllers.web_controller import get_user_by_email
 
 
 class RegistrationForm(FlaskForm):
@@ -12,6 +13,11 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo("password")])
     file = FileField()
     submit = SubmitField("Sign up")
+
+    def validate_email(self, email):
+        user = get_user_by_email(email.data)
+        if user:
+            raise ValidationError('The email is already taken.')
 
 
 class LoginForm(FlaskForm):
