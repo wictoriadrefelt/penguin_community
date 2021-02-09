@@ -147,6 +147,8 @@ def get_feed():
         p_picture = base64_data.decode('utf-8')
         profile_picture_list.append(p_picture)
 
+    print(post_list)
+
     zipped_list = zip(user_list, photo_list, post_list, profile_picture_list, post_fishes_list)
 
     return render_template('feed.html', title='Feed', zipped_list=zipped_list, user_visitor_id=user_visitor_id
