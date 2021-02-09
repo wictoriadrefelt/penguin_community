@@ -84,3 +84,40 @@ body {
     margin-bottom: 60px;
     text-align: center;
 }
+
+
+
+#factDisplay {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+
+}
+
+#factDisplay #post-img {
+  max-width: 100%;
+    max-height: 320px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#factDisplay #button1 {
+  position: absolute;
+  top: 20%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: white;
+  color: black;
+  font-size: 12px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#factDisplay #button1:hover {
+  background-color: white;
+}

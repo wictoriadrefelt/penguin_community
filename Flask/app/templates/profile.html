@@ -1,6 +1,6 @@
 {% extends "base_logged_in.html" %}
  {% block profile_content %}
-     <div class="jumbotron" id="">
+     <div class="jumbotron" id="huddle">
             <h3>My huddle:</h3>
             {% for huddlers in huddle_list %}
                 <a href="{{ url_for('get_others_profile', user_id=huddlers["user_id"]) }}">{{ huddlers["first_name"] }} {{ huddlers["last_name"]}}</a>

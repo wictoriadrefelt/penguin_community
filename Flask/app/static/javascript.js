@@ -9,7 +9,13 @@ let facts = [
     'Contrary to many popular holiday cartoons, you’ll never see penguins and polar bears together in the wild. That’s because penguins live south of the equator while polar bears north of the equator in Arctic!',
     'Penguin feet are adapted to walk long distances. Some species of penguins can march up to about 60 miles across sea ice to get to their breeding grounds. Penguin feet are also adapted to help the birds steer while swimming. They use their feet like rudders, angling them to help control direction.',
     'Many male penguins gift female penguins with rocks in order to woo them. The ladies use these rocks to build a nest.',
-    'According to some animal experts, the penguin is one of the most streamlined animals in the world. A penguin’s body is tapered at both ends and it has a large head, short neck and elongated body. This streamlined design helps penguins swim fast. '
+    'According to some animal experts, the penguin is one of the most streamlined animals in the world. A penguin’s body is tapered at both ends and it has a large head, short neck and elongated body. This streamlined design helps penguins swim fast. ',
+    'Penguins can drink sea water.',
+    'The Emperor Penguin is the tallest of all penguin species, reaching as tall as 120 cm (47 in) in height',
+    'Emperor Penguins can stay underwater for around 20 minutes at a time.',
+    'Chinstrap Penguins get their name from the thin black band under their head. At times it looks like they’re wearing a black helmet, which might be useful as they’re considered the most aggressive type of penguin.',
+    'Penguins in Antarctica have no land based predators',
+    'Yellow eyed penguins (or Hoiho) are endangered penguins native to New Zealand. Their population is believed to be around 4000.'
 ]
 
 
