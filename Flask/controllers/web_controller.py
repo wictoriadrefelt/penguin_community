@@ -1,7 +1,7 @@
 import data.repositories.web_repo as wr
 from app import bcrypt
-from flask import jsonify
 import random
+
 
 def get_user_by_email(email):
     return wr.get_user_by_email(email)
@@ -30,7 +30,7 @@ def create_new_comment(email, comment, post_id):
 def get_all_posts():
     return wr.get_all_posts()
 
-  
+
 def get_user_by_id(user_id):
     return wr.get_user_by_id(user_id)
 
@@ -68,9 +68,11 @@ def delete_post_by_id(post_id):
 def get_posts_by_user_id(user_id):
     return wr.get_posts_by_user_id(user_id)
 
+
 def add_to_huddle(huddle_id, email):
     user = get_user_by_email(email)
     return wr.add_to_huddle(huddle_id, user)
+
 
 def add_fish_to_post(post_id, email):
     post = get_post_by_post_id(post_id)
@@ -82,11 +84,8 @@ def number_of_fishes_on_post(post_id):
     return wr.number_of_fishes_on_post(post_id)
 
 
-
-
 def get_huddlers_from_user(user):
     return wr.get_huddlers_from_user(user)
-
 
 
 def get_post_from_huddle(email):
@@ -106,10 +105,10 @@ def get_huddle_list(user_email):
     huddle = get_huddlers_from_user(user)
     users = [get_user_by_id(id) for id in huddle]
     return [
-            {"first_name": user.first_name.capitalize(),
-             "last_name": user.last_name.capitalize(),
-             "user_id": str(user.id)}
-            for user in users]
+        {"first_name": user.first_name.capitalize(),
+         "last_name": user.last_name.capitalize(),
+         "user_id": str(user.id)}
+        for user in users]
 
 
 def update_user_profile(id, first_name, last_name):
@@ -146,8 +145,3 @@ def get_other_user(current_email):
 
     else:
         return None
-
-
-
-
-

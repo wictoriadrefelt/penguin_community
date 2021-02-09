@@ -1,4 +1,4 @@
-from data.models.models import Posts, Comment, Users
+from data.models.models import Posts
 from data.repositories.web_repo import get_post_by_post_id
 
 
