@@ -86,6 +86,7 @@ def add_to_huddle(huddle_id, user):
         user.save()
         return False
 
+
 def add_fish_to_post(post, fish_giver):
 
     fish_giver_id = str(fish_giver.id)
