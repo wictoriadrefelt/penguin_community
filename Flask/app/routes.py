@@ -6,16 +6,15 @@ from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session, jsonify
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
-    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, update_user_profile, \
+    get_posts_by_user_id, add_to_huddle, add_fish_to_post, update_user_profile, \
     get_huddle_list, get_other_user
-from controllers.post_controller import get_posts_paginate
+from controllers.post_controller import get_posts_paginate, get_posts_id_for_feed
 
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
 from functools import wraps
-
 
 
 @app.route('/post/<post_id>/post_fish', methods=["POST"])
@@ -86,7 +85,6 @@ def get_post(post_id):
                            form=form, zipped_list=zipped_list)
 
 
-
 @app.route('/process', methods=['POST'])
 def post_process():
     user_input = request.form['name']
@@ -102,11 +100,13 @@ def post_process():
 
 @app.route('/feedscroll', methods=['POST'])
 def feed_scroll_process():
-    page = int(request.form['page_num'])
-    posts = get_posts_paginate(page_num=page, items_per_page=2)
+    page_num = int(request.form['page_num'])
+    posts_id_list = session["posts"]
+
+    return_posts = get_posts_paginate(posts_id_list, page_num, items_per_page=3)
 
     response = app.response_class(
-        response=json.dumps(posts),
+        response=json.dumps(return_posts),
         status=200,
         mimetype='application/json'
     )
@@ -116,43 +116,11 @@ def feed_scroll_process():
 @app.route('/feed')
 @login_required('sign_in')
 def get_feed():
-
     random_user = get_other_user(session["email"])
-    posts = get_post_from_huddle(session["email"])
-    user_list = []
-    photo_list = []
-    post_list = []
-    profile_picture_list = []
-    post_fishes_list = []
-    user_visitor = get_user_by_email(session['email'])
-    user_visitor_id = str(user_visitor.id)
+    session["posts"] = get_posts_id_for_feed(session["email"])
 
-    for post in posts:
-        fishes = number_of_fishes_on_post(post.id)
-        post_fishes_list.append(fishes)
+    return render_template('feed.html', title='Feed', random_user=random_user)
 
-    for post in posts:
-        user_list.append(post.user)
-
-    for post in posts:
-        base64_data = codecs.encode(post.photo.read(), 'base64')
-        image = base64_data.decode('utf-8')
-        photo_list.append(image)
-
-    for post in posts:
-        post_list.append(post)
-
-    for post in posts:
-        base64_data = codecs.encode(post.user.profile_picture.read(), 'base64')
-        p_picture = base64_data.decode('utf-8')
-        profile_picture_list.append(p_picture)
-
-    print(post_list)
-
-    zipped_list = zip(user_list, photo_list, post_list, profile_picture_list, post_fishes_list)
-
-    return render_template('feed.html', title='Feed', zipped_list=zipped_list, user_visitor_id=user_visitor_id
-                           , random_user=random_user)
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -224,12 +192,9 @@ def update_profile():
     return render_template("profile.html", title="Profile", form=form, user=user, user_id=user.id)
 
 
-
-
 @app.route('/profile', methods=["GET", "POST"])
 @login_required('sign_in')
 def get_profile():
-
     email = session['email']
     user = get_user_by_email(email)
     user_id = user.id
@@ -311,11 +276,3 @@ def error_404(error):
 @app.errorhandler(500)
 def error_500(error):
     return render_template('errors/500.html'), 500
-
-
-"""  form = PostForm()
-    if form.validate_on_submit():
-        filename = secure_filename(form.file.data.filename)
-        form.file.data.save('uploads' + filename)
-        return redirect(url_for('create_post'))
-"""

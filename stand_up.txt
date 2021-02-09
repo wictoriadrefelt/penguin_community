@@ -91,5 +91,29 @@ Stand up 29/1/21 10.00
 
 
 Stand up 02/02/21 10.00
-- Diskuterar kring vilka tester vi bör ha med.
+- Diskuterar kring vilka tester vi bör ha med. Vad är viktigt för oss att testa?
 - Påbörjar utformande av tester.
+
+
+
+Stand up 04/02-21 10.00
+- Fortsätter med tester, login, register, search.
+- Upptäcker buggar samt avsaknad av viss funktionalitet vi anser oss behöva.
+- Lägger tillsammans till funktionalitet efterhand. Diskuterar vad vi bör prioritera samt vad vi skall lämna.
+
+
+
+Stand up 05/02-21 10.00
+- Fortsätter där vi avslutade efter gårdagen.
+- Diskussion kring upplägg utav demo samt hur vi skall gå till väga kring en presentation.
+
+
+
+Stand up 09/02-21 10.00
+- Finslipar det sista tillsammans
+- Städar upp i koden
+- Mergar samtliga branches, gör avstamp i det vi ska lägga åt sidan.
+- Lägger till screenshots från Miro.
+- Diskuterar kring morgondagens presentation, upplägg osv.
+- Fortsatt förberedelse inför morgondagen.
+

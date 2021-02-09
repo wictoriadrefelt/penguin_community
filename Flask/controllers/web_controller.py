@@ -82,6 +82,8 @@ def number_of_fishes_on_post(post_id):
     return wr.number_of_fishes_on_post(post_id)
 
 
+
+
 def get_huddlers_from_user(user):
     return wr.get_huddlers_from_user(user)
 
@@ -138,8 +140,14 @@ def get_other_user(current_email):
     while i < 15:
         i += 1
         random_user = get_random_user()
+        print(random_user)
         if random_user["user_id"] not in huddle_id_list and random_user["user_id"] != current_user_id:
             return random_user
+
     else:
         return None
+
+
+
+
 
