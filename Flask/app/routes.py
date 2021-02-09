@@ -1,6 +1,5 @@
 import codecs
 import json
-import time
 
 from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session, jsonify
@@ -9,12 +8,8 @@ from controllers.web_controller import create_new_user, get_user_by_email, creat
     get_posts_by_user_id, add_to_huddle, add_fish_to_post, update_user_profile, \
     get_huddle_list, get_other_user
 from controllers.post_controller import get_posts_paginate, get_posts_id_for_feed
-
-from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
-from data.models.models import Users, login_required, is_authenticated
-from flask_login import login_user, current_user
-from functools import wraps
+from data.models.models import login_required, is_authenticated
 
 
 @app.route('/post/<post_id>/post_fish', methods=["POST"])
@@ -95,7 +90,7 @@ def post_process():
         status=200,
         mimetype='application/json'
     )
-    return response  # jsonify({'empty string': True})
+    return response
 
 
 @app.route('/feedscroll', methods=['POST'])
@@ -113,6 +108,7 @@ def feed_scroll_process():
     return response
 
 
+@app.route('/')
 @app.route('/feed')
 @login_required('sign_in')
 def get_feed():
@@ -120,12 +116,6 @@ def get_feed():
     session["posts"] = get_posts_id_for_feed(session["email"])
 
     return render_template('feed.html', title='Feed', random_user=random_user)
-
-
-
-@app.route('/', methods=["GET", "POST"])
-def get_index():
-    return render_template('base.html', status='Signed In' if is_authenticated() else 'Not Signed In')
 
 
 @app.route("/restricted")
