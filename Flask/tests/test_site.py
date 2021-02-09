@@ -172,10 +172,34 @@ class PenguinCommunityTest(unittest.TestCase):
         upload_btn.click()
 
 
-    """
+    def test_add_friend(self):
+        self.driver.get('http://127.0.0.1:5000')
+        username_field = self.driver.find_element_by_id('username')
+        password_field = self.driver.find_element_by_id('password')
+        submit = self.driver.find_element_by_name('submit')
+
+        username_field.send_keys('admin')
+        password_field.send_keys('superstar')
+        submit.send_keys(Keys.RETURN)
+
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'welcome')))
+
+        num_friends_before = len(self.driver.find_elements_by_class_name('friend'))
+
+        friend_field = self.driver.find_element_by_id('friend')
+        friend_field.send_keys('Bosse')
+        friend_field.send_keys(Keys.RETURN)
+
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'welcome')))
+        num_friends_after = len(self.driver.find_elements_by_class_name('friend'))
+
+        self.assertEqual(num_friends_before + 1, num_friends_after)
+
+
     def tearDown(self):
         self.driver.close()
-    """
+
+
 
 if __name__ == '__main__':
     unittest.main()

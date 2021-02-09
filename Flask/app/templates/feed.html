@@ -84,10 +84,14 @@
                         '    <hr>' +
                         '    <form action="/post/' + data[i]["post_id"] + '/post_fish" method="POST">' +
                         '        <input class="btn" type="submit" value="Give Fish (' + data[i]["fishes"] + ')">' +
-                        '    </form>' +
+                        '</form>' +
+                        '    <form action=/post/' + data[i]["post_id"] + '/comment_post" method="POST">' +
+                        '        <input class="btn" type="submit" value="Comments (' + data[i]["comment"] + ')">' +
+                        '    <hr>' +
+                        '    ' +
+                        '</form>' +
                         '</div>');
                 }
-
                 if (data.length === 0){
                     document.getElementById("loading-msg").innerHTML = '<p>' + 'No more posts.' + '</p>';
                 } else {

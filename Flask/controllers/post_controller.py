@@ -10,5 +10,14 @@ def get_posts_paginate(posts_id_list, page_num=1, items_per_page=3):
     return get_dicts_of_posts(posts)
 
 
+def get_comments_on_post(post_id):
+    return pr.get_comments_on_post(post_id)
+
+
+def number_of_comments_on_posts(post_id):
+    return pr.number_of_comments_on_posts(post_id)
+
+  
 def get_posts_id_from_user_huddle_list(user_email):
     return [str(post.id) for post in get_post_from_huddle(user_email)]
+

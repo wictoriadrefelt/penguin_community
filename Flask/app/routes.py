@@ -8,7 +8,7 @@ from controllers.web_controller import create_new_user, get_user_by_email, creat
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
     get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, update_user_profile, \
     get_huddle_list, get_random_user
-from controllers.post_controller import get_posts_paginate, get_posts_id_from_user_huddle_list, get_huddle_list, get_other_user
+from controllers.post_controller import get_posts_paginate, get_posts_id_from_user_huddle_list, get_huddle_list, get_other_user, number_of_comments_on_posts
 
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
@@ -100,6 +100,7 @@ def post_process():
     return response  # jsonify({'empty string': True})
 
 
+
 @app.route('/feedscroll', methods=['POST'])
 def feed_scroll_process():
     page_num = int(request.form['page_num'])
@@ -115,14 +116,15 @@ def feed_scroll_process():
     return response
 
 
+
+
+
 @app.route('/feed')
 @login_required('sign_in')
 def get_feed():
     random_user = get_random_user(session["email"])
-
     session["posts"] = get_posts_id_from_user_huddle_list(session["email"])
-    print("session posts:", session["posts"])
-
+    
     return render_template('feed.html', title='Feed', random_user=random_user)
 
 
