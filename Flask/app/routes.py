@@ -8,7 +8,7 @@ from controllers.web_controller import create_new_user, get_user_by_email, creat
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
     get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, update_user_profile, \
     get_huddle_list, get_random_user
-from controllers.post_controller import get_posts_paginate
+from controllers.post_controller import get_posts_paginate, number_of_comments_on_posts
 
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
@@ -100,6 +100,7 @@ def post_process():
     return response  # jsonify({'empty string': True})
 
 
+
 @app.route('/feedscroll', methods=['POST'])
 def feed_scroll_process():
     page = int(request.form['page_num'])
@@ -111,6 +112,9 @@ def feed_scroll_process():
         mimetype='application/json'
     )
     return response
+
+
+
 
 
 @app.route('/feed')
@@ -127,12 +131,17 @@ def get_feed():
     post_list = []
     profile_picture_list = []
     post_fishes_list = []
+    post_comments_list = []
     user_visitor = get_user_by_email(session['email'])
     user_visitor_id = str(user_visitor.id)
 
     for post in posts:
         fishes = number_of_fishes_on_post(post.id)
         post_fishes_list.append(fishes)
+
+    for post in posts:
+        comments = number_of_comments_on_posts(post.id)
+        post_comments_list.append(comments)
 
     for post in posts:
         user_list.append(post.user)
@@ -150,7 +159,7 @@ def get_feed():
         p_picture = base64_data.decode('utf-8')
         profile_picture_list.append(p_picture)
 
-    zipped_list = zip(user_list, photo_list, post_list, profile_picture_list, post_fishes_list)
+    zipped_list = zip(user_list, photo_list, post_list, profile_picture_list, post_fishes_list, post_comments_list)
 
     return render_template('feed.html', title='Feed', zipped_list=zipped_list, user_visitor_id=user_visitor_id
                            , random_user=random_user)

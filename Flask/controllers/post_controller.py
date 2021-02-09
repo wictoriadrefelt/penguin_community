@@ -14,9 +14,14 @@ def get_posts_paginate(page_num=1, items_per_page=3):
              "photo": decode_picture(post.photo),
              "profile_picture": decode_picture(post.user.profile_picture),
              "fishes": wr.number_of_fishes_on_post(post.id),
+             "comment": pr.number_of_comments_on_posts(post.id),
              "post_user_id": str(post.user.id),
              "post_id": str(post.id)}
             for post in posts]
+
+
+def get_comments_on_post(post_id):
+    return pr.get_comments_on_post(post_id)
 
 
 def number_of_comments_on_posts(post_id):
