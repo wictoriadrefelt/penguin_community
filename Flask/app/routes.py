@@ -6,9 +6,10 @@ from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session, jsonify
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
-    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, update_user_profile, \
-    get_huddle_list, get_random_user
-from controllers.post_controller import get_posts_paginate, get_posts_id_from_user_huddle_list, get_huddle_list, get_other_user, number_of_comments_on_posts
+    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, \
+    update_user_profile, \
+    get_huddle_list, get_random_user, get_other_user
+from controllers.post_controller import get_posts_paginate, get_posts_id_from_user_huddle_list, number_of_comments_on_posts
 
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
@@ -122,7 +123,7 @@ def feed_scroll_process():
 @app.route('/feed')
 @login_required('sign_in')
 def get_feed():
-    random_user = get_random_user(session["email"])
+    random_user = get_other_user(session["email"])
     session["posts"] = get_posts_id_from_user_huddle_list(session["email"])
     
     return render_template('feed.html', title='Feed', random_user=random_user)

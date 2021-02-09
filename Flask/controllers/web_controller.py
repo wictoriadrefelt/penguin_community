@@ -139,9 +139,9 @@ def get_other_user(current_email):
 
     while True:
         random_user = get_random_user()
+        print(random_user)
         if random_user["user_id"] not in huddle_id_list and random_user["user_id"] != current_user_id:
             return random_user
-
 
 
 

@@ -1,6 +1,7 @@
 import data.repositories.web_repo as wr
 from controllers.controller_functions import get_dicts_of_posts
 from controllers.web_controller import get_post_from_huddle
+import data.repositories.post_repo as pr
 
 
 def get_posts_paginate(posts_id_list, page_num=1, items_per_page=3):
