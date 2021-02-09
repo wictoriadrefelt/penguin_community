@@ -107,3 +107,12 @@ Stand up 05/02-21 10.00
 - Fortsätter där vi avslutade efter gårdagen.
 - Diskussion kring upplägg utav demo samt hur vi skall gå till väga kring en presentation.
 
+
+Stand up 09/02-21 10.00
+- Finslipar det sista tillsammans
+- Städar upp i koden
+- Mergar samtliga branches, gör avstamp i det vi ska lägga åt sidan.
+- Lägger till screenshots från Miro.
+- Diskuterar kring morgondagens presentation, upplägg osv.
+- Fortsatt förberedelse inför morgondagen.
+
