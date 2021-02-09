@@ -118,11 +118,7 @@ def feed_scroll_process():
 def get_feed():
 
     random_user = get_other_user(session["email"])
-
-    print(random_user)
-
     posts = get_post_from_huddle(session["email"])
-
     user_list = []
     photo_list = []
     post_list = []
