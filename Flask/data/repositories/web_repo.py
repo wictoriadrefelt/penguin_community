@@ -6,7 +6,7 @@ import bson
 
 
 def get_posts_by_user_id(user_id):
-    return Posts.objects(user=bson.objectid.ObjectId(user_id))
+    return Posts.objects(user=bson.objectid.ObjectId(user_id)).order_by('-post_date')
 
 
 def get_user_by_email(email):
@@ -85,6 +85,7 @@ def add_to_huddle(huddle_id, user):
         user.huddle.remove(huddle_id_string)
         user.save()
         return False
+
 
 def add_fish_to_post(post, fish_giver):
 

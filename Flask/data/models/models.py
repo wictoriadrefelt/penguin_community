@@ -8,8 +8,6 @@ from data.db import request
 import datetime
 
 
-
-# https://www.javatpoint.com/javascript-form-validation
 def login_required(default_page):
     def decorator(route):
         @wraps(route)

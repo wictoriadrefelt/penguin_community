@@ -1,16 +1,15 @@
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import io
 import time
+
 
 class PenguinCommunityTest(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Firefox()# laddar ner rätt ver.
+        self.driver = webdriver.Firefox()
         self.driver.maximize_window()
 
     def test_login(self):
@@ -26,9 +25,13 @@ class PenguinCommunityTest(unittest.TestCase):
         welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'factDisplay')))
         self.assertEqual("Did you know?", welcome.text)
 
+        expected_url = "http://127.0.0.1:5000/feed"
+        actual_url = self.driver.current_url
+        self.assertEqual(actual_url, expected_url)
 
 
-    def test_register(self):
+
+    def test_register_and_login(self):
         self.driver.get('http://127.0.0.1:5000/sign_up')
         first_name_field = self.driver.find_element_by_id("first_name")
         last_name_field = self.driver.find_element_by_id("last_name")
@@ -40,13 +43,28 @@ class PenguinCommunityTest(unittest.TestCase):
 
         first_name_field.send_keys('Hans')
         last_name_field.send_keys('Hans')
-        email_field.send_keys('hans@hans.de')
+        email_field.send_keys('hans2@hans.de')
         password_field.send_keys('hans')
         confirm_password_field.send_keys('hans')
-        picture_field.send_keys("C:\\Users\Admin\Pictures\ping_selfie2.jpg")
+        picture_field.send_keys("C:\\penguin.png")
         submit.send_keys('enter')
         submit.click()
-        time.sleep(10)
+        time.sleep(3)
+
+        email_field = self.driver.find_element_by_id('email')
+        password_field = self.driver.find_element_by_id('password')
+        submit = self.driver.find_element_by_id('submit')
+
+        email_field.send_keys('hans2@hans.de')
+        password_field.send_keys('hans')
+        submit.click()
+
+        welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'factDisplay')))
+        self.assertEqual("Did you know?", welcome.text)
+
+        expected_url = "http://127.0.0.1:5000/feed"
+        actual_url = self.driver.current_url
+        self.assertEqual(actual_url, expected_url)
 
 
     def test_search(self):
@@ -64,15 +82,15 @@ class PenguinCommunityTest(unittest.TestCase):
 
         search_field = self.driver.find_element_by_id('nameInput')
         search_field.send_keys('Hans')
-        #search_field.clear()
-        search_results = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'suggestion-list')))
+        time.sleep(2)
+        search_results = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, 'suggestion-list')))
+        time.sleep(2)
 
         search_results = [item.text for item in search_results.find_elements_by_tag_name('a')]
+
+        self.assertEqual(len(search_results), 3)
         self.assertIn('Hans Hans', search_results)
-        self.assertEqual(len(search_results), 2)
-
-        print("sleep")
-
 
 
 
@@ -92,6 +110,10 @@ class PenguinCommunityTest(unittest.TestCase):
         profile_field.click()
         welcome = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'myNavbar')))
         self.assertEqual("Feed\nCreate post\nProfile\nLogout", welcome.text)
+
+        expected_url = "http://127.0.0.1:5000/profile"
+        actual_url = self.driver.current_url
+        self.assertEqual(actual_url, expected_url)
 
 
     def test_update_profile(self):
@@ -150,7 +172,6 @@ class PenguinCommunityTest(unittest.TestCase):
         upload_btn.click()
 
 
-    """
     def test_add_friend(self):
         self.driver.get('http://127.0.0.1:5000')
         username_field = self.driver.find_element_by_id('username')
@@ -173,11 +194,12 @@ class PenguinCommunityTest(unittest.TestCase):
         num_friends_after = len(self.driver.find_elements_by_class_name('friend'))
 
         self.assertEqual(num_friends_before + 1, num_friends_after)
-    """
-"""
+
+
     def tearDown(self):
         self.driver.close()
-"""
+
+
 
 if __name__ == '__main__':
     unittest.main()
