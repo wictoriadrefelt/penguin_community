@@ -6,17 +6,15 @@ from app import app, bcrypt
 from flask import render_template, redirect, url_for, request, flash, session, jsonify
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
-    get_posts_by_user_id, add_to_huddle, add_fish_to_post, number_of_fishes_on_post, get_post_from_huddle, \
-    update_user_profile, \
-    get_huddle_list, get_random_user, get_other_user
-from controllers.post_controller import get_posts_paginate, get_posts_id_from_user_huddle_list, number_of_comments_on_posts
+    get_posts_by_user_id, add_to_huddle, add_fish_to_post, update_user_profile, \
+    get_huddle_list, get_other_user
+from controllers.post_controller import get_posts_paginate, get_posts_id_for_feed
 
 from data.db import gridFS
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
 from data.models.models import Users, login_required, is_authenticated
 from flask_login import login_user, current_user
 from functools import wraps
-
 
 
 @app.route('/post/<post_id>/post_fish', methods=["POST"])
@@ -87,7 +85,6 @@ def get_post(post_id):
                            form=form, zipped_list=zipped_list)
 
 
-
 @app.route('/process', methods=['POST'])
 def post_process():
     user_input = request.form['name']
@@ -99,7 +96,6 @@ def post_process():
         mimetype='application/json'
     )
     return response  # jsonify({'empty string': True})
-
 
 
 @app.route('/feedscroll', methods=['POST'])
@@ -117,15 +113,12 @@ def feed_scroll_process():
     return response
 
 
-
-
-
 @app.route('/feed')
 @login_required('sign_in')
 def get_feed():
     random_user = get_other_user(session["email"])
-    session["posts"] = get_posts_id_from_user_huddle_list(session["email"])
-    
+    session["posts"] = get_posts_id_for_feed(session["email"])
+
     return render_template('feed.html', title='Feed', random_user=random_user)
 
 
@@ -198,12 +191,9 @@ def update_profile():
     return render_template("profile.html", title="Profile", form=form, user=user, user_id=user.id)
 
 
-
-
 @app.route('/profile', methods=["GET", "POST"])
 @login_required('sign_in')
 def get_profile():
-
     email = session['email']
     user = get_user_by_email(email)
     user_id = user.id
@@ -285,11 +275,3 @@ def error_404(error):
 @app.errorhandler(500)
 def error_500(error):
     return render_template('errors/500.html'), 500
-
-
-"""  form = PostForm()
-    if form.validate_on_submit():
-        filename = secure_filename(form.file.data.filename)
-        form.file.data.save('uploads' + filename)
-        return redirect(url_for('create_post'))
-"""
