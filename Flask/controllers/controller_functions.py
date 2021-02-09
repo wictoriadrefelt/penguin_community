@@ -1,4 +1,5 @@
 import codecs
+import data.repositories.web_repo as wr
 
 
 def decode_picture(picture):
@@ -12,3 +13,16 @@ def convert_datetime_to_str(datetime_obj):
 
 def get_milliseconds_since_epoch(datetime_obj):
     return int(datetime_obj.timestamp()) * 1000
+
+
+def get_dicts_of_posts(post_list):
+    return [{"first_name": post.user.first_name,
+             "last_name": post.user.last_name,
+             "description": post.description,
+             "ms_since_post_date": get_milliseconds_since_epoch(post.post_date),
+             "photo": decode_picture(post.photo),
+             "profile_picture": decode_picture(post.user.profile_picture),
+             "fishes": wr.number_of_fishes_on_post(post.id),
+             "post_user_id": str(post.user.id),
+             "post_id": str(post.id)}
+            for post in post_list]
