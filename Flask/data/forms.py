@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 from controllers.web_controller import get_user_by_email
@@ -28,7 +28,7 @@ class LoginForm(FlaskForm):
 
 class PostForm(FlaskForm):
     description = StringField("Description")
-    file = FileField(validators=[DataRequired()])
+    file = FileField(validators=[DataRequired(), FileAllowed(['jpg', 'png', 'gif'])])
     submit = SubmitField("Submit")
 
 
