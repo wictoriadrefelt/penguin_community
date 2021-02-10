@@ -1,5 +1,4 @@
 import mongoengine
-from datetime import datetime
 from data.models.models import Users, Posts, Comment
 db = mongoengine
 import bson

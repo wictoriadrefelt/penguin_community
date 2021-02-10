@@ -2,8 +2,8 @@ import codecs
 import json
 
 from app import app, bcrypt
-from flask import render_template, redirect, url_for, request, flash, session, jsonify
-from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, get_all_posts, \
+from flask import render_template, redirect, url_for, request, flash, session
+from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
     get_posts_by_user_id, add_to_huddle, add_fish_to_post, update_user_profile, \
     get_huddle_list, get_other_user
@@ -225,12 +225,6 @@ def sign_in():
         else:
             flash("Login Unsuccessful. Please check email and password", "danger")
     return render_template("sign_in.html", title="Login", form=form)
-
-
-@app.route('/test_profile')
-@app.route('/test_profile.html')
-def get_test_profile():
-    return render_template('test_profile.html')
 
 
 @app.route('/create_post', methods=["GET", "POST"])
