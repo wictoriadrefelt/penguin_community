@@ -1,6 +1,7 @@
 import data.repositories.web_repo as wr
 from app import bcrypt
 import random
+import requests
 
 
 def get_user_by_email(email):
@@ -139,9 +140,22 @@ def get_other_user(current_email):
     while i < 15:
         i += 1
         random_user = get_random_user()
-        print(random_user)
         if random_user["user_id"] not in huddle_id_list and random_user["user_id"] != current_user_id:
             return random_user
 
     else:
         return None
+
+
+def get_weather_api():
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    response = requests.get('https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=-90.0&lon=0.0', headers=headers)
+    dat = response.json()
+
+    temp = (dat["properties"]["timeseries"][0]["data"]["instant"]["details"]["air_temperature"])
+    temp_string = "Temperature at south pole right now: " + str(temp) + " °C"
+
+    return temp_string
+
+

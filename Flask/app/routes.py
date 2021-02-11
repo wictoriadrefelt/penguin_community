@@ -6,10 +6,12 @@ from flask import render_template, redirect, url_for, request, flash, session
 from controllers.web_controller import create_new_user, get_user_by_email, create_new_post, \
     get_users_by_first_or_last_name, get_user_by_id, get_post_by_post_id, delete_post_by_id, create_new_comment, \
     get_posts_by_user_id, add_to_huddle, add_fish_to_post, update_user_profile, \
-    get_huddle_list, get_other_user
+    get_huddle_list, get_other_user, get_weather_api
 from controllers.post_controller import get_posts_paginate, get_posts_id_for_feed
 from data.forms import RegistrationForm, LoginForm, PostForm, CommentForm, UpdateProfileForm
 from data.models.models import login_required, is_authenticated
+app.jinja_env.globals.update(get_weather_api=get_weather_api)
+
 
 
 @app.route('/post/<post_id>/post_fish', methods=["POST"])
@@ -112,6 +114,8 @@ def feed_scroll_process():
 @app.route('/feed')
 @login_required('sign_in')
 def get_feed():
+    weather = get_weather_api()
+    print(weather)
     random_user = get_other_user(session["email"])
     session["posts"] = get_posts_id_for_feed(session["email"])
 
@@ -237,6 +241,7 @@ def get_create_post():
         photo = form.file.data
         create_new_post(email, description, photo)
         flash("Congratulations, your post was successfully uploaded", "success")
+
     return render_template('create_post.html', form=form)
 
 
@@ -260,3 +265,4 @@ def error_404(error):
 @app.errorhandler(500)
 def error_500(error):
     return render_template('errors/500.html'), 500
+
