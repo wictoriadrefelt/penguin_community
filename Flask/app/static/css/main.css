@@ -1,3 +1,4 @@
+
 body {
     background-color: #96b4c9;
     margin:0;height:100%;
@@ -23,6 +24,8 @@ canvas{
 .container {
   max-width: 1000px;
 }
+
+
 
 .navbar-default {
     background-color: #608fb0;
@@ -138,4 +141,34 @@ canvas{
 
 #factDisplay #button1:hover {
   background-color: white;
+}
+
+#nav {
+    background: -webkit-linear-gradient(#000222, #00d4ff, #090979);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#nav-Create_post {
+    background: -webkit-linear-gradient(#000222, #00d4ff, #090979);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#nav-feed {
+    background: -webkit-linear-gradient(#000222, #00d4ff, #090979);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#nav-Log-out {
+    background: -webkit-linear-gradient(#000222, #00d4ff, #090979);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#nav-Profile {
+    background: -webkit-linear-gradient(#000222, #00d4ff, #090979);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

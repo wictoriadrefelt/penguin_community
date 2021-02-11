@@ -8,6 +8,7 @@
       <title>Penguin</title>
   {% endif %}
   <link rel="shortcut icon" type="image/jpg" href="/static/images/favicon5.ico"/>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -151,8 +152,10 @@ init();
 <header class="header-height">
     <div class ="container">
         <div class="row">
-            <div class="col col-6" id="Penguin-Com">
-                <h1>Penguin Community</h1>
+            <div class="col col-6">
+
+                    <img src="/static/images/cool-logo2.png" id="logo-text" alt="logo">
+
             </div>
             <div class="col col-6">
                 <div style="padding-left: 15%" class="header-height">
@@ -176,14 +179,14 @@ init();
       <ul class="nav navbar-nav center">
       {% if 'email' in session %}
         <li {% if request.path == '/feed' %}class="active"{% endif %}>
-            <a href="{{ url_for('get_feed') }}" style="color: black">Feed</a>
+            <a href="{{ url_for('get_feed') }}" id="nav-feed">Feed</a>
         </li>
         <li {% if request.path == '/create_post' %}class="active"{% endif %}>
-            <a href="{{ url_for('get_create_post') }}" id="create_post" style="color: black">Create post</a>
+            <a href="{{ url_for('get_create_post') }}" id="nav-Create_post">Create post</a>
         </li>
         <li {% if '/profile' in request.path %}class="active"{% endif %}>
 
-            <a href="{{ url_for('get_profile') }}" id="Profile" style="color: black">Profile</a>
+            <a href="{{ url_for('get_profile') }}" id="nav-Profile">Profile</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -192,7 +195,7 @@ init();
                 <input type="text" class="form-control" id="nameInput" placeholder="Search penguins">
           </form>
         </li>
-        <li><a href="{{ url_for('logged_out') }}" style="color: black"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a href="{{ url_for('logged_out') }}" id="nav-Log-out"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 
       {% else %}
       <li {% if request.path == '/sign_in' %}class="active"{% endif %}>
