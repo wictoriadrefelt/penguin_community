@@ -88,6 +88,11 @@ canvas{
     border-color: black;
 }
 
+.active, .btn:hover {
+  background-color: #0093E9;
+  color: white;
+}
+
 #myBtn {
     height: 50px;
     width: 50px;
@@ -136,7 +141,7 @@ canvas{
   background-color: white;
   color: black;
   font-family: Montserrat, sans-serif;
-  font-size: 14px;
+  font-size: 20px;
   padding: 12px 24px;
   border: none;
   cursor: pointer;
@@ -149,38 +154,7 @@ canvas{
 }
 
 #nav {
-    background: -webkit-linear-gradient(#000000, #005ccb, #000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: "Montserrat", sans-serif;
-}
-
-#nav-Create_post {
-    font-size: 20px;
-    font-family: Montserrat, sans-serif;
-    background: -webkit-linear-gradient(#000000, #005ccb, #000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#nav-Feed {
-    font-size: 20px;
-    font-family: Montserrat, sans-serif;
-    background: -webkit-linear-gradient(#000000, #005ccb, #000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#nav-Log-out {
-    font-size: 20px;
-    font-family: Montserrat, sans-serif;
-    background: -webkit-linear-gradient(#000000, #005ccb, #000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#nav-Profile {
-    font-size: 20px;
+    font-size: 18px;
     font-family: Montserrat, sans-serif;
     background: -webkit-linear-gradient(#000000, #005ccb, #000000);
     -webkit-background-clip: text;
