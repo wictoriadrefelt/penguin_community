@@ -28,7 +28,7 @@ class LoginForm(FlaskForm):
 
 class PostForm(FlaskForm):
     description = StringField("Description")
-    file = FileField(validators=[DataRequired(), FileAllowed(['jpg', 'png', 'gif'], 'Filetype not allowed!')])
+    file = FileField(validators=[DataRequired(), FileAllowed(['jpg', 'png', 'gif'], 'Filetype not allowed!')]) #test
     submit = SubmitField("Submit")
 
 

@@ -71,22 +71,23 @@
                         '        <div class="media-body">\n' +
                         '            <h3 class="media-heading">' +
                         '            <a href="' + profile_link + '">' +  data[i]["first_name"] + ' ' + data[i]["last_name"] + '</a></h3>\n' +
+                        '            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">\n' +
+                        '                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>\n' +
+                        '                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>\n' +
+                        '            </svg><a class="post-time" data-post-milliseconds="'  + post_time_milliseconds + '">  ' + posted_on_time + '</a>' +
                         '        </div>\n' +
-                        '        <div class="media-right">' +
-                        '        <a href="#" class="post-time" data-post-milliseconds="'  + post_time_milliseconds + '">Posted ' + posted_on_time + '</a>' +
-                        '        </div>' +
                         '    </div>\n' +
-                        '    <hr>\n' +
+                        '    <br>\n' +
                         '    <a href="' + profile_link + '">\n' +
                         '        <img src = "data:image/png;base64, ' + data[i]["photo"] + '" alt= "myImage" id="post-img"/>' +
-                        '    </a>\n' +
+                        '    </a><br>' +
                         '    <p class="post">' + data[i]["description"] + '</p>' +
                         '    <hr>' +
                         '    <form action="/post/' + data[i]["post_id"] + '/post_fish" method="POST">' +
                         '        <input class="btn" type="submit" value="Give Fish (' + data[i]["fishes"] + ')">' +
-                        '</form>' +
+                        '    </form>' +
                         '    <form action=/post/' + data[i]["post_id"] + '/comment_post" method="POST">' +
-                        '        <input class="btn" type="submit" value="Comments (' + data[i]["comment"] + ')">' +
+                        '        <input class="btn" type="submit" value="Comment (' + data[i]["comment"] + ')">' +
                         '    <hr>' +
                         '    ' +
                         '</form>' +
@@ -122,7 +123,7 @@
 
         for(let i = 0; i < post.length; i++) {
             let time = post[i].getAttribute("data-post-milliseconds");
-            post[i].innerHTML = timeSince(time);
+            post[i].innerHTML = ' ' + timeSince(time);
         }
     }
 
