@@ -23,14 +23,22 @@ header {
 }
 
 header h1 {
-    padding-left: 20%;
-    text-align: center;
+    font-size: 48px;    padding-left: 20%;
+    text-align: left;
     padding-top: 60px;
-    color: black;
+    background: -webkit-linear-gradient(#333, #eee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
 }
 
 header #penguin {
     height: 100%;
-    width: 200px;
+    width: 150px;
+    padding-top: 50px;
+}
+
+header #logo-text {
+    height: 100%;
     padding-top: 50px;
 }
