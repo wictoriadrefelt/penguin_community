@@ -53,7 +53,16 @@ canvas{
 
 #post-img {
     max-width: 100%;
-    max-height: 350px;
+    max-height: 400px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    border: 5px solid black;
+}
+
+#ad-img {
+    max-width: 100%;
+    max-height: 400px;
     display: block;
     margin-right: auto;
     margin-left: auto;
@@ -107,7 +116,7 @@ canvas{
     text-align: center;
 }
 
-
+/* Settings for sidebar jumbotrons */
 
 #factDisplay {
   position: relative;
@@ -126,7 +135,7 @@ canvas{
 
 #factDisplay #button1 {
   position: absolute;
-  top: 20%;
+  top: 110px;
   left: 60%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -143,6 +152,7 @@ canvas{
 #factDisplay #button1:hover {
   background-color: white;
 }
+
 
 #nav {
     background: -webkit-linear-gradient(#000000, #005ccb, #000000);
@@ -182,3 +192,16 @@ canvas{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+
+.sidebar a {
+    font-size: 13px;
+    padding-top: 16px;
+}
+
+.jumbotron hr {
+    margin-bottom: 11px;
+    margin-top: 6px;
+}
+
+
