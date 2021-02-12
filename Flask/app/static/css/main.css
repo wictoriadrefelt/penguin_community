@@ -3,7 +3,11 @@
 body {
     background-color: #96b4c9;
     margin:0;height:100%;
+
 }
+
+
+
 
 canvas{
     position:fixed;top:0px;left:0;width:100%;
@@ -26,10 +30,9 @@ canvas{
   max-width: 1000px;
 }
 
-
-
 .navbar-default {
-    background-color: #608fb0;
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
     border: unset;
     margin-bottom: 0;
     text-align: center;
@@ -94,6 +97,11 @@ canvas{
     border-color: black;
 }
 
+.active, .btn:hover {
+  background-color: #0093E9;
+  color: white;
+}
+
 #myBtn {
     height: 50px;
     width: 50px;
@@ -141,7 +149,8 @@ canvas{
   -ms-transform: translate(-50%, -50%);
   background-color: white;
   color: black;
-  font-size: 12px;
+  font-family: Montserrat, sans-serif;
+  font-size: 20px;
   padding: 12px 24px;
   border: none;
   cursor: pointer;
@@ -153,40 +162,8 @@ canvas{
   background-color: white;
 }
 
-
 #nav {
-    background: -webkit-linear-gradient(#000000, #005ccb, #000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: "Montserrat", sans-serif;
-}
-
-#nav-Create_post {
-    font-size: 20px;
-    font-family: Montserrat, sans-serif;
-    background: -webkit-linear-gradient(#000000, #005ccb, #000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#nav-Feed {
-    font-size: 20px;
-    font-family: Montserrat, sans-serif;
-    background: -webkit-linear-gradient(#000000, #005ccb, #000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#nav-Log-out {
-    font-size: 20px;
-    font-family: Montserrat, sans-serif;
-    background: -webkit-linear-gradient(#000000, #005ccb, #000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#nav-Profile {
-    font-size: 20px;
+    font-size: 18px;
     font-family: Montserrat, sans-serif;
     background: -webkit-linear-gradient(#000000, #005ccb, #000000);
     -webkit-background-clip: text;
