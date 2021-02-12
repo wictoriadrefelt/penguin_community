@@ -13,7 +13,6 @@ from data.models.models import login_required, is_authenticated
 app.jinja_env.globals.update(get_weather_api=get_weather_api)
 
 
-
 @app.route('/post/<post_id>/post_fish', methods=["POST"])
 def fish_post(post_id):
     email = session['email']
@@ -55,7 +54,7 @@ def post_comment(post_id):
 
 @app.route('/post/<post_id>', methods=["GET", "POST"])
 def get_post(post_id):
-    form = CommentForm()  # uses for send comment
+    form = CommentForm()
 
     post = get_post_by_post_id(post_id)
 

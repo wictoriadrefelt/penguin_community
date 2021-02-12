@@ -29,7 +29,7 @@
     <h3>For the love of penguins, flap the button below to create your post</h3>
     <form action="" method="POST" enctype="multipart/form-data" id="form1">
         {{ form.hidden_tag() }}
-        <fieldset class="form-group">
+        <fieldset class="form-group" style="border: none">
   <button type="button" style="color:dodgerblue" class="btn btn-default btn-lg glyphicon glyphicon-heart" id="myBtn"></button>
 
   <div class="modal fade" id="myModal" role="dialog">
@@ -54,13 +54,13 @@
                   {% endif %}
               </div>
 
-              <div class="form-group">
+              <div class="form-group" style="place-content: center">
                   <title></title>
                   <h3>Select a picture below</h3>
                   {{ form.hidden_tag() }}
                   {{ form.file }}
 
-                  <button type="submit" id="upload_btn" class="btn btn-default">Upload</button>
+                  <button type="submit" id="upload_btn" class="btn btn-default" style=>Upload</button>
 
               </div>
 
