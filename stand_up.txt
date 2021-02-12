@@ -117,3 +117,8 @@ Stand up 09/02-21 10.00
 - Diskuterar kring morgondagens presentation, upplägg osv.
 - Fortsatt förberedelse inför morgondagen.
 
+
+Stand up 12/02-21 10.00
+- Går genom de sista ändringarna.
+- Sista uppstädning av kod.
+

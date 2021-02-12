@@ -1,7 +1,5 @@
 import gridfs
 from mongoengine import connect
-from flask import request
-
 
 db = connect(
     db='mongo-penguin',
