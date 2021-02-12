@@ -15,5 +15,4 @@ def get_comments_on_post(post_id):
 
 def number_of_comments_on_posts(post_id):
     post = get_comments_on_post(post_id)
-    print(post)
     return len(post)

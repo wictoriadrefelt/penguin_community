@@ -1,5 +1,4 @@
-from data import db
-from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument, FileField, IntField, DateTimeField
+from mongoengine import Document, StringField, ListField, ReferenceField, EmbeddedDocumentField, EmbeddedDocument, FileField, DateTimeField
 from app import login_manager
 from flask_login import UserMixin
 from flask import session, redirect, url_for
