@@ -105,7 +105,7 @@ function init() {
   snow();
 }
 
-canvas.addEventListener("mousemove", function (e) {
+window.addEventListener("mousemove", function (e) {
   (mX = e.clientX), (mY = e.clientY);
 });
 
